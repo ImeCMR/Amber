@@ -1,0 +1,20 @@
+#!/bin/csh -f
+
+# Step 1 - Run tleap to generate topology
+rm -f leap.log
+"$AMBERHOME/bin/tleap" -s -f tleap_0WN.in >& tleap.out || goto error
+
+# Step 2 - Run parmchk2_new to generate additional frcmod
+$AMBERHOME/bin/parmchk2_new -i leap.log -o additional.frcmod -f leaplog -s 1 >& tleap.out || goto error
+
+# Step 3 - Run tleap again to generate topology 
+"$AMBERHOME/bin/tleap" -s -f tleap_0WN2.in >& tleap.out || goto error
+
+../../dacdif additional.frcmod.save additional.frcmod
+../../dacdif -t 1 0WN.prmtop.save 0WN.prmtop
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

@@ -1,0 +1,200 @@
+-I: Adding /home2/jwang/software/amber18/dat/leap/prep to search path.
+-I: Adding /home2/jwang/software/amber18/dat/leap/lib to search path.
+-I: Adding /home2/jwang/software/amber18/dat/leap/parm to search path.
+-I: Adding /home2/jwang/software/amber18/dat/leap/cmd to search path.
+-s: Ignoring startup file: leaprc
+-f: Source tleap_0WN2.in.
+
+Welcome to LEaP!
+Sourcing: ./tleap_0WN2.in
+----- Source: /home2/jwang/software/amber18/dat/leap/cmd/leaprc.protein.ff14SB
+----- Source of /home2/jwang/software/amber18/dat/leap/cmd/leaprc.protein.ff14SB done
+Log file: ./leap.log
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/parm10.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/frcmod.ff14SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff14SB protein backbone and sidechain parameters
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/amino12.lib
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/aminoct12.lib
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/aminont12.lib
+----- Source: /home2/jwang/software/amber18/dat/leap/cmd/leaprc.lipid14
+----- Source of /home2/jwang/software/amber18/dat/leap/cmd/leaprc.lipid14 done
+Log file: ./leap.log
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/lipid14.dat
+Reading title:
+AMBER Lipid14 Force Field, C. Dickson, B. Madej, A.Skjevik, K. Teigen, I.R. Gould, R.C. Walker*
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/lipid14.lib
+----- Source: /home2/jwang/software/amber18/dat/leap/cmd/leaprc.gaff
+----- Source of /home2/jwang/software/amber18/dat/leap/cmd/leaprc.gaff done
+Log file: ./leap.log
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/gaff.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 1.81, May 2017)
+----- Source: /home2/jwang/software/amber18/dat/leap/cmd/leaprc.water.tip3p
+----- Source of /home2/jwang/software/amber18/dat/leap/cmd/leaprc.water.tip3p done
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/atomic_ions.lib
+Loading library: /home2/jwang/software/amber18/dat/leap/lib/solvents.lib
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/frcmod.tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+This is the additional/replacement parameter set for TIP3P water
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/frcmod.ions1lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of monovalent ions for TIP3P water model (12-6 normal usage set)
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/frcmod.ionsjc_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Monovalent ion parameters for Ewald and TIP3P water from Joung & Cheatham JPCB (2008)
+Loading parameters: /home2/jwang/software/amber18/dat/leap/parm/frcmod.ions234lm_126_tip3p
+Reading force field modification type file (frcmod)
+Reading title:
+Li/Merz ion parameters of divalent to tetravalent ions for TIP3P water model (12-6 normal usage set)
+Loading Prep file: ./0WN.prepi
+Loading parameters: ./0WN.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading Prep file: ./CYZ.prepi
+Loading parameters: ./CYZ.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading parameters: ./additional.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading PDB file: ./egfr_0WN.pdb
+  total atoms in file: 4953
+  Leap added 26 missing atoms according to residue templates:
+       26 H / lone pairs
+Checking 'mol'....
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+The unperturbed charge of the unit (-6.998201) is not zero.
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.375193 angstroms between .R<LYS 17>.A<HB2 6> and .R<ILE 19>.A<HD12 16>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.394521 angstroms between .R<LYS 18>.A<HZ2 19> and .R<GLN 88>.A<HE21 14>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.465746 angstroms between .R<LEU 22>.A<HD11 11> and .R<0WN 306>.A<H19 53>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.481354 angstroms between .R<LEU 51>.A<HD23 17> and .R<THR 86>.A<HG22 9>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 0.699431 angstroms between .R<LEU 51>.A<HD22 16> and .R<THR 86>.A<HG1 12>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.388490 angstroms between .R<LEU 51>.A<HD22 16> and .R<THR 86>.A<OG1 11>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.438686 angstroms between .R<LEU 51>.A<HD21 15> and .R<LEU 51>.A<H 2>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.412758 angstroms between .R<ILE 60>.A<HD11 15> and .R<LEU 89>.A<HD11 11>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.393194 angstroms between .R<VAL 75>.A<HG11 8> and .R<PHE 157>.A<HZ 14>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.312764 angstroms between .R<ARG 77>.A<HE 15> and .R<ARG 77>.A<HB3 7>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.351696 angstroms between .R<SER 85>.A<HB2 6> and .R<THR 86>.A<H 2>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.494857 angstroms between .R<VAL 135>.A<HG13 10> and .R<ARG 137>.A<HG3 10>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.231177 angstroms between .R<ILE 212>.A<HD11 15> and .R<ILE 212>.A<H 2>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.483166 angstroms between .R<PRO 213>.A<HG2 6> and .R<GLU 216>.A<HG3 10>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 0.836480 angstroms between .R<MET 288>.A<HE3 15> and .R<MET 293>.A<HG3 10>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.378492 angstroms between .R<MET 288>.A<HE3 15> and .R<MET 293>.A<CG 8>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.249558 angstroms between .R<MET 288>.A<CE 12> and .R<MET 293>.A<HG3 10>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 0.924223 angstroms between .R<MET 288>.A<SD 11> and .R<VAL 296>.A<HG22 13>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.255243 angstroms between .R<GLU 290>.A<HB3 7> and .R<MET 293>.A<HE3 15>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.120886 angstroms between .R<GLU 290>.A<HB2 6> and .R<MET 293>.A<HE3 15>
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+Close contact of 1.276980 angstroms between .R<GLU 290>.A<CB 5> and .R<MET 293>.A<HE3 15>
+Checking parameters for unit 'mol'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Warnings: 22
+Unit is OK.
+Total unperturbed charge:  -6.998201
+Total perturbed charge:    -6.998201
+Checking Unit.
+
+/home2/jwang/software/amber18/bin/teLeap: Warning!
+The unperturbed charge of the unit (-6.998201) is not zero.
+
+/home2/jwang/software/amber18/bin/teLeap: Note.
+Ignoring the warning from Unit Checking.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+old PREP-specified impropers:
+ <CYZ 98>:  -M   CA   N    H   
+ <CYZ 98>:  CA   +M   C    O   
+ <0WN 306>:  C31  C28  C30  H15 
+ <0WN 306>:  C28  N26  C27  O29 
+ <0WN 306>:  C27  C7   N26  H13 
+ <0WN 306>:  C8   C9   C7   N26 
+ <0WN 306>:  C7   C6   C8   H3  
+ <0WN 306>:  C4   C8   C6   C5  
+ <0WN 306>:  C6   N2   C4   N11 
+ <0WN 306>:  C4   C16  N11  H5  
+ <0WN 306>:  C14  C17  C16  N11 
+ <0WN 306>:  C16  C12  C14  H6  
+ <0WN 306>:  C14  C13  C12  CL1 
+ <0WN 306>:  C12  C15  C13  F18 
+ <0WN 306>:  C13  C17  C15  H7  
+ <0WN 306>:  C16  C15  C17  H8  
+ <0WN 306>:  H2   N2   C1   N3  
+ <0WN 306>:  C6   C10  C5   N3  
+ <0WN 306>:  C5   C9   C10  H4  
+ <0WN 306>:  C7   C10  C9   O20 
+ total 933 improper torsions applied
+ 20 improper torsions in old prep form
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	CPRO	1
+	NGLU	1
+  )
+ (no restraints)
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 23; Notes = 1.

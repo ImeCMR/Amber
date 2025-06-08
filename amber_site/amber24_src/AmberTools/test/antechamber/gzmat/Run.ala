@@ -1,0 +1,39 @@
+#!/bin/csh -f
+
+# Run antechamber to generate a gcrt file 
+
+echo  "Step1: run antechamber to generate a gcrt file"
+../../../../bin/antechamber -fi mol2 -fo gcrt -i ala.mol2 -o ala.gcrt -ch ala >& step1.out || goto error
+
+echo  "Step2: run antechamber to generate a gcrt file with two gaussian jobs"
+../../../../bin/antechamber -fi mol2 -fo gcrt -i ala.mol2 -o ala_twosteps.gcrt -ch ala -gopt "B3LYP/6-31G* opt scf=tight" -gsp "HF/6-31G* SCF=tight Test Pop=MK iop(6/33=2) iop(6/42=6)" >& step2.out || goto error
+
+echo  "Step3: run antechamber to generate a gzmat file"
+../../../../bin/antechamber -fi mol2 -fo gzmat -i ala.mol2 -o ala.gzmat -ch ala -gm "%mem=2GB" -gn "%nproc=8" >& step3.out || goto error
+
+echo  "Step4: run antechamber to generate a gzmat file using torsional angle 9-7-5-6 (default is 9-7-5-2)"
+../../../../bin/antechamber -fi mol2 -fo gzmat -i ala.mol2 -o ala_tor1.gzmat -ch ala -gm "%mem=2GB" -gn "%nproc=8" >& step4.out -tor "9-7-5-6:0" || goto error
+
+echo  "Step5: run antechamber to generate a gzmat file with 17-15-9-7 and 15-9-7-5 frozen"
+../../../../bin/antechamber -fi mol2 -fo gzmat -i ala.mol2 -o ala_tor2.gzmat -ch ala -gm "%mem=2GB" -gn "%nproc=8" >& step5.out -tor "17-15-9-7:1,15-9-7-5:1" || goto error
+
+
+
+../../dacdif -a 5.5e-3 ala.gcrt.save ala.gcrt
+../../dacdif -a 5.5e-3 ala_twosteps.gcrt.save ala_twosteps.gcrt
+../../dacdif -a 5.5e-3 ala.gzmat.save ala.gzmat
+../../dacdif -a 5.5e-3 ala_tor1.gzmat.save ala_tor1.gzmat
+../../dacdif -a 5.5e-3 ala_tor2.gzmat.save ala_tor2.gzmat
+
+/bin/rm -f  ATOMTYPE.INF NEWPDB.PDB PREP.INF punch qout QOUT esout
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+
+
+
+
+

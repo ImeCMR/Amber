@@ -1,0 +1,23 @@
+PB energy calculation
+ &cntrl
+   imin = 5, nstlim = 2, dt = 0.002,
+   ntx = 2, irest = 0,
+   ntb = 0,
+   ntt = 1,
+   temp0 = 298.0, ig = -1,
+   ntp = 0,
+   ntc = 2, ntf = 2,
+   ioutfm = 1, iwrap = 0,
+   ntwe = 1000, ntwx = 10000, ntpr = 1, ntwr = 10000,
+   cut = 9999.0,
+   maxcyc = 1,
+   ipb=2, inp=0
+
+/
+&pb
+   npbverb=0, istrng=150, epsout=80.0, epsin=1.0, space=.5,
+   accept=0.001, radiopt=0, fillratio=2,
+   npbopt=0, bcopt=1, solvopt=1, maxitn=10000,
+   frcopt=0, nfocus=2, radiscale=1.0, radires="DRG", protscale=1.0,
+   dprob=1.4
+/

@@ -1,0 +1,124 @@
+#!/bin/bash
+
+numprocs=1
+if [ -n "${DO_PARALLEL}" ] ; then
+   numprocs=`echo $DO_PARALLEL | awk -f ../numprocs.awk `
+fi
+
+echo "Running BAR/PBSA with $numprocs threads"
+if [ "$numprocs" -lt "8" ]; then
+   echo "Skipping complex runs with $numprocs threads"
+fi
+
+#. ../../program_error.sh
+
+if [ -z "$bar_pbsa" ]; then
+   bar_pbsa="$AMBERHOME/bin/bar_pbsa.py"
+fi
+
+if [ -z "$dacdif" ]; then
+   dacdif="$AMBERHOME/AmberTools/test/dacdif"
+fi
+
+if [ -z "$nctest" ] ; then
+   nctest="$AMBERHOME/AmberTools/test/NcTest"
+fi
+
+check_pandas=$(amber.conda list pandas)
+check_pyyaml=$(amber.conda list pyyaml)
+check_pytraj=$(amber.python -c "import pytraj" 2>&1)
+
+if [[ "$check_pandas" == *"pandas"* ]] && [[ "$check_pyyaml" == *"pyyaml"* ]] && [[ "$check_pytraj" != *"Error"* ]]; then
+
+   strip_input='1C5X_inputs/strip_input.yaml'
+   prep_input='1C5X_inputs/prep_input.yaml'
+   com_run_input='1C5X_inputs/complex_run_input.yaml'
+   lig_run_input='1C5X_inputs/ligands_run_input.yaml'
+
+   # strip explicit solvent
+   $bar_pbsa strip $strip_input
+
+   # write pbsa input
+   $bar_pbsa prep $prep_input
+
+   # run BAR/PBSA, $numprocs cores
+   $bar_pbsa run $lig_run_input -n $numprocs
+   if [ "$numprocs" -ge "8" ]; then
+      $bar_pbsa run $com_run_input -n $numprocs
+   fi
+
+   # calculate total decharging energy
+   $bar_pbsa calc $lig_run_input
+   if [ "$numprocs" -ge "8" ]; then
+       $bar_pbsa calc $com_run_input
+   fi
+
+   # trajectories
+   $nctest 1C5X_save/concat_ligands/0.000/ti001.nc 1C5X/concat_ligands/0.000/ti001.nc
+   $nctest 1C5X_save/concat_ligands/0.200/ti001.nc 1C5X/concat_ligands/0.200/ti001.nc
+   $nctest 1C5X_save/concat_ligands/0.400/ti001.nc 1C5X/concat_ligands/0.400/ti001.nc
+   $nctest 1C5X_save/concat_ligands/0.600/ti001.nc 1C5X/concat_ligands/0.600/ti001.nc
+   $nctest 1C5X_save/concat_ligands/0.800/ti001.nc 1C5X/concat_ligands/0.800/ti001.nc
+   $nctest 1C5X_save/concat_ligands/1.000/ti001.nc 1C5X/concat_ligands/1.000/ti001.nc
+
+   $dacdif 1C5X_save/concat_ligands/0.000/ti.parm 1C5X/concat_ligands/0.000/ti.parm
+   $dacdif 1C5X_save/concat_ligands/0.200/ti.parm 1C5X/concat_ligands/0.200/ti.parm
+   $dacdif 1C5X_save/concat_ligands/0.400/ti.parm 1C5X/concat_ligands/0.400/ti.parm
+   $dacdif 1C5X_save/concat_ligands/0.600/ti.parm 1C5X/concat_ligands/0.600/ti.parm
+   $dacdif 1C5X_save/concat_ligands/0.800/ti.parm 1C5X/concat_ligands/0.800/ti.parm
+   $dacdif 1C5X_save/concat_ligands/1.000/ti.parm 1C5X/concat_ligands/1.000/ti.parm
+
+   $nctest 1C5X_save/concat_ligands/0.000/ti.ncrst 1C5X/concat_ligands/0.000/ti.ncrst
+   $nctest 1C5X_save/concat_ligands/0.200/ti.ncrst 1C5X/concat_ligands/0.200/ti.ncrst
+   $nctest 1C5X_save/concat_ligands/0.400/ti.ncrst 1C5X/concat_ligands/0.400/ti.ncrst
+   $nctest 1C5X_save/concat_ligands/0.600/ti.ncrst 1C5X/concat_ligands/0.600/ti.ncrst
+   $nctest 1C5X_save/concat_ligands/0.800/ti.ncrst 1C5X/concat_ligands/0.800/ti.ncrst
+   $nctest 1C5X_save/concat_ligands/1.000/ti.ncrst 1C5X/concat_ligands/1.000/ti.ncrst
+
+   $nctest 1C5X_save/concat_complex/0.000/ti001.nc 1C5X/concat_complex/0.000/ti001.nc
+   $nctest 1C5X_save/concat_complex/0.200/ti001.nc 1C5X/concat_complex/0.200/ti001.nc
+   $nctest 1C5X_save/concat_complex/0.400/ti001.nc 1C5X/concat_complex/0.400/ti001.nc
+   $nctest 1C5X_save/concat_complex/0.600/ti001.nc 1C5X/concat_complex/0.600/ti001.nc
+   $nctest 1C5X_save/concat_complex/0.800/ti001.nc 1C5X/concat_complex/0.800/ti001.nc
+   $nctest 1C5X_save/concat_complex/1.000/ti001.nc 1C5X/concat_complex/1.000/ti001.nc
+
+   $dacdif 1C5X_save/concat_complex/0.000/ti.parm 1C5X/concat_complex/0.000/ti.parm
+   $dacdif 1C5X_save/concat_complex/0.200/ti.parm 1C5X/concat_complex/0.200/ti.parm
+   $dacdif 1C5X_save/concat_complex/0.400/ti.parm 1C5X/concat_complex/0.400/ti.parm
+   $dacdif 1C5X_save/concat_complex/0.600/ti.parm 1C5X/concat_complex/0.600/ti.parm
+   $dacdif 1C5X_save/concat_complex/0.800/ti.parm 1C5X/concat_complex/0.800/ti.parm
+   $dacdif 1C5X_save/concat_complex/1.000/ti.parm 1C5X/concat_complex/1.000/ti.parm
+
+   $nctest 1C5X_save/concat_complex/0.000/ti.ncrst 1C5X/concat_complex/0.000/ti.ncrst
+   $nctest 1C5X_save/concat_complex/0.200/ti.ncrst 1C5X/concat_complex/0.200/ti.ncrst
+   $nctest 1C5X_save/concat_complex/0.400/ti.ncrst 1C5X/concat_complex/0.400/ti.ncrst
+   $nctest 1C5X_save/concat_complex/0.600/ti.ncrst 1C5X/concat_complex/0.600/ti.ncrst
+   $nctest 1C5X_save/concat_complex/0.800/ti.ncrst 1C5X/concat_complex/0.800/ti.ncrst
+   $nctest 1C5X_save/concat_complex/1.000/ti.ncrst 1C5X/concat_complex/1.000/ti.ncrst
+
+   # pbsa input
+   $dacdif 1C5X_save/param_sweep_ligands/e_1.0_r_1.0_p_1.0/pb_input.txt 1C5X/param_sweep_ligands/e_1.0_r_1.0_p_1.0/pb_input.txt 
+   $dacdif 1C5X_save/param_sweep_complex/e_1.0_r_1.0_p_1.0/pb_input.txt 1C5X/param_sweep_complex/e_1.0_r_1.0_p_1.0/pb_input.txt 
+
+   # energies
+   $dacdif 1C5X_save/param_sweep_ligands/e_1.0_r_1.0_p_1.0/energies.csv 1C5X/param_sweep_ligands/e_1.0_r_1.0_p_1.0/energies.csv
+   if [ "$numprocs" -ge "8" ]; then
+      $dacdif 1C5X_save/param_sweep_complex/e_1.0_r_1.0_p_1.0/energies.csv 1C5X/param_sweep_complex/e_1.0_r_1.0_p_1.0/energies.csv
+   fi
+
+   # final bar
+   $dacdif 1C5X_save/param_sweep_ligands/e_1.0_r_1.0_p_1.0/bar_final.txt 1C5X/param_sweep_ligands/e_1.0_r_1.0_p_1.0/bar_final.txt
+   if [ "$numprocs" -ge "8" ]; then
+      $dacdif 1C5X_save/param_sweep_complex/e_1.0_r_1.0_p_1.0/bar_final.txt 1C5X/param_sweep_complex/e_1.0_r_1.0_p_1.0/bar_final.txt
+   fi
+
+   /bin/rm -r mbar_pbsa.log 1C5X
+else
+
+   echo 'Missing modules'
+   echo 'All tests skipped'
+
+fi
+
+
+exit 0

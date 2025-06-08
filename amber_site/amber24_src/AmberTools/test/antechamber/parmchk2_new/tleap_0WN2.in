@@ -1,0 +1,23 @@
+source leaprc.protein.ff14SB
+source leaprc.lipid14
+source leaprc.gaff
+source leaprc.water.tip3p 
+
+loadamberprep 0WN.prepi
+loadamberparams 0WN.frcmod
+loadamberprep CYZ.prepi
+loadamberparams CYZ.frcmod
+loadamberparams additional.frcmod
+mol=loadpdb egfr_0WN.pdb
+deleteBond mol.51.C mol.52.N
+deleteBond mol.167.C mol.168.N
+deleteBond mol.285.C mol.286.N
+bond mol.98.SG mol.306.C30 S
+check mol
+#solvatebox mol TIP3PBOX 12.0
+#addions mol Cl- 50
+#addions mol Na+ 0
+charge mol
+saveamberparm mol 0WN.prmtop 0WN.prmcrd
+quit
+

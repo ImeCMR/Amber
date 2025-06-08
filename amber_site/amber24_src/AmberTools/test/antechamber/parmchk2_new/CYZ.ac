@@ -1,0 +1,21 @@
+CHARGE     -0.15 ( 0 )
+Formula: H4 C3 N1 O1 S1 
+ATOM      1  N   CYZ     1       3.326   1.548  -0.000 -0.415700         N
+ATOM      2  H   CYZ     1       3.909   0.724  -0.000  0.271900         H
+ATOM      3  CA  CYZ     1       3.970   2.846   0.000  0.212849        CX
+ATOM      4  HA  CYZ     1       3.672   3.400  -0.890  0.007875        H1
+ATOM      5  CB  CYZ     1       3.577   3.654   1.232 -0.069506        2C
+ATOM      6  HB2 CYZ     1       2.497   3.801   1.241  0.056055        H1
+ATOM      7  HB3 CYZ     1       3.877   3.116   2.131  0.056055        H1
+ATOM      8  SG  CYZ     1       4.310   5.304   1.366 -0.296047         S
+ATOM      9  C   CYZ     1       5.486   2.705  -0.000  0.597300         C
+ATOM     10  O   CYZ     1       6.009   1.593   0.000 -0.567900         O
+BOND    1    2    1    0      H    N
+BOND    2    3    1    0     CA    N
+BOND    3    4    3    0     HA   CA
+BOND    4    5    3    0     CB   CA
+BOND    5    6    5    0    HB2   CB
+BOND    6    7    5    0    HB3   CB
+BOND    7    8    5    0     SG   CB
+BOND    8    9    3    0      C   CA
+BOND    9   10    9    0      O    C

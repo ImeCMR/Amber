@@ -1,0 +1,24 @@
+
+Welcome to acdoctor: check and diagnosis problems in molecular input files.
+
+-- Check Format for mol2 File --
+   Status: pass
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+Warning: The number of bonds (4) for atom (ID: 2, Name: CC) does not match
+         the connectivity (3) for atom type (CC) defined in CORR_NAME_TYPE.DAT.
+Warning: The number of bonds (4) for atom (ID: 5, Name: CB) does not match
+         the connectivity (3) for atom type (CB) defined in CORR_NAME_TYPE.DAT.
+Warning: The number of bonds (4) for atom (ID: 12, Name: CA) does not match
+         the connectivity (3) for atom type (CA) defined in CORR_NAME_TYPE.DAT.
+But, you may safely ignore the warnings if your molecule
+         uses atom names or element names as atom types.
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+/tmp/amber/bin/acdoctor: Fatal Error!
+Weird atomic valence (3) for atom (ID: 1, Name: CD).
+       Possible open valence.

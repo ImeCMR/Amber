@@ -1,0 +1,135 @@
+
+Welcome to antechamber 18.0: molecular input file processor.
+
+acdoctor mode is on: check and diagnosis problems in the input file.
+-- Check Format for ac File --
+   Status: pass
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+   Status: pass
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+   Status: pass
+-- Check Number of Units --
+   Status: pass
+acdoctor mode has completed checking the input file.
+
+
+
+INPUT_FILE:		ala.ac
+ESP_FILE:		ala.esp
+CONF_NUM:		2
+NET_CHARGE:		0.00000  
+HEAD_ATOM:	UN	DU	DU
+TAIL_ATOM:	UN	DU	DU
+There are 2 separating bonds
+SEPBOND			1	N1	C2	1	N	C
+SEPBOND			2	C5	N2	-1	C	N
+There are 4 predefined charges
+ATOM_CHARGE		1	N1	 -0.41750
+ATOM_CHARGE		2	H4	  0.27190
+ATOM_CHARGE		3	C5	  0.59730
+ATOM_CHARGE		4	O2	 -0.56790
+PREP_FILE: ala.prep
+
+Command: /home2/jwang/software/amber18/bin/antechamber -fi ac -fo ac -i ala.ac -o RESIDUE_GEN.AC0 -at amber
+
+SEP_BOND      1 HEAD      N1     6     N CAP:    C2     4     C
+SEP_BOND      2 TAIL      C5    14     C CAP:    N2    16     N
+
+
+Cap Atoms for #1 separating bond (C2 - N1) with a type of 1
+ATOM	 1	H1
+ATOM	 2	C1
+ATOM	 3	H2
+ATOM	 4	H3
+ATOM	 5	C2
+ATOM	 6	O1
+
+Cap Atoms for #2 separating bond (N2 - C5) with a type of -1
+ATOM	 17	N2
+ATOM	 18	H9
+ATOM	 19	C6
+ATOM	 20	H10
+ATOM	 21	H11
+ATOM	 22	H12
+
+Residue Atoms
+ATOM	 7	N1
+ATOM	 8	H4
+ATOM	 9	C3
+ATOM	 10	H5
+ATOM	 11	C4
+ATOM	 12	H6
+ATOM	 13	H7
+ATOM	 14	H8
+ATOM	 15	C5
+ATOM	 16	O2
+
+HEAD ATOM :    N1     N     C
+
+TAIL ATOM :    C5     C     N
+
+Main Chain Atoms
+ATOM	1	N1
+ATOM	2	C3
+ATOM	3	C5
+Generate charge input file for respgen ... 
+
+Begin Real Work ... 
+
+Generate main chain atom file for prepgen ... 
+PRE_HEAD_TYPE	C
+POST_TAIL_TYPE	N
+
+[31mStep 1:  Generate RESP input files ... [0m
+
+Run respgen to generate first stage resp input file ... 
+
+Command: /home2/jwang/software/amber18/bin/respgen -i ala.ac -o RESIDUE_GEN_RESP.INPUT1 -f resp1 -a RESIDUE_GEN_RESPGEN.DAT -n 2
+
+
+Run respgen to generate second stage resp input file ... 
+
+Command: /home2/jwang/software/amber18/bin/respgen -i ala.ac -o RESIDUE_GEN_RESP.INPUT2 -f resp2 -a RESIDUE_GEN_RESPGEN.DAT -n 2
+
+
+[31mStep 2:  Run resp to get RESP charges ... [0m
+
+Command: /home2/jwang/software/amber18/bin/resp -O -i RESIDUE_GEN_RESP.INPUT1 -o RESIDUE_GEN_RESP.OUTPUT1 -q QIN -e ala.esp
+
+Command: /home2/jwang/software/amber18/bin/resp -O -i RESIDUE_GEN_RESP.INPUT2 -o RESIDUE_GEN_RESP.OUTPUT2 -q qout -e ala.esp[31mStep 3:  Read RESP charges ... [0m
+
+[31mStep 4:  Generate prep input file ... [0m
+
+Command: /home2/jwang/software/amber18/bin/prepgen -i RESIDUE_GEN.AC -o ala.prep -m RESIDUE_GEN_MAINCHAIN.DAT -rf ala.res -rn ALA
+
+PRE_HEAD_TYPE is     C
+POST_TAIL_TYPE is     N
+Net charge of truncated molecule is     0.00
+HEAD_ATOM      7   N1
+TAIL_ATOM     15   C5
+MAIN_CHAIN     1    7   N1
+MAIN_CHAIN     2    9   C3
+MAIN_CHAIN     3   15   C5
+OMIT_ATOM      1    1   H1
+OMIT_ATOM      2    2   C1
+OMIT_ATOM      3    3   H2
+OMIT_ATOM      4    4   H3
+OMIT_ATOM      5    5   C2
+OMIT_ATOM      6    6   O1
+OMIT_ATOM      7   17   N2
+OMIT_ATOM      8   18   H9
+OMIT_ATOM      9   19   C6
+OMIT_ATOM     10   20  H10
+OMIT_ATOM     11   21  H11
+OMIT_ATOM     12   22  H12
+Number of mainchain atoms (including head and tail atom):     3
+Number of omited atoms:    12
+
+[31mAll Done ![0m
+

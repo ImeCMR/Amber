@@ -1,0 +1,50 @@
+#!/bin/sh
+#TEST-PROGRAM sander
+#TEST-DESCRIP TO_BE_DEtermined
+#TEST-PURPOSE regression, basic
+#TEST-STATE   undocumented
+
+. ../program_error.sh
+
+for FILE in out.pdb out1.pdb out.mol2 fabi.pdb ; do
+  if [ -f "$FILE" ] ; then
+    rm -f $FILE
+  fi
+done
+
+#TESTNAME='AMBPDB tests'
+#Requires ambpdb
+AMBPDB=$AMBERHOME/bin/ambpdb
+if [ ! -f "$AMBPDB" ] ; then
+  echo "Warning: Cannot find $AMBPDB; skipping tests."
+  exit 0
+fi
+
+TOP=$AMBERHOME/AmberTools/src/cpptraj/test/tz2.parm7
+RST=$AMBERHOME/AmberTools/src/cpptraj/test/tz2.rst7
+if [ ! -f "$TOP" -o ! -f "$RST" ] ; then
+  echo "Error: Cannot find test files."
+  exit 1
+fi
+
+DACDIF=../dacdif
+
+$AMBPDB -p $TOP -c $RST > out.pdb || error 
+$DACDIF out.pdb.save out.pdb
+
+$AMBPDB -p $TOP < $RST > out1.pdb || error
+$DACDIF out.pdb.save out1.pdb
+
+#UNITNAME='Convert NetCDF to PDB with ambpdb'
+#CheckFor netcdf
+#if [ $? -eq 0 ] ; then
+#  $VALGRIND $AMBPDB -p ../FtuFabI.NAD.TCL.parm7 -c ../FtuFabI.NAD.TCL.nc -bres > fabi.pdb 2>> $CPPTRAJ_ERROR
+#  DoTest fabi.pdb.save fabi.pdb
+#fi
+
+UNITNAME='Amber to SYBYL atom type conversion test'
+#CheckFor amberhome
+$AMBPDB -p $TOP -mol2 -sybyl < $RST > out.mol2 || error
+$DACDIF test2.mol2.save out.mol2
+
+exit 0

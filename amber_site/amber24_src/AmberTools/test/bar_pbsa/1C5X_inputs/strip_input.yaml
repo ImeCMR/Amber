@@ -1,0 +1,9 @@
+dest_path: '1C5X'
+complex_paths:
+    - './1C5X_explicit/t1/complex'
+ligand_paths:
+    - './1C5X_explicit/t1/ligands'
+ligand_mask: ':DRG'
+ion_decharge: True
+last_half_frames: True
+stride: 1

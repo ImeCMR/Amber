@@ -1,0 +1,16 @@
+Info: acdoctor mode is on: check and diagnose problems in the input file.
+Info: The atom type is set to gaff; the options available to the -at flag are
+      gaff, gaff2, amber, bcc, abcg2, and sybyl.
+
+-- Check Format for pdb File --
+   Status: pass
+
+---Judge bond type for Residue 1 with ID of 1 and Name of ACE ---
+
+---Judge bond type for Residue 2 with ID of 2 and Name of ASH ---
+
+---Judge bond type for Residue 3 with ID of 3 and Name of NME ---
+Info: Total number of electrons: 100; net charge: 0
+
+Running: /home/case/dist/amber24/bin/sqm -O -i sqm.in -o sqm.out
+

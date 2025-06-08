@@ -1,0 +1,49 @@
+#!/bin/csh -f
+
+/bin/cp -p mpd.pdb.save mpd.pdb
+#echo
+#echo  Here is a bad structure in pdb format, mpd.pdb. We want to use acdoctor
+#echo  to find problems and antechamber to fix them. First of all, run acdoctor :
+#echo  "$AMBERHOME/bin/acdoctor -i mpd.pdb -f pdb >& mpd_pdb.out"
+#echo
+"$AMBERHOME/bin/acdoctor" -i mpd.pdb -f pdb >& mpd_pdb.out
+#echo  Since acdoctor indicates the molecule has more than one unit, it is
+#echo  likely there are missing bonds.  We convert the file from pdb to mol2
+#echo  without judging bond types by using flag "-j 5" :
+#echo "$AMBERHOME/bin/antechamber -i mpd.pdb -fi pdb -o mpd.mol2 -fo mol2 -j 5 -at sybyl -dr no"
+#echo
+"$AMBERHOME/bin/antechamber" -i mpd.pdb -fi pdb -o mpd.mol2 -fo mol2 -j 5 -at sybyl -dr no \
+    >& antechamber_nobondtypes.out || goto error
+#echo  Now we check mpd.mol2 again using acdoctor :
+#echo "$AMBERHOME/bin/acdoctor -i mpd.mol2 -f mol2 >& mpd_mol2.out"
+#echo 
+"$AMBERHOME/bin/acdoctor" -i mpd.mol2 -f mol2 >& mpd_mol2.out 
+#echo  "acdoctor found that atom CD has weird valence; therefore it is highly"
+#echo  possible that CD is missing bonds.  With a visualization program,
+#echo  we can see that CD and HD are not bonded, and their separation is 1.42 A.
+#echo  Because of this bad structure, antechamber could not make a correct
+#echo  judgment about bond formation. One may manually add a bond or run a
+#echo  simple QM optimization to see if the structure can be improved :
+#echo "$AMBERHOME/bin/antechamber -i mpd.pdb -fi pdb -o mpd.sqmout -fo sqmout -dr no"
+#echo 
+"$AMBERHOME/bin/antechamber" -i mpd.pdb -fi pdb -o mpd.sqmout -fo sqmout -dr no \
+    >& antechamber_qm.out || goto error
+
+#echo  After the structure is optimized with QM, we check it again :
+#echo "$AMBERHOME/bin/acdoctor -i mpd.sqmout -f sqmout >& mpd_sqmout.out"
+"$AMBERHOME/bin/acdoctor" -i mpd.sqmout -f sqmout >& mpd_sqmout.out || goto error
+#echo 
+
+#echo  Finally we have corrected the error
+../../dacdif mpd_pdb.out.save mpd_pdb.out 
+../../dacdif mpd.mol2.save mpd.mol2 
+../../dacdif antechamber_nobondtypes.out.save antechamber_nobondtypes.out 
+../../dacdif mpd_mol2.out.save mpd_mol2.out 
+../../dacdif antechamber_qm.out.save antechamber_qm.out 
+../../dacdif mpd_mopout.out.save mpd_sqmout.out 
+/bin/rm -f ACDOCT* ANTE* ATOMTYPE.INF mpd.sqmout mpd.pdb sqm.in
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

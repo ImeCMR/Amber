@@ -1,0 +1,26 @@
+#!/bin/csh -f
+
+# Used 1-iodine propane as an example to show how to use antechamber in conjuction with Gaussian 09
+
+echo  "Step1: run antechamber to generate mol2 file"
+"$AMBERHOME/bin/antechamber" -fi jout -fo mol2 -i ethyl_acetate.jout -o ethyl_acetate.mol2 -c esp >& antechamber.out || goto error
+
+echo  "Step 2: get prepi file from ethyl_acetate.mol2, the sequence order is NOT changed"
+"$AMBERHOME/bin/antechamber" -fi mol2 -fo prepi -i ethyl_acetate.mol2 -o ethyl_acetate.prepi -pf y >& prepgen.out || goto error
+
+
+../../dacdif -a 5.5e-3 ethyl_acetate.mol2.save ethyl_acetate.mol2
+../../dacdif -a 5.5e-3 ethyl_acetate.prepi.save ethyl_acetate.prepi
+
+/bin/rm -f  ATOMTYPE.INF NEWPDB.PDB PREP.INF punch qout QOUT esout
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+
+
+
+
+

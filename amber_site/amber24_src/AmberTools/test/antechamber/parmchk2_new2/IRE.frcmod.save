@@ -1,0 +1,32 @@
+Remark line goes here
+MASS
+
+BOND
+CA-OS  450.00   1.364       same as CA-OH, penalty score=  0.3
+
+ANGLE
+CA-OS-CT   60.000     117.000   same as CM-OS-CT, penalty score=  1.1
+CA-CA-OS   70.000     120.000   same as CA-CA-OH, penalty score=  6.0
+CA-CA-NC   70.000     121.500   same as CM-CA-NC, penalty score=  1.1
+CA-CA-N2   70.000     120.100   same as CM-CA-N2, penalty score=  1.1
+CA-N2-CA   70.000     120.000   same as CC-NA-CR, penalty score= 10.3
+
+DIHE
+CA-CA-OS-CT   2    1.800       180.000           2.000      same as X -CA-OH-X , penalty score=118.0
+
+IMPROPER
+CA-CA-CA-OS         1.1          180.0         2.0          Using the default value
+CA-CA-CA-HA         1.1          180.0         2.0          Using general improper torsional angle  X- X-CA-HA, penalty score=  6.0)
+CA-CA-CA-CA         1.1          180.0         2.0          Using the default value
+CA-CA-CA-NC         1.1          180.0         2.0          Using the default value
+HA-NC-CQ-NC         1.1          180.0         2.0          Using the default value
+CA-N2-CA-NC         1.1          180.0         2.0          Using the default value
+CA-CA-N2-H          1.0          180.0         2.0          Using general improper torsional angle  X- X-N2- H, penalty score=  6.0)
+CA-CA-CA-N2         1.1          180.0         2.0          Using the default value
+CA-CA-CA-Cl         1.1          180.0         2.0          Using the default value
+CA-CA-CA-F          1.1          180.0         2.0          Using the default value
+
+NONBON
+
+
+

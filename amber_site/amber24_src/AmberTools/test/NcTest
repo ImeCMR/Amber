@@ -1,0 +1,101 @@
+#!/bin/sh
+
+# NcTest() <1> <2>
+#   Compare NetCDF files <1> and <2>. Use NCDUMP to convert to ASCII
+#   first, removing ==> line and :programVersion attribute.
+
+# Find ncdump
+NCDUMP="$AMBERHOME/bin/ncdump"
+if [ ! -f "$NCDUMP" ] ; then
+  NCDUMP=`which ncdump`
+fi
+if [ -z "$NCDUMP" ] ; then
+  >&2 echo "Error: NcTest: 'ncdump' not found, required for NcTest."
+  exit 1
+fi
+
+# Find dacdif
+DACDIF="$AMBERHOME/AmberTools/test/dacdif"
+if [ ! -f "$DACDIF" ] ; then
+  >&2 echo "Error: NcTest: 'dacdif' not found, required for NcTest."
+  exit 1
+fi 
+
+# Check that arguments are present
+#echo "DEBUG: NcTest $1 $2"
+if [ -z "$1" -o -z "$2" ] ; then
+  >&2 echo "Error: NcTest: One or both files not specified."
+  exit 1
+fi
+
+# Save remaining args for dacdif 
+FNC1=$1
+FNC2=$2
+shift
+shift
+
+DIFFARGS="$FNC1 $FNC2"
+CALC_NUM_ERR=0
+while [ ! -z "$1" ] ; do
+  # If doing relative or absolute differences, need to do some
+  # extra procssing.
+  if [ "$1" = '-r' -o "$1" = '-a' ] ; then
+    CALC_NUM_ERR=1
+  fi
+  DIFFARGS=$DIFFARGS" $1"
+  shift
+done
+
+# Check that files exist 
+if [ ! -f "$FNC1" ] ; then
+  echo "possible FAILURE:  file $FNC1 does not exist."
+  exit 1
+elif [ ! -f "$FNC2" ] ; then
+  echo "possible FAILURE:  file $FNC2 does not exist."
+  exit 1
+fi
+
+# Back up the existing files. Bail out if anything goes wrong
+cp $FNC1 $FNC1.ncbackup
+if [ $? -ne 0 ] ; then
+  >&2 echo "Error: NcTest: Could not back up $FNC1"
+  exit 1
+fi
+cp $FNC2 $FNC2.ncbackup
+if [ $? -ne 0 ] ; then
+  >&2 echo "Error: NcTest: Could not back up $FNC2"
+  exit 1
+fi
+
+# Prepare existing files.
+if [ $CALC_NUM_ERR -eq 1 ] ; then
+  # FIXME: Must remove commas here because I cannot figure out how to pass
+  # the regular expression to ndiff.awk FS without the interpreter giving
+  # this error for FS='[ \t,()]':
+  # awk: fatal: Invalid regular expression: /'[/
+  $NCDUMP -n nctest $FNC1 | grep -v "==>\|:program" | sed 's/,/ /g' > nc0.save
+  $NCDUMP -n nctest $FNC2 | grep -v "==>\|:program" | sed 's/,/ /g' > nc0
+else
+  $NCDUMP -n nctest $FNC1 | grep -v "==>\|:program" > nc0.save
+  $NCDUMP -n nctest $FNC2 | grep -v "==>\|:program" > nc0
+fi
+
+# Rename the prepared files for dacdif
+mv nc0.save $FNC1
+mv nc0 $FNC2
+
+# Run dacdif and record the result
+$DACDIF $DIFFARGS
+STAT=$?
+
+# Restore save backup
+mv $FNC1.ncbackup $FNC1
+
+# If test pased, remove test output backup. Otherwise restore it
+if [ $STAT -eq 0 ] ; then
+  rm $FNC2.ncbackup
+else
+  mv $FNC2.ncbackup $FNC2
+fi
+
+exit $STAT

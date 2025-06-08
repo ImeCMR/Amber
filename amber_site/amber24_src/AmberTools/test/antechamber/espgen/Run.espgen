@@ -1,0 +1,15 @@
+#!/bin/csh -f
+set AMBERHOME="/home2/jwang/git2/amber_2023/amber22"
+"$AMBERHOME/bin/espgen" -i c100.gout -o c100.esp >& espgen.out || goto error
+"$AMBERHOME/bin/espgen" -i c100.gout -o c100.esp_pGM -p 1 >& espgen_pGM.out || goto error
+
+../../dacdif -a 1.5e-3 c100.esp.save c100.esp
+../../dacdif -a 1.5e-3 c100.esp_pGM.save c100.esp_pGM
+
+/bin/rm -f ESPGEN.TMP  RESPIN1  RESPIN2 
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

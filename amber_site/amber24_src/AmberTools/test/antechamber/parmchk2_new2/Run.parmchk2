@@ -1,0 +1,22 @@
+#!/bin/csh -f
+
+# Step 1 - Run antechamber to generate IRE.prepi using amber atomtype 
+"$AMBERHOME/bin/antechamber" -fi mol2 -fo prepi -i IRE.mol2 -o IRE.prepi -at amber -rn IRE >& antechamber.out || goto error
+
+# Step 2 - Run parmchk2 to generate frcmod file
+$AMBERHOME/bin/parmchk2_new -i IRE.prepi -f prepi -o IRE.frcmod -s 4 -frc ff14SB >& parmchk2_step2.out || goto error
+
+# Step 3 - Run parmchk2 to generate frcmod file using gaff2
+$AMBERHOME/bin/parmchk2_new -i IRE.frcmod -f frcmod -o IRE.frcmod2 -s 2 -att 1 >& parmchk2_step3.out || goto error
+
+../../dacdif IRE.prepi.save IRE.prepi 
+../../dacdif IRE.frcmod.save IRE.frcmod
+../../dacdif IRE.frcmod2.save IRE.frcmod2
+
+/bin/rm -f  ANTECHAMBER* RESIDUE_GEN* ATOMTYPE.INF NEWPDB.PDB PREP.INF punch qout QOUT esout QIN
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

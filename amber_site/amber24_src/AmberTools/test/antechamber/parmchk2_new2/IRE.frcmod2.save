@@ -1,0 +1,32 @@
+Remark line goes here
+MASS
+
+BOND
+CA-OS  357.50   1.370       same as ca-os, penalty score=  0.0
+
+ANGLE
+CA-OS-CT   66.100     117.960   same as c3-os-ca, penalty score=  0.0
+CA-CA-OS   87.300     119.200   same as ca-ca-os, penalty score=  0.0
+CA-CA-NC   87.600     119.720   same as ca-ca-nc, penalty score=  0.0
+CA-CA-N2   86.200     120.950   same as ca-ca-nh, penalty score=  0.0
+CA-N2-CA   65.200     127.460   same as ca-nh-ca, penalty score=  0.0
+
+DIHE
+CA-CA-OS-CT   1    1.610       180.000           2.000      same as c3-os-ca-ca, penalty score=  0.0
+
+IMPROPER
+CA-CA-CA-OS         1.1          180.0         2.0          Using the default value
+CA-CA-CA-HA         1.1          180.0         2.0          Using the default value
+CA-CA-CA-CA         1.1          180.0         2.0          Using the default value
+CA-CA-CA-NC         1.1          180.0         2.0          Using the default value
+HA-NC-CQ-NC         1.1          180.0         2.0          Using the default value
+CA-N2-CA-NC         1.1          180.0         2.0          Using the default value
+CA-CA-N2-H          1.1          180.0         2.0          Using the default value
+CA-CA-CA-N2         1.1          180.0         2.0          Using the default value
+CA-CA-CA-Cl         1.1          180.0         2.0          Using the default value
+CA-CA-CA-F          1.1          180.0         2.0          Using the default value
+
+NONBON
+
+
+

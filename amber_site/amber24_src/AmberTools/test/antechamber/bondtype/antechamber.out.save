@@ -1,0 +1,11 @@
+Info: The atom type is set to gaff; the options available to the -at flag are
+      gaff, gaff2, amber, bcc, abcg2, and sybyl.
+
+Info: Ignoring Mol2 record type (@<TRIPOS>SUBSTRUCTURE).
+Info: Finished reading file (fluorescein_f.mol2); atoms read (35), bonds read (38).
+Info: Determining atomic numbers from atomic symbols which are case sensitive.
+Running: /home/case/dist/amber24/bin/bondtype -j full -i ANTECHAMBER_BOND_TYPE.AC0 -o ANTECHAMBER_BOND_TYPE.AC -f ac
+Info: Bond types are assigned for valence state (1) with penalty (1).
+
+Running: /home/case/dist/amber24/bin/atomtype -i ANTECHAMBER_AC.AC0 -o ANTECHAMBER_AC.AC -p gaff
+

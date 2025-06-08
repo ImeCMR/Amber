@@ -1,0 +1,33 @@
+
+Welcome to antechamber 21.1: molecular input file processor.
+
+Info: acdoctor mode is on: check and diagnose problems in the input file.
+Info: The atom type is set to gaff; the options available to the -at flag are
+      gaff, gaff2, amber, bcc, and sybyl.
+
+Info: Finished reading file (cfborate.xyz); lines read (81), atoms read (78).
+Info: Determining atomic numbers from atomic symbols which are case sensitive.
+-- Check Unusual Elements --
+Warning: Unusual element (Cf) for atom (ID: 1, Name: Cf1).
+Warning: Unusual element (B) for atom (ID: 4, Name: B1).
+Warning: Unusual element (B) for atom (ID: 5, Name: B2).
+Warning: Unusual element (B) for atom (ID: 8, Name: B3).
+Warning: Unusual element (B) for atom (ID: 9, Name: B4).
+Warning: Unusual element (B) for atom (ID: 15, Name: B5).
+Warning: Unusual element (B) for atom (ID: 16, Name: B6).
+Warning: Unusual element (B) for atom (ID: 17, Name: B7).
+Warning: Unusual element (B) for atom (ID: 25, Name: B8).
+Warning: Unusual element (B) for atom (ID: 36, Name: B9).
+Warning: Unusual element (B) for atom (ID: 44, Name: B10).
+Warning: Unusual element (B) for atom (ID: 46, Name: B11).
+antechamber: Fatal Error!
+GAFF does not have sufficient parameters for molecules having unusual
+       elements (those other than H,C,N,O,S,P and halogens).
+       To ensure antechamber works properly, one may need to designate
+       bond types for bonds involved with unusual elements.
+       To do so, simply freeze the bond types by appending "F" or "f" 
+       to the corresponding bond types in ac or mol2 files
+       and rerun antechamber without unusual element checking via:
+       antechamber -dr no 
+       Alternatively for metals, see metalpdb2mol2.py in MCPB. 
+

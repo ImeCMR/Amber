@@ -1,0 +1,31 @@
+
+Welcome to acdoctor: check and diagnosis problems in molecular input files.
+
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+   Status: pass
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+   Status: pass
+-- Check Number of Units --
+   Status: pass
+
+-- Now try to judge bond type -- 
+Running: /tmp/amber/bin/bondtype -j full -i ACDOCTOR_INIT.ac -o ACDOCTOR_BOND.ac -f ac
+-- Now try to assign atom type -- 
+Running: /tmp/amber/bin/atomtype -i ACDOCTOR_BOND.ac -o ACDOCTOR_ATOM.ac -p gaff
+-- Now write out ACDOCTOR.mol2 -- 
+
+-- IF no error occurs in bond and atom type assignments,
+   mpd.sqmout should present no problems to the antechamber package. -- 
+
+ACDOCTOR_INIT.ac  : ac file before bond type and atom type assignment
+ACDOCTOR_BT.ac    : ac file after bond type assignment
+ACDOCTOR_AT.ac    : ac file after gaff atom type assignment
+ACDOCTOR_SYBYL.ac : ac file after sybyl atom type assignment
+ACDOCTOR.mol2     : mol2 file after sybyl atom type assignment
+

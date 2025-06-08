@@ -1,0 +1,14 @@
+
+Welcome to antechamber: molecular input file processor.
+
+Warning: Weird total charge: -9999!The net charge is assumed to be 0.
+         If the weird charge was correct, specify it via the -nc net charge flag.
+Running: /tmp/amber/bin/bondtype -j full -i ANTECHAMBER_BOND_TYPE.AC0 -o ANTECHAMBER_BOND_TYPE.AC -f ac
+Warning: Weird total charge: -9999!The net charge is assumed to be 0.
+         If the weird charge was correct, specify it via the -nc net charge flag.
+
+Running: /tmp/amber/bin/atomtype -i ANTECHAMBER_AC.AC0 -o ANTECHAMBER_AC.AC -p amber
+Warning: Weird total charge (-9999)!
+         Assuming the net charge is 0.
+         If the weird charge was correct, specify it via the -nc net charge flag.
+

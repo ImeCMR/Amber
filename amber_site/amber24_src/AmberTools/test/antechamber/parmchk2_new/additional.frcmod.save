@@ -1,0 +1,21 @@
+Remark line goes here
+MASS
+
+BOND
+S -c3  215.90   1.839       same as c3-ss, penalty score=  0.0
+
+ANGLE
+S -c3-c3   61.300     110.270   same as c3-c3-ss, penalty score=  0.0
+S -c3-h1   42.100     108.760   same as h1-c3-ss, penalty score=  0.0
+2C-S -c3   60.200      99.240   same as c3-ss-c3, penalty score=  0.0
+
+DIHE
+2C-S -c3-c3   3    1.000         0.000           3.000      same as X -c3-ss-X , penalty score=  0.0
+2C-S -c3-h1   3    1.000         0.000           3.000      same as X -c3-ss-X , penalty score=  0.0
+
+IMPROPER
+
+NONBON
+
+
+

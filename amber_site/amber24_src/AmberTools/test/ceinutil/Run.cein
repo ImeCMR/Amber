@@ -1,0 +1,30 @@
+#!/bin/csh -f
+
+
+set ceinutil=$AMBERHOME/bin/ceinutil.py
+
+$ceinutil -p diheme.prmtop -igb 2 > cein1 || goto error
+$ceinutil -p diheme.prmtop -igb 8 > cein2 || goto error
+$ceinutil -p diheme.prmtop -igb 2 -resnum 140 > cein3 || goto error
+$ceinutil -p diheme.prmtop -igb 2 -notresnum 143 > cein3.1 || goto error
+$ceinutil -p diheme.prmtop -igb 2 -notresnum 140 > cein4 || goto error
+$ceinutil -p diheme.prmtop -igb 2 -resname HEH -states 0,1 > cein5 || goto error
+
+# explicit solvent cein files
+
+$ceinutil -p mp8.solv.prmtop -igb 2 > cein6 || goto error
+
+# Compare them now
+../dacdif cein1.save cein1
+../dacdif cein2.save cein2
+../dacdif cein3.save cein3
+../dacdif cein3.save cein3.1
+../dacdif cein4.save cein4
+../dacdif cein5.save cein5
+../dacdif cein6.save cein6
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

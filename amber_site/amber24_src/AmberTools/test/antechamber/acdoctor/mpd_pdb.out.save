@@ -1,0 +1,24 @@
+
+Welcome to acdoctor: check and diagnosis problems in molecular input files.
+
+-- Check Format for pdb File --
+   Status: pass
+-- Check Unusual Elements --
+   Status: pass
+-- Check Open Valences --
+   Status: pass
+-- Check Geometry --
+      for those bonded   
+      for those not bonded   
+   Status: pass
+-- Check Weird Bonds --
+   Status: pass
+-- Check Number of Units --
+/tmp/amber/bin/acdoctor: Fatal Error!
+This molecule may have more than one unit.
+       antechamber can only handle one unit.  If the input is a single unit
+       then the connectivity is wrong and the geometry may be bad.
+       Please convert your molecule to a mol2 file via:
+       antechamber -j 5 -at sybyl -dr no 
+       And then check your molecule with a visualization program;
+       manually add missing bonds or delete unwanted bonds as appropriate.

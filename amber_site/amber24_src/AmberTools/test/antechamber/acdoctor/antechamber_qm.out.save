@@ -1,0 +1,13 @@
+
+Welcome to antechamber: molecular input file processor.
+
+Warning: The assigned bond types may be wrong, please :
+(1) double check the structure (the connectivity) and/or 
+(2) adjust atom valence penalty parameters in APS.DAT, and/or 
+(3) increase PSCUTOFF in define.h and recompile bondtype.c
+    (be cautious, using a large value of PSCUTOFF (>100) will 
+    significantly increase the computation time).
+Info: Total number of electrons: 66; net charge: 0
+
+Running: /tmp/amber/bin/sqm -O -i sqm.in -o sqm.out
+
