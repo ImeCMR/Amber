@@ -1,0 +1,20 @@
+Remark line goes here
+MASS
+
+BOND
+C -OD              570.0000      1.2290  Branched from C -O
+C -ND              490.0000      1.3350  Branched from C -N
+
+ANGLE
+CT-CT-N             80.0000      109.70  AA ala, general (JACS 94, 2657)
+CT-CX-N             80.0000      109.70  AA ala, general (was CT-CT-N)
+N -C -OD            80.0000      122.90  Branched from N -C -O
+
+DIHE
+HO-OA-CT-CX   1     0.16000    0.0 -3.0  Branched from HO-OH-CT-CX
+HO-OA-CT-CX   1     0.25000    0.0  1.0  Branched from HO-OH-CT-CX
+
+IMPROPER
+
+NONBON
+  C                1.908000    0.086000  ! sp2 C carbonyl group

@@ -1,0 +1,47 @@
+#!/bin/csh -f
+
+
+set cpinutil=$AMBERHOME/bin/cpinutil.py
+
+# Usage: cpinutil.py -p <prmtop> -igb <2|5|8> -resname <resname list>
+#                    -notresname <resname list> -resnum <residue numbers>
+#                    -notresnum <residue numbers> -minpKa <value>
+#                    -maxpKa <value> -states <list of states>
+#                    -system <system name> [--ignore-warnings]
+
+$cpinutil -p hewl.parm7 -igb 2 --old-format > cpin1 || goto error
+$cpinutil -p hewl.parm7 -igb 5 --old-format > cpin2 || goto error
+$cpinutil -p hewl.parm7 -igb 2 --old-format -resname AS4,GL4 > cpin3 || goto error
+$cpinutil -p hewl.parm7 -igb 2 --old-format -notresname HIP,LYS,TYR,CYS > cpin3.1 || goto error
+$cpinutil -p hewl.parm7 -igb 2 --old-format -resnum 35,52 > cpin4 || goto error
+$cpinutil -p hewl.parm7 -igb 2 --old-format -minpKa 3.5 -maxpKa 4.0 > cpin5 || goto error
+$cpinutil -p hewl.parm7 -igb 2 --old-format -resname AS4,GL4,HIP \
+          -states 0,1,0,1,0,1,0,1,0,1 > cpin6 || goto error
+
+# explicit solvent cpin files
+
+$cpinutil -p hewl.solv.parm7 -igb 2 -op hewl.op.parm7 --old-format > cpin7 || goto error
+
+# testing the new cpin format
+
+$cpinutil -p hewl.parm7 -igb 2 > cpin8 || goto error
+$cpinutil -p hewl.solv.parm7 -igb 2 -op hewl.op.parm7 > cpin9 || goto error
+
+# Compare them now
+../dacdif cpin1.save cpin1
+../dacdif cpin2.save cpin2
+../dacdif cpin3.save cpin3
+../dacdif cpin3.save cpin3.1
+../dacdif cpin4.save cpin4
+../dacdif cpin5.save cpin5
+../dacdif cpin6.save cpin6
+../dacdif cpin7.save cpin7
+../dacdif hewl.op.parm7.save hewl.op.parm7
+../dacdif cpin8.save cpin8
+../dacdif cpin9.save cpin9
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

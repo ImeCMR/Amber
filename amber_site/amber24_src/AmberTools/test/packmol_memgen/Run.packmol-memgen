@@ -1,0 +1,72 @@
+#!/bin/sh
+#
+#MEMEMBED / PACKMOL MEMGEN TEST
+#Very brief runs to check basic functionality
+
+
+. ../program_error.sh
+
+ERROR_MESSAGE="Program error"
+
+SCRIPT_PATH="$AMBERHOME/bin/memembed"
+
+PDB=2x2v
+
+echo "running memembed"
+$SCRIPT_PATH -t 4,26,46,68 -n out -q 1 -a 2 ${PDB}.pdb > memembed.log || echo "${0}: ${ERROR_MESSAGE}"
+
+grep Convergence memembed.log > /dev/null
+
+finished=$?
+
+if [ $finished -eq 0 ]
+then
+    echo "PASSED"
+    echo "=============================================================="
+    /bin/rm -f memembed.log ${PDB}_EMBED.pdb
+else
+    echo "Possible FAILURE"
+    echo "MEMEMBED Failed. Check the output files in `pwd`"
+fi
+
+SCRIPT_PATH="$AMBERHOME/bin/immers"
+
+PDB=6us9
+
+echo "running immers / ppm"
+$SCRIPT_PATH < ppm.in > ppm.out || echo "${0}: ${ERROR_MESSAGE}"
+
+grep emin ppm.out > /dev/null
+
+finished=$?
+
+if [ $finished -eq 0 ]
+then
+    echo "PASSED"
+    echo "=============================================================="
+    /bin/rm -f ppm.out datapar* datasub1 fort* ${PDB}out.pdb
+else
+    echo "Possible FAILURE"
+    echo "PPM immers Failed. Check the output files in `pwd`"
+fi
+
+
+SCRIPT_PATH="$AMBERHOME/bin/packmol-memgen"
+output=packmol-memgen.out
+
+echo "running simple packmol-memgen run"
+$SCRIPT_PATH --lipids DOPC --distxy_fix 20 --salt_c K+ --nloop 10 --nloop_all 10 --writeout 5 > $output 2>&1 || echo "${0}: ${ERROR_MESSAGE}"
+
+grep DONE! $output > /dev/null
+
+finished=$?
+
+if [ $finished -eq 0 ]
+then
+    echo "PASSED"
+    echo "=============================================================="
+    /bin/rm -f $output bilayer_*.pdb_FORCED packmol.inp packmol-memgen.log packmol.log bilayer_*.pdb
+else
+    echo "Possible FAILURE"
+    echo "PACKMOL-MEMGEN Failed. Check the output files in `pwd`"
+fi

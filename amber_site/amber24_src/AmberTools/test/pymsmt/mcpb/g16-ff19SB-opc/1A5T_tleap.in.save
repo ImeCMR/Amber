@@ -1,0 +1,39 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff
+source leaprc.water.opc
+addAtomTypes {
+        { "M1"  "Zn" "sp3" }
+        { "Y1"  "S" "sp3" }
+        { "Y2"  "S" "sp3" }
+        { "Y3"  "S" "sp3" }
+        { "Y4"  "S" "sp3" }
+}
+CM1 = loadmol2 CM1.mol2
+CM2 = loadmol2 CM2.mol2
+CM3 = loadmol2 CM3.mol2
+CM4 = loadmol2 CM4.mol2
+ZN1 = loadmol2 ZN1.mol2
+loadamberparams frcmod.ionslm_126_opc
+loadamberparams 1A5T_mcpbpy.frcmod
+mol = loadpdb 1A5T_mcpbpy.pdb
+bond mol.50.SG mol.325.ZN
+bond mol.59.SG mol.325.ZN
+bond mol.62.SG mol.325.ZN
+bond mol.65.SG mol.325.ZN
+bond mol.49.C mol.50.N
+bond mol.50.C mol.51.N
+bond mol.58.C mol.59.N
+bond mol.59.C mol.60.N
+bond mol.61.C mol.62.N
+bond mol.62.C mol.63.N
+bond mol.64.C mol.65.N
+bond mol.65.C mol.66.N
+savepdb mol 1A5T_dry.pdb
+saveamberparm mol 1A5T_dry.prmtop 1A5T_dry.inpcrd
+solvatebox mol OPCBOX 10.0
+addions mol Na+ 0
+addions mol Cl- 0
+savepdb mol 1A5T_solv.pdb
+saveamberparm mol 1A5T_solv.prmtop 1A5T_solv.inpcrd
+quit
+ 

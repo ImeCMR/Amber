@@ -1,0 +1,500 @@
+
+(2.) Parameter sampling.  Bonds and angles are binned over 18 intervals based 
+     on deviations, positive or negative, from the ideal bond length.  Each 
+     interval represents 0.028 Angstrom or 0.023 radian deviation for bonds or 
+     angles, respectively.  Dihedrals and impropers are binned at 10-degree 
+     intervals, ranging from zero to 180 (the range of the arccosine 
+     function).
+
+ Sampling histogram key:  (zero)   . : = e o U O 0 @ X ( > ten)
+
+ Angle sampling:
+                              Bins in Degrees 
+                                                  Fitted  Original
+  Term  Amber Types   Count  -15     +0      15   K / Eq   K / Eq 
+  ----  -----------  ------- ------------------  -------- --------
+  ANGL  CX C  N           70    .  @XXX@o:          10.84    70.00
+                                                    97.79   116.60
+  ANGL  C  CX N           70        :@U@XXX=        51.56    63.00
+                                                   109.87   110.10
+
+ Torsion term sampling:
+                              Bins in Radians 
+  Term  Amber Types   Count  -PI     +0      PI   Fitted  Original
+  ----  -----------  ------- ------------------  -------- --------
+  DIHE  X  C  CT X       210 XOU@@XX0UX@XXOUX@X      7.61    -0.12
+  DIHE  X  C  CX X       210 oXXOXXXXX@XXXX@=XX      7.30    -0.56
+  DIHE  X  C  N  X       420 X=     =XX=     :X      2.90     2.37
+  DIHE  X  CT CX X       360 XX =XXXX :XXXX =XX      0.32     0.19
+  DIHE  X  CT N  X       420 XXXXXXXXXXXXXXXXXX     -0.44     0.52
+  DIHE  X  CX N  X       280 XXXU@XXXX@XXX0XOOX     -1.09     0.20
+  DIHE  X  CX 3C X       120 U:  oX@=  XXo=  eX     -9.68     0.01
+  DIHE  C  N  CX C        70  XXoXXe    .           -0.45     0.07
+  DIHE  C  N  CX C        70  XXoXXe    .           -1.31     0.26
+  DIHE  C  N  CX C        70  XXoXXe    .           -3.79     0.07
+  DIHE  C  N  CX C        70  XXoXXe    .           16.19     0.32
+  DIHE  N  CX C  N        70 .     .XXo:. .UOX@     -0.01    -0.19
+  DIHE  N  CX C  N        70 .     .XXo:. .UOX@      3.08    -0.04
+  DIHE  N  CX C  N        70 .     .XXo:. .UOX@     -3.94     0.67
+  DIHE  N  CX C  N        70 .     .XXo:. .UOX@     -8.58    -0.51
+  DIHE  CT CX N  C        40              @OO@0     -3.82    -0.09
+  DIHE  CT CX N  C        40              @OO@0     -9.88    -0.24
+  DIHE  CT CX N  C        40              @OO@0    -27.11    -0.50
+  DIHE  CT CX N  C        40              @OO@0    -16.69    -0.96
+  DIHE  CT CX C  N        40   ==X@.      oU...      1.21    -0.25
+  DIHE  CT CX C  N        40   ==X@.      oU...      6.40    -0.08
+  DIHE  CT CX C  N        40   ==X@.      oU...      8.75     0.05
+  DIHE  CT CX C  N        40   ==X@.      oU...     15.27     0.62
+  DIHE  3C CX N  C        30 .    .       ===XO     -0.83    -0.15
+  DIHE  3C CX N  C        30 .    .       ===XO     -8.11    -0.36
+  DIHE  3C CX N  C        30 .    .       ===XO    -25.16     0.02
+  DIHE  3C CX N  C        30 .    .       ===XO    -14.77    -0.82
+  DIHE  N  C  CX 3C       30   :eo:       eUe:.     -9.37    -0.18
+  DIHE  N  C  CX 3C       30   :eo:       eUe:.    -15.56     0.01
+  DIHE  N  C  CX 3C       30   :eo:       eUe:.    -39.25     0.14
+  DIHE  N  C  CX 3C       30   :eo:       eUe:.    -42.57     0.42
+  DIHE  HC CT 3C CX       90 X::. XX=.: XX=:. X    -12.02     0.62
+  DIHE  HC CT 3C H1       90 Xe.: XXe.: XXe.: @     -1.06     0.25
+  DIHE  C  CX 3C CT       30      :     .::  XX    -12.15    -0.28
+  DIHE  C  CX 3C CT       30      :     .::  XX     -7.80     0.08
+  DIHE  C  CX 3C CT       30      :     .::  XX     -8.11     0.21
+  DIHE  C  CX 3C CT       30      :     .::  XX    -15.03     0.80
+  DIHE  N  CX 3C CT       30 :=  UXo    :           -0.31     0.17
+  DIHE  N  CX 3C CT       30 :=  UXo    :          -15.36    -0.40
+  DIHE  N  CX 3C CT       30 :=  UXo    :          -44.03     0.28
+  DIHE  N  CX 3C CT       30 :=  UXo    :           10.30     0.09
+  DIHE  H  N  C  OD      140 X                X      1.41     1.76
+  DIHE  H  N  C  OD      140 X                X     -0.60     1.19
+  DIHE  H1 CX C  OD       70 XX0.     .XXo.: :=     -8.99     0.33
+  DIHE  H1 CX C  OD       70 XX0.     .XXo.: :=      5.20     0.28
+  DIHE  H1 CX C  OD       70 XX0.     .XXo.: :=     -0.18    -0.29
+  DIHE  HC CT C  OD      210 XOXXUOX0XXoOX0X@0O    -12.81     0.10
+  DIHE  HC CT C  OD      210 XOXXUOX0XXoOX0X@0O    -14.44    -0.11
+  DIHE  HC CT C  OD      210 XOXXUOX0XXoOX0X@0O     -0.19    -0.06
+  DIHE  HC CT 3C OA       90 X.:. XX::. XX=:. X     14.05     0.34
+  DIHE  HC CT 3C OA       90 X.:. XX::. XX=:. X     -0.43    -1.60
+  DIHE  H1 CX 3C OA       30 =    :     :.:  UX     -1.79     0.26
+  DIHE  H1 CX 3C OA       30 =    :     :.:  UX    -16.44    -3.82
+  DIHE  HO OA 3C H1       30 .=   :e=: :o:.=..      21.00    -0.28
+  DIHE  C  CX 3C OA       30 .:  XX     :     :    -22.46     0.02
+  DIHE  C  CX 3C OA       30 .:  XX     :     :     27.02     0.92
+  DIHE  C  CX 3C OA       30 .:  XX     :     :     50.34    -0.27
+  DIHE  C  CX 3C OA       30 .:  XX     :     :     12.10     4.78
+  DIHE  N  CX 3C OA       30       :=  eXe    :      8.86     0.16
+  DIHE  N  CX 3C OA       30       :=  eXe    :    -12.34     0.01
+  DIHE  N  CX 3C OA       30       :=  eXe    :     -2.87    -0.25
+  DIHE  N  CX 3C OA       30       :=  eXe    :      8.43     4.64
+  DIHE  CX 3C OA HO       30 :..=. .=   .o:= :o     -1.47     0.12
+  DIHE  CX 3C OA HO       30 :..=. .=   .o:= :o    -27.81     0.46
+  DIHE  CX 3C OA HO       30 :..=. .=   .o:= :o     -3.88    -0.30
+  DIHE  CX 3C OA HO       30 :..=. .=   .o:= :o      2.60    -0.09
+  DIHE  CT 3C OA HO       30 e== :e:: e. .=   .     -0.56    -0.03
+  DIHE  CT 3C OA HO       30 e== :e:: e. .=   .      6.24     0.38
+  DIHE  CT 3C OA HO       30 e== :e:: e. .=   .     -2.93     0.43
+  DIHE  CT 3C OA HO       30 e== :e:: e. .=   .      2.44     1.26
+
+<++>-----------------------------------------------------------------------<++>
+
+<++>-----------------------------------------------------------------------<++>
+
+(3.) Warnings concerning parameter sampling and the fitted values of new 
+     parameters.
+
+ Angle parameter warnings (3):
+  - Angle CX C  N  has lopsided sampling (  0.00% below, 100.00% above
+    the optimized equilibrium value of   97.7949).
+  - Angle CX C  N  has poor sampling within 0.05 radians of its optimized
+    equilbrium value (  97.7949).
+  - Angle C  CX N  has lopsided sampling (  3.92% below,  90.14% above
+    the optimized equilibrium value of  109.8693).
+
+<++>-----------------------------------------------------------------------<++>
+
+<++>-----------------------------------------------------------------------<++>
+
+(4.) Energy adjustment constants.  These constants are included to bring the 
+     overall energy of quantum mechanical and molecular mechanical 
+     calculations into general agreement so that the fitted parameters can 
+     address the energy differences between multiple states of each system. 
+     Gross differences between quantum and molecular mechanics are first 
+     eliminated by subtracting off the average energy of all states for each 
+     system; these parameters are then included to "mop up."
+
+      System      Adjustment         System      Adjustment
+ ---------------- ----------    ---------------- ----------
+ ALA.top             66.7107    THR.top            257.8492    
+
+<++>-----------------------------------------------------------------------<++>
+
+<++>-----------------------------------------------------------------------<++>
+
+(5.) Fitting matrix analysis.  This is a check against features of the fitting 
+     set that might create a poorly conditioned matrix.
+
+ - No columns with zero data detected
+ - 1 highly correlated column pairs detected, corresponding to parameters:
+
+     First term,        Second term,     Fitted   Fitted      Pearson
+   Type    Atoms      Type    Atoms      value 1  value 2   Correlation
+   ---- -----------   ---- -----------   -------- --------  -----------
+   DIHE H  N  C  OD   DIHE H  N  C  OD       1.41    -0.60   0.99998141
+<++>-----------------------------------------------------------------------<++>
+
+<++>-----------------------------------------------------------------------<++>
+
+(6.) Energy contributions of each fitted parameter.  All parameters that 
+     contribute to each system are printed, this time with respect to the 
+     amount of energy that they contribute to the molecular mechanical 
+     system.
+
+ System: ALA.top
+                      Energy    Std. Dev.
+   DIHE HC CT C  OD   -43.3595     0.9053
+   DIHE HC CT C  OD   -38.3994     0.3584
+   DIHE CT CX N  C    -24.3359    19.7934
+   DIHE X  C  CT X     22.8437     0.4818
+   DIHE X  C  CX X     21.5895     0.9995
+   DIHE CT CX C  N     13.5608     5.5875
+   DIHE C  N  CX C     12.3590     7.1708
+   DIHE CT CX N  C    -11.5873     5.7067
+   DIHE N  CX C  N    -10.2435     7.1729
+   DIHE CT CX N  C     -7.2571     6.0039
+   DIHE CT CX C  N      7.0027     4.2824
+   DIHE H1 CX C  OD     6.7318     2.7819
+   DIHE H1 CX C  OD    -6.0193     6.5952
+   DIHE X  CX N  X     -4.8396     0.4103
+   DIHE CT CX N  C     -4.1495     2.7109
+   DIHE N  CX C  N      2.6763     1.9370
+   DIHE X  CT N  X     -2.6147     0.0598
+   DIHE CT CX C  N      2.5632     3.5239
+   DIHE N  CX C  N     -2.0738     2.0226
+   DIHE C  N  CX C     -1.9110     1.9521
+   ANGL C  CX N         1.7415     0.5469
+   DIHE CT CX C  N      1.5966     0.7376
+   DIHE C  N  CX C     -1.4293     0.8143
+   DIHE X  C  N  X      0.9597     0.9520
+   DIHE X  CT CX X      0.8991     1.0054
+   ANGL CX C  N         0.5275     0.1794
+   DIHE C  N  CX C     -0.4575     0.3424
+   DIHE HC CT C  OD    -0.3627     0.3914
+   DIHE H1 CX C  OD    -0.2108     0.1153
+   DIHE H  N  C  OD     0.0877     0.0850
+   DIHE N  CX C  N     -0.0143     0.0093
+   DIHE H  N  C  OD    -0.0095     0.0092
+ System: THR.top
+                      Energy    Std. Dev.
+   DIHE C  CX 3C OA    76.6125    32.4870
+   DIHE N  CX 3C CT   -63.5076    25.1442
+   DIHE HC CT C  OD   -43.1556     0.8333
+   DIHE HC CT C  OD   -38.4605     0.3469
+   DIHE C  CX 3C OA   -30.9539    12.6641
+   DIHE 3C CX N  C    -30.4814    18.2605
+   DIHE N  C  CX 3C   -29.8358    14.9404
+   DIHE N  CX 3C CT   -26.0543     5.2932
+   DIHE C  CX 3C CT   -24.9193     7.9851
+   DIHE X  C  CT X     22.7392     0.4379
+   DIHE X  C  CX X     21.9479     1.1569
+   DIHE CX 3C OA HO   -21.1815    19.2244
+   DIHE N  CX 3C OA   -20.9953     4.0896
+   DIHE N  C  CX 3C   -20.8469     9.5021
+   DIHE N  C  CX 3C   -16.6957    19.4468
+   DIHE C  CX 3C CT   -16.1342     7.0551
+   DIHE C  N  CX C     15.9300     7.1288
+   DIHE HO OA 3C H1    15.8459    14.2213
+   DIHE HC CT 3C OA    15.3607    22.8583
+   DIHE N  CX 3C OA    14.2260     4.1907
+   DIHE HC CT 3C CX   -12.9763    19.1103
+   DIHE X  CX 3C X    -12.2325    12.0855
+   DIHE C  CX 3C OA    11.4630     5.8816
+   DIHE C  CX 3C OA    11.0656     9.9731
+   DIHE N  C  CX 3C   -10.7863     6.4905
+   DIHE N  CX 3C CT     8.7923     5.2248
+   DIHE H1 CX C  OD    -8.4830     6.8966
+   DIHE 3C CX N  C     -6.9200     5.1105
+   DIHE N  CX C  N     -6.6719     7.0640
+   DIHE H1 CX C  OD     6.1521     3.1302
+   DIHE H1 CX 3C OA    -5.5415     8.9727
+   DIHE CT 3C OA HO     5.1860     4.3391
+   DIHE 3C CX N  C     -4.8266     5.7698
+   DIHE X  CX N  X     -4.6268     0.4397
+   DIHE C  CX 3C CT    -4.6136     5.6078
+   DIHE CX 3C OA HO    -4.2016     2.9209
+   DIHE N  CX 3C OA     3.8138     3.6564
+   DIHE C  CX 3C CT    -3.1195     2.9001
+   DIHE N  CX 3C OA    -2.9409     1.2730
+   DIHE CT 3C OA HO    -2.7587     2.2253
+   DIHE X  CT N  X     -2.6465     0.0415
+   DIHE CT 3C OA HO     2.4276     1.7759
+   DIHE N  CX C  N     -2.1475     2.1472
+   DIHE CX 3C OA HO     2.0272     1.6637
+   DIHE N  CX C  N      1.8809     1.7049
+   ANGL C  CX N         1.7410     0.5374
+   DIHE CX 3C OA HO    -1.6882     0.9450
+   DIHE C  N  CX C     -1.4719     1.7221
+   DIHE HC CT 3C OA    -1.3044     0.0121
+   DIHE HC CT 3C H1    -1.1927     1.7259
+   DIHE C  N  CX C     -1.0281     0.8741
+   DIHE 3C CX N  C     -0.9536     0.5446
+   DIHE X  C  N  X      0.8530     0.6680
+   DIHE CT 3C OA HO    -0.6559     0.4344
+   ANGL CX C  N         0.6467     0.2199
+   DIHE H1 CX 3C OA    -0.5643     0.6130
+   DIHE C  N  CX C     -0.5196     0.2988
+   DIHE HC CT C  OD    -0.4787     0.4057
+   DIHE N  CX 3C CT    -0.2997     0.2022
+   DIHE H1 CX C  OD    -0.2458     0.1022
+   DIHE H  N  C  OD     0.0880     0.0753
+   DIHE N  CX C  N     -0.0148     0.0095
+   DIHE H  N  C  OD    -0.0095     0.0082
+
+
+<++>-----------------------------------------------------------------------<++>
+
+<++>-----------------------------------------------------------------------<++>
+
+(7.) Context of each parameter.  Instances of each parameter found in the 
+     fitting conformations are enumerated below.
+
+ [ Parameter ] [ Atom types ]                   Sampling Histogram
+  Residue (Atom Names)                   Count  MIN     +0     MAX  Warnings
+ --------------------------------------- -----  ------------------  --------
+ ANGL C  CX N    
+  ALA (N    CA   C   )                      40          O=U@0o:   
+  THR (N    CA   C   )                      30         ::==X=U.   
+
+ ANGL CX C  N    
+  ALA (CA   C   ) NME (N   )                40     .  OU@X=:      
+  THR (CA   C   ) NME (N   )                30        :eUOU=:     
+
+ DIHE X  C  CT X 
+  ACE (HH33 CH3  C   ) ALA (N   )           40  Xeo==XXoo=eXXeo=eX
+  ACE (HH32 CH3  C   ) ALA (N   )           40  Xeo==XXoo=eXXeo=eX
+  ACE (HH31 CH3  C   ) ALA (N   )           40  Xeo==XXoo=eXXeo=eX
+  ACE (HH33 CH3  C   ) THR (N   )           30  U=.UU@o=.Oo@o=.Oo0
+  ACE (HH32 CH3  C   ) THR (N   )           30  U=.UU@o=.Oo@o=.Oo0
+  ACE (HH31 CH3  C   ) THR (N   )           30  U=.UU@o=.Oo@o=.Oo0
+ DIHE X  C  CX X 
+  ALA (HA   CA   C   ) NME (N   )           40  :oO:oXX0XoXXO0O:oo
+  ALA (CB   CA   C    O   )                 40  :oO:oXX0XoXXO0O:oo
+  ALA (N    CA   C    O   )                 40  :oO:oXX0XoXXO0O:oo
+  THR (HA   CA   C   ) NME (N   )           30  =0oooO@@=eU:oo:.oU
+  THR (CB   CA   C    O   )                 30  =0oooO@@=eU:oo:.oU
+  THR (N    CA   C    O   )                 30  =0oooO@@=eU:oo:.oU
+ DIHE X  C  N  X 
+  ACE (CH3  C   ) ALA (N    H   )           40  X:     =XX:     :X
+  ACE (O    C   ) ALA (N    CA  )           40  X:     =XX:     :X
+  ACE (CH3  C   ) ALA (N    CA  )           40  X:     =XX:     :X
+  ALA (CA   C   ) NME (N    H   )           40  X:     =XX:     :X
+  ALA (O    C   ) NME (N    CH3 )           40  X:     =XX:     :X
+  ALA (CA   C   ) NME (N    CH3 )           40  X:     =XX:     :X
+  ACE (CH3  C   ) THR (N    H   )           30  X.      XX.      X
+  ACE (O    C   ) THR (N    CA  )           30  X.      XX.      X
+  ACE (CH3  C   ) THR (N    CA  )           30  X.      XX.      X
+  THR (CA   C   ) NME (N    H   )           30  X.      XX.      X
+  THR (O    C   ) NME (N    CH3 )           30  X.      XX.      X
+  THR (CA   C   ) NME (N    CH3 )           30  X.      XX.      X
+ DIHE X  CT CX X 
+  ALA (HA   CA   CB   HB1 )                 40  XX =XXXX :XXXX =XX
+  ALA (HA   CA   CB   HB2 )                 40  XX =XXXX :XXXX =XX
+  ALA (HA   CA   CB   HB3 )                 40  XX =XXXX :XXXX =XX
+  ALA (N    CA   CB   HB1 )                 40  XX =XXXX :XXXX =XX
+  ALA (N    CA   CB   HB2 )                 40  XX =XXXX :XXXX =XX
+  ALA (N    CA   CB   HB3 )                 40  XX =XXXX :XXXX =XX
+  ALA (HB3  CB   CA   C   )                 40  XX =XXXX :XXXX =XX
+  ALA (HB2  CB   CA   C   )                 40  XX =XXXX :XXXX =XX
+  ALA (HB1  CB   CA   C   )                 40  XX =XXXX :XXXX =XX
+ DIHE X  CT N  X 
+  ALA (C   ) NME (N    CH3  HH31)           40  @XX@XX@XXOXXXXXXXX
+  ALA (C   ) NME (N    CH3  HH32)           40  @XX@XX@XXOXXXXXXXX
+  ALA (C   ) NME (N    CH3  HH33)           40  @XX@XX@XXOXXXXXXXX
+  NME (H    N    CH3  HH31)                 40  @XX@XX@XXOXXXXXXXX
+  NME (H    N    CH3  HH32)                 40  @XX@XX@XXOXXXXXXXX
+  NME (H    N    CH3  HH33)                 40  @XX@XX@XXOXXXXXXXX
+  THR (C   ) NME (N    CH3  HH31)           30  XXOXUXXXOXUXXXoXUX
+  THR (C   ) NME (N    CH3  HH32)           30  XXOXUXXXOXUXXXoXUX
+  THR (C   ) NME (N    CH3  HH33)           30  XXOXUXXXOXUXXXoXUX
+  NME (H    N    CH3  HH31)                 30  XXOXUXXXOXUXXXoXUX
+  NME (H    N    CH3  HH32)                 30  XXOXUXXXOXUXXXoXUX
+  NME (H    N    CH3  HH33)                 30  XXOXUXXXOXUXXXoXUX
+ DIHE X  CX N  X 
+  ACE (C   ) ALA (N    CA   HA  )           40  OOX.@OOXXeXXOoX.O0
+  ALA (H    N    CA   HA  )                 40  OOX.@OOXXeXXOoX.O0
+  ALA (H    N    CA   CB  )                 40  OOX.@OOXXeXXOoX.O0
+  ALA (H    N    CA   C   )                 40  OOX.@OOXXeXXOoX.O0
+  ACE (C   ) THR (N    CA   HA  )           30  ooXo ee@XoXXU=XU e
+  THR (H    N    CA   HA  )                 30  ooXo ee@XoXXU=XU e
+  THR (H    N    CA   CB  )                 30  ooXo ee@XoXXU=XU e
+  THR (H    N    CA   C   )                 30  ooXo ee@XoXXU=XU e
+ DIHE X  CX 3C X 
+  THR (HA   CA   CB   HB  )                 30  U:  oX@=  XXo=  eX
+  THR (HA   CA   CB   CG2 )                 30  U:  oX@=  XXo=  eX
+  THR (N    CA   CB   HB  )                 30  U:  oX@=  XXo=  eX
+  THR (HB   CB   CA   C   )                 30  U:  oX@=  XXo=  eX
+ DIHE C  N  CX C 
+  ACE (C   ) ALA (N    CA   C   )           40   O@:X@.           
+  ACE (C   ) THR (N    CA   C   )           30   ===0@=    .      
+ DIHE C  N  CX C 
+  ACE (C   ) ALA (N    CA   C   )           40   O@:X@.           
+  ACE (C   ) THR (N    CA   C   )           30   ===0@=    .      
+ DIHE C  N  CX C 
+  ACE (C   ) ALA (N    CA   C   )           40   O@:X@.           
+  ACE (C   ) THR (N    CA   C   )           30   ===0@=    .      
+ DIHE C  N  CX C 
+  ACE (C   ) ALA (N    CA   C   )           40   O@:X@.           
+  ACE (C   ) THR (N    CA   C   )           30   ===0@=    .      
+ DIHE N  CX C  N 
+  ALA (N    CA   C   ) NME (N   )           40  .      oU: .  =o@0
+  THR (N    CA   C   ) NME (N   )           30        .oU=:  .=:U.
+ DIHE N  CX C  N 
+  ALA (N    CA   C   ) NME (N   )           40  .      oU: .  =o@0
+  THR (N    CA   C   ) NME (N   )           30        .oU=:  .=:U.
+ DIHE N  CX C  N 
+  ALA (N    CA   C   ) NME (N   )           40  .      oU: .  =o@0
+  THR (N    CA   C   ) NME (N   )           30        .oU=:  .=:U.
+ DIHE N  CX C  N 
+  ALA (N    CA   C   ) NME (N   )           40  .      oU: .  =o@0
+  THR (N    CA   C   ) NME (N   )           30        .oU=:  .=:U.
+ DIHE CT CX N  C 
+  ACE (C   ) ALA (N    CA   CB  )           40               @OO@0
+ DIHE CT CX N  C 
+  ACE (C   ) ALA (N    CA   CB  )           40               @OO@0
+ DIHE CT CX N  C 
+  ACE (C   ) ALA (N    CA   CB  )           40               @OO@0
+ DIHE CT CX N  C 
+  ACE (C   ) ALA (N    CA   CB  )           40               @OO@0
+ DIHE CT CX C  N 
+  ALA (CB   CA   C   ) NME (N   )           40    ==X@.      oU...
+ DIHE CT CX C  N 
+  ALA (CB   CA   C   ) NME (N   )           40    ==X@.      oU...
+ DIHE CT CX C  N 
+  ALA (CB   CA   C   ) NME (N   )           40    ==X@.      oU...
+ DIHE CT CX C  N 
+  ALA (CB   CA   C   ) NME (N   )           40    ==X@.      oU...
+ DIHE 3C CX N  C 
+  ACE (C   ) THR (N    CA   CB  )           30  .    .       ===XO
+ DIHE 3C CX N  C 
+  ACE (C   ) THR (N    CA   CB  )           30  .    .       ===XO
+ DIHE 3C CX N  C 
+  ACE (C   ) THR (N    CA   CB  )           30  .    .       ===XO
+ DIHE 3C CX N  C 
+  ACE (C   ) THR (N    CA   CB  )           30  .    .       ===XO
+ DIHE N  C  CX 3C
+  THR (CB   CA   C   ) NME (N   )           30    :eo:       eUe:.
+ DIHE N  C  CX 3C
+  THR (CB   CA   C   ) NME (N   )           30    :eo:       eUe:.
+ DIHE N  C  CX 3C
+  THR (CB   CA   C   ) NME (N   )           30    :eo:       eUe:.
+ DIHE N  C  CX 3C
+  THR (CB   CA   C   ) NME (N   )           30    :eo:       eUe:.
+ DIHE HC CT 3C CX
+  THR (CA   CB   CG2  HG21)                 30  X::. XX=.: XX=:. X
+  THR (CA   CB   CG2  HG22)                 30  X::. XX=.: XX=:. X
+  THR (CA   CB   CG2  HG23)                 30  X::. XX=.: XX=:. X
+ DIHE HC CT 3C H1
+  THR (HB   CB   CG2  HG21)                 30  Xe.: XXe.: XXe.: @
+  THR (HB   CB   CG2  HG22)                 30  Xe.: XXe.: XXe.: @
+  THR (HB   CB   CG2  HG23)                 30  Xe.: XXe.: XXe.: @
+ DIHE C  CX 3C CT
+  THR (CG2  CB   CA   C   )                 30       :     .::  XX
+ DIHE C  CX 3C CT
+  THR (CG2  CB   CA   C   )                 30       :     .::  XX
+ DIHE C  CX 3C CT
+  THR (CG2  CB   CA   C   )                 30       :     .::  XX
+ DIHE C  CX 3C CT
+  THR (CG2  CB   CA   C   )                 30       :     .::  XX
+ DIHE N  CX 3C CT
+  THR (N    CA   CB   CG2 )                 30  :=  UXo    :      
+ DIHE N  CX 3C CT
+  THR (N    CA   CB   CG2 )                 30  :=  UXo    :      
+ DIHE N  CX 3C CT
+  THR (N    CA   CB   CG2 )                 30  :=  UXo    :      
+ DIHE N  CX 3C CT
+  THR (N    CA   CB   CG2 )                 30  :=  UXo    :      
+ DIHE H  N  C  OD
+  ACE (O    C   ) ALA (N    H   )           40  X                X
+  ALA (O    C   ) NME (N    H   )           40  X                X
+  ACE (O    C   ) THR (N    H   )           30  X                X
+  THR (O    C   ) NME (N    H   )           30  X                X
+ DIHE H  N  C  OD
+  ACE (O    C   ) ALA (N    H   )           40  X                X
+  ALA (O    C   ) NME (N    H   )           40  X                X
+  ACE (O    C   ) THR (N    H   )           30  X                X
+  THR (O    C   ) NME (N    H   )           30  X                X
+ DIHE H1 CX C  OD
+  ALA (HA   CA   C    O   )                 40  O@U.      Uo: . .:
+  THR (HA   CA   C    O   )                 30  eo:      .oU=.. ..
+ DIHE H1 CX C  OD
+  ALA (HA   CA   C    O   )                 40  O@U.      Uo: . .:
+  THR (HA   CA   C    O   )                 30  eo:      .oU=.. ..
+ DIHE H1 CX C  OD
+  ALA (HA   CA   C    O   )                 40  O@U.      Uo: . .:
+  THR (HA   CA   C    O   )                 30  eo:      .oU=.. ..
+ DIHE HC CT C  OD
+  ACE (HH33 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH32 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH31 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH33 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH32 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH31 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+ DIHE HC CT C  OD
+  ACE (HH33 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH32 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH31 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH33 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH32 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH31 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+ DIHE HC CT C  OD
+  ACE (HH33 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH32 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH31 CH3  C    O   )                 40  e=XOeoe:X0=oe:XoUo
+  ACE (HH33 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH32 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+  ACE (HH31 CH3  C    O   )                 30  OeXe::OU0o::UUXe::
+ DIHE HC CT 3C OA
+  THR (HG23 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+  THR (HG22 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+  THR (HG21 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+ DIHE HC CT 3C OA
+  THR (HG23 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+  THR (HG22 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+  THR (HG21 CG2  CB   OG1 )                 30  X.:. XX::. XX=:. X
+ DIHE H1 CX 3C OA
+  THR (HA   CA   CB   OG1 )                 30  =    :     :.:  UX
+ DIHE H1 CX 3C OA
+  THR (HA   CA   CB   OG1 )                 30  =    :     :.:  UX
+ DIHE HO OA 3C H1
+  THR (HB   CB   OG1  HG1 )                 30  .=   :e=: :o:.=.. 
+ DIHE C  CX 3C OA
+  THR (OG1  CB   CA   C   )                 30  .:  XX     :     :
+ DIHE C  CX 3C OA
+  THR (OG1  CB   CA   C   )                 30  .:  XX     :     :
+ DIHE C  CX 3C OA
+  THR (OG1  CB   CA   C   )                 30  .:  XX     :     :
+ DIHE C  CX 3C OA
+  THR (OG1  CB   CA   C   )                 30  .:  XX     :     :
+ DIHE N  CX 3C OA
+  THR (N    CA   CB   OG1 )                 30        :=  eXe    :
+ DIHE N  CX 3C OA
+  THR (N    CA   CB   OG1 )                 30        :=  eXe    :
+ DIHE N  CX 3C OA
+  THR (N    CA   CB   OG1 )                 30        :=  eXe    :
+ DIHE N  CX 3C OA
+  THR (N    CA   CB   OG1 )                 30        :=  eXe    :
+ DIHE CX 3C OA HO
+  THR (CA   CB   OG1  HG1 )                 30  :..=. .=   .o:= :o
+ DIHE CX 3C OA HO
+  THR (CA   CB   OG1  HG1 )                 30  :..=. .=   .o:= :o
+ DIHE CX 3C OA HO
+  THR (CA   CB   OG1  HG1 )                 30  :..=. .=   .o:= :o
+ DIHE CX 3C OA HO
+  THR (CA   CB   OG1  HG1 )                 30  :..=. .=   .o:= :o
+ DIHE CT 3C OA HO
+  THR (CG2  CB   OG1  HG1 )                 30  e== :e:: e. .=   .
+ DIHE CT 3C OA HO
+  THR (CG2  CB   OG1  HG1 )                 30  e== :e:: e. .=   .
+ DIHE CT 3C OA HO
+  THR (CG2  CB   OG1  HG1 )                 30  e== :e:: e. .=   .
+ DIHE CT 3C OA HO
+  THR (CG2  CB   OG1  HG1 )                 30  e== :e:: e. .=   .
+<++>-----------------------------------------------------------------------<++>
+

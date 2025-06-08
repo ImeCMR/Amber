@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     ../Torsion/THR.top
+  -c     ../Torsion/THR1.crd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    nTHR.top
+  PrmtopTitle  "default_name"
+  NewInpcrd    nTHR.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif nTHR.top.save nTHR.top
+${AMBERHOME}/test/dacdif nTHR.crd.save nTHR.crd
+/bin/rm -f buildsystem.out newsys.in

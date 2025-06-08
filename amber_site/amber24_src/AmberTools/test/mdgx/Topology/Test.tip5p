@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Write the rules to turn TIP3P into TIP4P-Ew water
+cat > Out3.rule << EOF
+&rule
+  epname     EP1
+  eptype     Out-3
+  parent     O
+  frame2     H1
+  frame3     H2
+  residue    WAT
+  v12       -0.344908263
+  v13       -0.344908263
+  v12x13     0.644379035
+  q         -0.2410
+&end
+
+&rule
+  epname     EP2
+  eptype     Out-3
+  parent     O
+  frame2     H1
+  frame3     H2
+  residue    WAT
+  v12       -0.344908263
+  v13       -0.344908263
+  v12x13    -0.644379035
+  q         -0.2410
+&end
+
+&rule
+  atom       O
+  eptype     NONE
+  residue    WAT
+  q          0.0
+  sig        3.09700
+  eps        0.17800  
+&end
+
+&rule
+  atom       H1
+  eptype     NONE
+  residue    WAT
+  q          0.2410
+&end
+
+&rule
+  atom       H2
+  eptype     NONE
+  residue    WAT
+  q          0.2410
+&end
+EOF
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     tip3p.top
+  -xpt   Out3.rule
+  -c     tip3p.inpcrd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    TIP5P_Out3.top
+  PrmtopTitle  "TIP5P made with the Out-3 type frame"
+  NewInpcrd    TIP5P_Out3.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif TIP5P_Out3.top.save TIP5P_Out3.top
+${AMBERHOME}/test/dacdif TIP5P_Out3.crd.save TIP5P_Out3.crd
+
+# Clean up this mess
+/bin/rm -f buildsystem.out newsys.in Out3.rule

@@ -1,0 +1,31 @@
+#!/bin/csh -f
+#TEST-PROGRAM mdgx.cuda
+#TEST-DESCRIP Test if mdgx.cuda is really a cuda executable
+#TEST-PURPOSE regression, basic
+#TEST-STATE   operational
+
+set exe = 'mdgx.cuda'
+set failmsg = 'possible FAILURE:'
+set sentinel = 'This is Not a CUDA executable.'
+
+set mdgx = "${AMBERHOME}/bin/$exe"
+if( $?TESTmdgx ) then
+    set mdgx = $TESTmdgx
+endif
+
+if( ! $?DO_PARALLEL ) then
+    setenv DO_PARALLEL " "
+endif
+
+strings -a "$mdgx" | grep "$sentinel"
+if ( $status == 0 ) then
+    echo "$failmsg  $exe is Not a CUDA executable !"
+else
+    echo "PASSED"
+endif
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

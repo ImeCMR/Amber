@@ -1,0 +1,63 @@
+#!/bin/csh -f
+
+
+set genremdinputs=$AMBERHOME/bin/genremdinputs.py
+
+# Testing 1D
+
+$genremdinputs -inputs phs.dat -groupfile groupfile.1d.1.ref -i mdin.1d.ref --verbose -O > output1.1d.dat || goto error
+$genremdinputs -inputs temperatures.dat -groupfile groupfile.1d.1.ref groupfile.1d.2.ref \
+                -i mdin.1d.1.ref mdin.1d.2.ref --verbose -O > output2.1d.dat || goto error
+$genremdinputs -inputs hamil.us.dat -groupfile groupfile.1d.us.ref -i mdin.1d.us.ref -disang distang.ref -O || goto error
+
+../dacdif output1.1d.dat.save output1.1d.dat
+../dacdif output2.1d.dat.save output2.1d.dat
+../dacdif groupfile.1d.2.save groupfile.1d.2
+../dacdif mdin.1d.rep.002.save mdin.1d.rep.002
+../dacdif mdin.1d.1.rep.001.save mdin.1d.1.rep.001
+../dacdif mdin.1d.2.rep.003.save mdin.1d.2.rep.003
+../dacdif remd.dim.phremd.save remd.dim.phremd
+../dacdif groupfile.1d.us.save groupfile.1d.us
+../dacdif mdin.1d.us.rep.001.save mdin.1d.us.rep.001
+../dacdif distang.rep.003.save distang.rep.003
+
+/bin/rm -f groupfile.1d.1 mdin.1d.rep.00[13456] mdin.1d.1.rep.00[234] mdin.1d.2.rep.00[124] mdin.1d.us.rep.00[23456] distang.rep.00[12456] remd.dim.{h,t}remd
+
+# Testing 2D
+
+$genremdinputs -inputs hamiltonians.dat temperatures.dat -groupfile groupfile.2d.ref -i mdin.2d.ref --verbose -randomseed 1234 -O > output.2d.dat || goto error
+
+../dacdif output.2d.dat.save output.2d.dat
+../dacdif groupfile.2d.save groupfile.2d
+../dacdif mdin.2d.rep.002.save mdin.2d.rep.002
+../dacdif remd.dim.htremd.save remd.dim.htremd
+
+/bin/rm -f mdin.2d.rep.00[13456789] mdin.2d.rep.0[12]?
+
+# Testing 2D with two Hamiltonian dimensions
+
+$genremdinputs -inputs hamiltonians1.dat hamiltonians2.dat -groupfile groupfile.2d2.ref -i mdin.2d2.ref --verbose -randomseed 1234 -O > output.2d2.dat || goto error
+
+../dacdif output.2d2.dat.save output.2d2.dat
+../dacdif groupfile.2d2.save groupfile.2d2
+../dacdif mdin.2d2.rep.002.save mdin.2d2.rep.002
+../dacdif remd.dim.hhremd.save remd.dim.hhremd
+
+/bin/rm -f mdin.2d2.rep.00[13456789] mdin.2d2.rep.0[12]?
+
+# Testing 3D
+
+$genremdinputs -inputs redoxes.dat phs.dat temperatures.dat -groupfile groupfile.3d.ref -i mdin.3d.ref --verbose -O > output.3d.dat || goto error
+
+../dacdif output.3d.dat.save output.3d.dat
+../dacdif groupfile.3d.save groupfile.3d
+../dacdif mdin.3d.rep.002.save mdin.3d.rep.002
+../dacdif remd.dim.ephtremd.save remd.dim.ephtremd
+
+/bin/rm -f mdin.3d.rep.00[13456789] mdin.3d.rep.?[123456789]? mdin.3d.rep.1??
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

@@ -1,0 +1,24 @@
+The number of REMD dimensions is 1
+  REMD Dimension #1: TEMPERATURE
+    Value #1: 260.0
+    Value #2: 280.0
+    Value #3: 300.0
+    Value #4: 320.0
+
+New groupfiles
+  groupfile.1d.1
+  groupfile.1d.2
+
+Information printed to the new groupfiles
+---------------------
+ Rep #  TEMPERATURE  
+---------------------
+     1     260.0     
+     2     280.0     
+     3     300.0     
+     4     320.0     
+---------------------
+
+Information printed to the REMD file remd.dim.tremd
+  Groups for dimension #1 (TEMPERATURE)
+     group(1,:)=1,2,3,4,

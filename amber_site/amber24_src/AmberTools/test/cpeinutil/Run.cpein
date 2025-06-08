@@ -1,0 +1,28 @@
+#!/bin/csh -f
+
+
+set cpeinutil=$AMBERHOME/bin/cpeinutil.py
+
+$cpeinutil -p diheme.prmtop -igb 2 > cpein1 || goto error
+$cpeinutil -p diheme.prmtop -igb 8 > cpein2 || goto error
+$cpeinutil -p diheme.prmtop -igb 2 -resnum 140 > cpein3 || goto error
+$cpeinutil -p diheme.prmtop -igb 2 -notresnum 140 > cpein4 || goto error
+$cpeinutil -p diheme.prmtop -igb 2 -resname HEH -states 0,1 > cpein5 || goto error
+
+# explicit solvent cpein files
+
+$cpeinutil -p tyr.solv.prmtop -igb 2 > cpein6 || goto error
+
+# Compare them now
+../dacdif cpein1.save cpein1
+../dacdif cpein2.save cpein2
+../dacdif cpein3.save cpein3
+../dacdif cpein4.save cpein4
+../dacdif cpein5.save cpein5
+../dacdif cpein6.save cpein6
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

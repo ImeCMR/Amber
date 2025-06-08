@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Run the mdgx program
+${MDGX} -O -i mdgx.in
+
+# Analyze the relevant output
+grep "^ Etot:" mdgx.out > energy.dat
+grep "^ CMAP:" mdgx.out >> energy.dat
+grep "^ Bond:.*Dihedral:" mdgx.out >> energy.dat
+grep "^ Elec:" mdgx.out >> energy.dat
+
+${AMBERHOME}/test/dacdif energy.dat.save energy.dat
+/bin/rm -f mdrst mdtrj mdgx.out

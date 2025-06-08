@@ -1,0 +1,60 @@
+The number of REMD dimensions is 2
+  REMD Dimension #1: HAMILTONIAN
+    Value #1: file1.prmtop
+    Value #2: file2.prmtop
+    Value #3: file3.prmtop
+    Value #4: file4.prmtop
+    Value #5: file5.prmtop
+    Value #6: file6.prmtop
+  REMD Dimension #2: TEMPERATURE
+    Value #1: 260.0
+    Value #2: 280.0
+    Value #3: 300.0
+    Value #4: 320.0
+
+New groupfiles
+  groupfile.2d
+
+Information printed to the new groupfiles
+-----------------------------------
+ Rep #  HAMILTONIAN   TEMPERATURE  
+-----------------------------------
+     1  file1.prmtop     260.0     
+     2  file1.prmtop     280.0     
+     3  file1.prmtop     300.0     
+     4  file1.prmtop     320.0     
+     5  file2.prmtop     260.0     
+     6  file2.prmtop     280.0     
+     7  file2.prmtop     300.0     
+     8  file2.prmtop     320.0     
+     9  file3.prmtop     260.0     
+    10  file3.prmtop     280.0     
+    11  file3.prmtop     300.0     
+    12  file3.prmtop     320.0     
+    13  file4.prmtop     260.0     
+    14  file4.prmtop     280.0     
+    15  file4.prmtop     300.0     
+    16  file4.prmtop     320.0     
+    17  file5.prmtop     260.0     
+    18  file5.prmtop     280.0     
+    19  file5.prmtop     300.0     
+    20  file5.prmtop     320.0     
+    21  file6.prmtop     260.0     
+    22  file6.prmtop     280.0     
+    23  file6.prmtop     300.0     
+    24  file6.prmtop     320.0     
+-----------------------------------
+
+Information printed to the REMD file remd.dim.htremd
+  Groups for dimension #1 (HAMILTONIAN)
+     group(1,:)=1,5,9,13,17,21,
+     group(2,:)=2,6,10,14,18,22,
+     group(3,:)=3,7,11,15,19,23,
+     group(4,:)=4,8,12,16,20,24,
+  Groups for dimension #2 (TEMPERATURE)
+     group(1,:)=1,2,3,4,
+     group(2,:)=5,6,7,8,
+     group(3,:)=9,10,11,12,
+     group(4,:)=13,14,15,16,
+     group(5,:)=17,18,19,20,
+     group(6,:)=21,22,23,24,

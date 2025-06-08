@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+    MDGX=${TESTmdgx}
+    echo "MDGX set to ${MDGX}"
+fi
+
+# Check that configuration sampling reports the correct energies
+cat > cfsamp.in << EOF
+&files
+  -p SER.prmtop
+  -c SER.p*
+  -o cfsamp.out
+&end
+
+&configs
+
+  % Backbone phi and psi sampling
+  RandomPerturb   :1@C  :2@N  :2@CA :2@C    { -1.0 1.0 }  fbhw 2.00  Krst 64.0,
+  RandomPerturb   :2@N  :2@CA :2@C  :3@N    { -1.0 1.0 }  fbhw 2.00  Krst 64.0,
+
+  % Sampling instructions
+  verbose 1,
+  maxcyc = 1,
+  step0 = 0.0000001,
+  frctol = 10000.0,
+
+  strainlim = 100.0,
+  bstrain = 100.0,
+  astrain = 100.0,
+
+  % Output controls
+  verbose = 0,
+  outbase  'Test',
+  write    'pdb',
+  outsuff  'pdb',
+&end
+EOF
+${MDGX} -O -i cfsamp.in
+
+echo "Bond energies from conformations:" > bondE.dat
+I=1
+while [ ${I} -le 7 ] ; do
+  grep "4   Bond" Test${I}.pdb >> bondE.dat
+  let "I+=1"
+done
+
+echo "Testing configuration sampling implementation of bond augmentations:"
+${AMBERHOME}/test/dacdif bondE.dat.save bondE.dat
+
+# Check that standard dynamics reports the correct energies
+I=1
+while [ ${I} -le 7 ] ; do
+cat > mdgx.in << EOF
+&files
+  -p SER.prmtop
+  -c SER.p${I}
+  -f mdgx${I}.frc
+  -o mdgx${I}.out
+&end
+
+&cntrl
+  cut = 20.0,
+  DoRATTLE = 0,
+  ElecCut = 20.000,  vdw_cutoff = 20.000,
+  dt = 1.0e-7,   nstlim = 2,
+  ntpr = 1,    ntwr = 2,  ntwf = 2,  ntwx = 0,
+  Temperature = 0.0,
+  SplnSpc = 0.015625, 
+&end
+
+&ewald
+  vdwmeth = 0,
+  nfft1 = 96,  nfft2 = 96,  nfft3 = 96,
+  dsumtol = 1.0e-7,
+&end
+EOF
+  ${MDGX} -O -i mdgx.in  
+  let "I+=6"
+done
+
+echo "Test dynamics with bond compression adjustment engaged:"
+${AMBERHOME}/test/dacdif mdgx1.frc.save mdgx1.frc
+
+echo "Test dynamics with bond pulling adjustment engaged:"
+${AMBERHOME}/test/dacdif mdgx7.frc.save mdgx7.frc
+
+# Clean up
+/bin/rm -f mdgx.in Test[1-7].pdb mdgx[17].out restrt mdinfo cfsamp.in cfsamp.out
+

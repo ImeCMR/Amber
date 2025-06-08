@@ -1,0 +1,45 @@
+#!/bin/csh -f
+
+if( ! $?TESTsander ) set TESTsander = "${AMBERHOME}/bin/pbsa.cuda"
+
+if( ! $?DO_PARALLEL ) then
+        setenv DO_PARALLEL " "
+else
+    echo "This test not set up for parallel"
+    echo " cannot run in parallel with pbsa"
+    exit 0
+endif
+
+set grid = 0.5
+set ipb = 7 
+
+cat > min.in <<EOF
+ test of pbsa
+ &cntrl 
+   ntx=1, imin=1, ipb=${ipb}, inp=0
+ /   
+ &pb
+   npbverb=0, istrng=0,
+   epsout=80.0, epsin=1.0, dprob=1.4, radiopt=0, sasopt=2,
+   fillratio=1.5, nfocus=1, space=${grid},
+   accept=0.0001, maxitn=1000,
+   npbopt=0, bcopt=2, 
+   eneopt=1, frcopt=0, cutnb=15, cutsa=8, cutfd=7
+ /   
+EOF
+
+touch dummy
+$DO_PARALLEL $TESTsander -O -i min.in -c Na.inpcrd -p Na.prmtop -o mdout.Na.ipb${ipb}.bc2  < dummy || goto error
+../dacdif -r 0.001 mdout.Na.ipb${ipb}.bc2.save mdout.Na.ipb${ipb}.bc2
+$DO_PARALLEL $TESTsander -O -i min.in -c dmp.inpcrd -p dmp.prmtop -o mdout.dmp.ipb${ipb}.bc2  < dummy || goto error
+../dacdif -r 0.001 mdout.dmp.ipb${ipb}.bc2.save mdout.dmp.ipb${ipb}.bc2
+$DO_PARALLEL $TESTsander -O -i min.in -c 1a23.inpcrd -p 1a23.prmtop -o mdout.1a23.ipb${ipb}.bc2  < dummy || goto error
+../dacdif -r 0.001 mdout.1a23.ipb${ipb}.bc2.save mdout.1a23.ipb${ipb}.bc2
+
+/bin/rm -f min.in restrt mdinfo dummy
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

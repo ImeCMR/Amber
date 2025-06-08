@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Test ff19ipq parameters: bond augmentation
+
+. ../TestCommon.sh
+
+CleanFiles leap.in leap.out
+
+printf "\nTest application of bond augmentation in advanced force fields.\n\n"
+cat > leap.in <<EOF
+source leaprc.protein.test
+source leaprc.water.spceb
+# SPC/E ions
+loadamberparams frcmod.ionsjc_spce
+m = loadpdb "../../mdgx/1p7e/1P7E.pdb"
+solvateoct m SPCBOX 12.0 0.9
+addions m Na+ 2
+saveamberparm m r1p7e.prmtop r1p7e.inpcrd
+quit
+EOF
+RunTleap r1p7e.prmtop
+
+$DACDIF r1p7e.prmtop.save r1p7e.prmtop
+
+CleanFiles pp.in restrt mdinfo leap.in leap.out leap.log r1p7e.inpcrd
+
+exit 0

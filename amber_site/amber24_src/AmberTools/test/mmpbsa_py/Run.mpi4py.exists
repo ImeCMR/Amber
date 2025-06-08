@@ -1,0 +1,18 @@
+#!/bin/csh -f
+#TEST-PROGRAM mpi4py
+#TEST-DESCRIP was mpi4py installed?
+#TEST-PURPOSE regression, basic
+#TEST-STATE   ok
+
+set output = mpi4py.path
+
+/bin/rm -f $output
+ls -d $AMBERHOME/lib/python3.*/site-packages/mpi4py \
+    | sed -e 's/python3.[0-9]*/python3./' \
+    > $output
+../dacdif -f $output.save $output
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

@@ -1,0 +1,51 @@
+#!/bin/csh -f
+
+set inpcrd=$1
+set prmtop=$2
+set case=$3
+
+if (( $inpcrd == "" ) || ( $prmtop == "" )) then
+	echo "Error: Please specify inpcrd and prmtop files as follows:"
+	echo ""
+	echo "./Run.testCase.min database/xx.incrd database/xx.prmtop xx"
+	echo ""
+	exit 1
+endif
+
+if( ! $?DO_PARALLEL ) then
+        setenv DO_PARALLEL ""
+else
+    echo "This test not set up for parallel"
+    echo " cannot run in parallel with pbsa"
+    exit 0
+endif
+
+set TESTsander = "${AMBERHOME}/bin/pbsa.cuda"
+
+set solvopt=2 # MG
+foreach bc (1)
+set output=mdout.$case.min_bc${bc}
+
+cat > min.in <<EOF
+ test of pbsa
+ &cntrl 
+   ntx=1, imin=1, ipb=2, inp=0
+ /
+ &pb
+   npbverb=0, istrng=0, epsout=80.0, epsin=1.0, space=.5, sasopt=2,
+   accept=0.0001, dprob=1.4, radiopt=1, fillratio=1.5,
+   smoothopt=0, arcres=0.0625, nfocus=1, bcopt=$bc, solvopt=$solvopt, maxitn=2000
+ /
+EOF
+
+touch dummy
+$DO_PARALLEL $TESTsander -O -i min.in -o $output -c $inpcrd -p $prmtop < dummy || goto error
+../dacdif -r 1e-3 $output.save $output
+/bin/rm -f min.in restrt mdinfo dummy
+end
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

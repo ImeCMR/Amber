@@ -1,0 +1,19 @@
+Remark line goes here
+MASS
+
+BOND
+CT-H1              340.0000      1.0900  changed from 331 bsd on NMA nmodes; AA, RIBOSE
+CX-H1              340.0000      1.0900  changed from 331 bsd on NMA nmodes; AA, RIBOSE (was CT-H1)
+
+ANGLE
+
+DIHE
+N -CT-CT-OA   1     0.00000    0.0 -1.0  Branched from N -CT-CT-OH
+N -CT-CT-OA   1     1.49000    0.0 -2.0  Branched from N -CT-CT-OH
+N -CT-CT-OA   1     0.15600    0.0 -3.0  Branched from N -CT-CT-OH
+N -CT-CT-OA   1     0.00000    0.0  4.0  Branched from N -CT-CT-OH
+
+IMPROPER
+
+NONBON
+  N                1.824000    0.170000  sp2 nitrogen in amide groups

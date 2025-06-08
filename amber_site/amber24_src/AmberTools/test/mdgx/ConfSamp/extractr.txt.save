@@ -1,0 +1,11 @@
+ Initial E(Model) (a)         -25.2204       0.0000     -25.2204     -25.2204
+ Initial E(Restraint) (b)     220.6739     114.6820      81.7139     384.7516
+ Final E(Model) (c)            -4.8617      26.9961     -23.8620      55.3343
+ Final E(Restraint) (d)         6.4089       5.6333       1.7540      18.5184
+ Delta E(Model) (e)            20.3587      26.9961       1.3584      80.5547
+ Delta E(Restraint) (f)      -214.2649     111.7246    -366.2332     -79.2244
+      E(model) will typically rise, indicating that structures became 
+  (f) The change in restraint energy.  E(restraint) will typically fall as 
+     Strain is   11.4142 for bond  CA  -CB        (9, 11)
+     Strain is   13.2901 for angle CA  -CB  -OG1  (9, 11, 17)
+     Restraint binding atoms C   -HG1 (19, 18) strained to   10.3410

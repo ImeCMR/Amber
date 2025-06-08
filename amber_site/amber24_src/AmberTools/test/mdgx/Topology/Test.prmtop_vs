@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Write the extra points rule file
+cat > rules.txt << EOF
+&rule
+  atom       Br1     
+  residue    LIG
+  eptype     NONE
+  q         -0.35302
+&end
+
+&rule
+  parent     Br1
+  frame2     C4
+  epname     EP1
+  residue    LIG
+  eptype     Flex-2
+  v12       -0.419287212
+  q          0.24754
+&end
+EOF
+
+# Write the mdgx input file
+cat > sysWithVS.in << EOF
+&files
+  -p          OneBrBnzn.top
+  -xpt        rules.txt
+  -c          OneBrBnzn.crd
+  -o          buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    nOneBrBnzn.top
+  PrmtopTitle  "Bromobenzene with a new extra point and a charge change"
+  NewInpcrd    nOneBrBnzn.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i sysWithVS.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif nOneBrBnzn.top.save nOneBrBnzn.top
+${AMBERHOME}/test/dacdif nOneBrBnzn.crd.save nOneBrBnzn.crd
+/bin/rm -f buildsystem.out sysWithVS.in rules.txt

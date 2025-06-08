@@ -1,0 +1,27 @@
+The number of REMD dimensions is 1
+  REMD Dimension #1: PH
+    Value #1: 6.0
+    Value #2: 6.5
+    Value #3: 7.0
+    Value #4: 7.5
+    Value #5: 8.0
+    Value #6: 8.5
+
+New groupfiles
+  groupfile.1d.1
+
+Information printed to the new groupfiles
+---------------------
+ Rep #       PH      
+---------------------
+     1      6.0      
+     2      6.5      
+     3      7.0      
+     4      7.5      
+     5      8.0      
+     6      8.5      
+---------------------
+
+Information printed to the REMD file remd.dim.phremd
+  Groups for dimension #1 (PH)
+     group(1,:)=1,2,3,4,5,6,

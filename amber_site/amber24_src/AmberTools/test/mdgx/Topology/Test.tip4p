@@ -1,0 +1,154 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Write the rules to turn TIP3P into TIP4P-Ew water
+cat > Flex3.rule << EOF
+&rule
+  epname     EPW
+  eptype     Flex-3
+  parent     O
+  frame2     H1
+  frame3     H2
+  residue    WAT
+  v12        0.106641378
+  v13        0.106641378
+  q         -1.04844
+&end
+
+&rule
+  atom       O
+  eptype     NONE
+  residue    WAT
+  q          0.0
+  sig        3.16435
+  eps        0.16275  
+&end
+
+&rule
+  atom       H1
+  eptype     NONE
+  residue    WAT
+  q          0.52422
+&end
+
+&rule
+  atom       H2
+  eptype     NONE
+  residue    WAT
+  q          0.52422
+&end
+EOF
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     tip3p.top
+  -xpt   Flex3.rule
+  -c     tip3p.inpcrd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    TIP4P_Flex3.top
+  PrmtopTitle  "TIP4P made with the Flex-3 type frame"
+  NewInpcrd    TIP4P_Flex3.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif TIP4P_Flex3.top.save TIP4P_Flex3.top
+${AMBERHOME}/test/dacdif TIP4P_Flex3.crd.save TIP4P_Flex3.crd
+
+# Write new rules to turn TIP3P into TIP4P-Ew water
+cat > FD3.rule << EOF
+&rule
+  epname     EPW
+  eptype     FD-3
+  parent     O
+  frame2     H1
+  frame3     H2
+  residue    WAT
+  v1e        0.125
+  v23        0.500
+  q         -1.04844
+&end
+EOF
+
+# The rules to change the rest of the water from TIP3P to TIP4P-Ew are the same
+tail -23 Flex3.rule >> FD3.rule
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     tip3p.top
+  -xpt   FD3.rule
+  -c     tip3p.inpcrd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    TIP4P_FD3.top
+  PrmtopTitle  "TIP4P made with the FD-3 type frame"
+  NewInpcrd    TIP4P_FD3.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif TIP4P_FD3.top.save TIP4P_FD3.top
+${AMBERHOME}/test/dacdif TIP4P_FD3.crd.save TIP4P_FD3.crd
+
+# Write yet more rules to turn TIP3P into TIP4P-Ew water
+cat > FAD3.rule << EOF
+&rule
+  epname     EPW
+  eptype     FAD-3
+  parent     O
+  frame2     H1
+  frame3     H2
+  residue    WAT
+  v1e        0.125
+  theta      0.911852527
+  q         -1.04844
+&end
+EOF
+
+# The rules to change the rest of the water from TIP3P to TIP4P-Ew are the same
+tail -23 Flex3.rule >> FAD3.rule
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     tip3p.top
+  -xpt   FAD3.rule
+  -c     tip3p.inpcrd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    TIP4P_FAD3.top
+  PrmtopTitle  "TIP4P made with the FAD-3 type frame"
+  NewInpcrd    TIP4P_FAD3.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif TIP4P_FAD3.top.save TIP4P_FAD3.top
+${AMBERHOME}/test/dacdif TIP4P_FAD3.crd.save TIP4P_FAD3.crd
+
+# Clean up this mess
+/bin/rm -f buildsystem.out newsys.in Flex3.rule FD3.rule FAD3.rule

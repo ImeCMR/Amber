@@ -1,0 +1,28 @@
+&files
+ -p prmtop
+ -c inpcrd
+ -o mdgx.out
+ -r mdrst
+ -x mdtrj
+&end
+
+&cntrl
+ nstlim 10,
+ cut 18.0,
+ ntpr 1,  ntwx 1,  ioutfm = 1,
+ ntt 0,
+ dt = 1.0e-3,
+ DoSETTLE 1,  DoRATTLE 1,
+ ig = 77217,
+&end
+
+&ewald
+  vdwmeth = 0,
+  dsum_tol = 1.0e-6,
+  nfft1 = 36,
+  nfft2 = 36,
+  nfft3 = 36,
+  ordr1 = 6,
+  ordr2 = 6,
+  ordr3 = 6,
+&end

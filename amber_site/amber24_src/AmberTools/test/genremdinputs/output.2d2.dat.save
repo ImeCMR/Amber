@@ -1,0 +1,76 @@
+The number of REMD dimensions is 2
+  REMD Dimension #1: HAMILTONIAN1
+    Value #1: file1.prmtop
+    Value #2: file2.prmtop
+    Value #3: file3.prmtop
+    Value #4: file4.prmtop
+    Value #5: file5.prmtop
+    Value #6: file6.prmtop
+  REMD Dimension #2: HAMILTONIAN2
+    Value #1: 0.0
+    Value #2: 0.2
+    Value #3: 0.4
+    Value #4: 0.6
+    Value #5: 0.8
+    Value #6: 1.0
+
+New groupfiles
+  groupfile.2d2
+
+Information printed to the new groupfiles
+-----------------------------------
+ Rep #  HAMILTONIAN1  HAMILTONIAN2 
+-----------------------------------
+     1  file1.prmtop      0.0      
+     2  file1.prmtop      0.2      
+     3  file1.prmtop      0.4      
+     4  file1.prmtop      0.6      
+     5  file1.prmtop      0.8      
+     6  file1.prmtop      1.0      
+     7  file2.prmtop      0.0      
+     8  file2.prmtop      0.2      
+     9  file2.prmtop      0.4      
+    10  file2.prmtop      0.6      
+    11  file2.prmtop      0.8      
+    12  file2.prmtop      1.0      
+    13  file3.prmtop      0.0      
+    14  file3.prmtop      0.2      
+    15  file3.prmtop      0.4      
+    16  file3.prmtop      0.6      
+    17  file3.prmtop      0.8      
+    18  file3.prmtop      1.0      
+    19  file4.prmtop      0.0      
+    20  file4.prmtop      0.2      
+    21  file4.prmtop      0.4      
+    22  file4.prmtop      0.6      
+    23  file4.prmtop      0.8      
+    24  file4.prmtop      1.0      
+    25  file5.prmtop      0.0      
+    26  file5.prmtop      0.2      
+    27  file5.prmtop      0.4      
+    28  file5.prmtop      0.6      
+    29  file5.prmtop      0.8      
+    30  file5.prmtop      1.0      
+    31  file6.prmtop      0.0      
+    32  file6.prmtop      0.2      
+    33  file6.prmtop      0.4      
+    34  file6.prmtop      0.6      
+    35  file6.prmtop      0.8      
+    36  file6.prmtop      1.0      
+-----------------------------------
+
+Information printed to the REMD file remd.dim.hhremd
+  Groups for dimension #1 (HAMILTONIAN1)
+     group(1,:)=1,7,13,19,25,31,
+     group(2,:)=2,8,14,20,26,32,
+     group(3,:)=3,9,15,21,27,33,
+     group(4,:)=4,10,16,22,28,34,
+     group(5,:)=5,11,17,23,29,35,
+     group(6,:)=6,12,18,24,30,36,
+  Groups for dimension #2 (HAMILTONIAN2)
+     group(1,:)=1,2,3,4,5,6,
+     group(2,:)=7,8,9,10,11,12,
+     group(3,:)=13,14,15,16,17,18,
+     group(4,:)=19,20,21,22,23,24,
+     group(5,:)=25,26,27,28,29,30,
+     group(6,:)=31,32,33,34,35,36,

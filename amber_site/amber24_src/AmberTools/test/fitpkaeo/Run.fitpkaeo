@@ -1,0 +1,27 @@
+#!/bin/csh -f
+
+
+set fitpkaeo=$AMBERHOME/bin/fitpkaeo.py
+
+# Testing pKa
+
+cat cphstats.dat | $fitpkaeo > output.pka.dat || goto error
+cat cphstats.dat | $fitpkaeo --verbose > output.pka.verbose.dat || goto error
+
+../dacdif output.pka.dat.save output.pka.dat
+../dacdif output.pka.verbose.dat.save output.pka.verbose.dat
+
+# Testing Eo
+
+cat cestats.dat | $fitpkaeo > output.eo.dat || goto error
+cat cestats.dat | $fitpkaeo --verbose > output.eo.verbose.dat || goto error
+
+../dacdif output.eo.dat.save output.eo.dat
+../dacdif output.eo.verbose.dat.save output.eo.verbose.dat
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

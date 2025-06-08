@@ -1,0 +1,601 @@
+
+          -------------------------------------------------------
+          PBSA VERSION 2019                       UC Irvine
+          -------------------------------------------------------
+
+| Run on 03/21/2019 at 17:41:33
+  [-O]verwriting output
+
+File Assignments:
+|  MDIN: min.in                                                                
+| MDOUT: mdout.charge.min                                                      
+|INPCRD: inpcrd                                                                
+|  PARM: prmtop                                                                
+|
+
+ Here is the input file:
+
+ test of pbsa                                                                  
+ &cntrl                                                                        
+   ntx=1, imin=6, ipb=1, inp=0                                                 
+ /                                                                             
+ &pb                                                                           
+   npbverb=0, istrng=0, epsout=80.0, epsin=1.0, space=.5,                      
+   accept=0.001, dprob=1.4, radiopt=0, fillratio=3,                            
+   nfocus=1, smoothopt=1, eneopt=2, bcopt=7, frcopt=2,                         
+   arcres=0.0625                                                               
+ /                                                                             
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+| Flags:                                                                        
+| New format PARM file being parsed.
+| Version =    1.000 Date = 02/25/10 Time = 14:57:48
+ NATOM  =       2 NTYPES =       2 NBONH =       0 MBONA  =       1
+ NTHETH =       0 MTHETA =       0 NPHIH =       0 MPHIA  =       0
+ NHPARM =       0 NPARM  =       0 NNB   =       2 NRES   =       1
+ NBONA  =       1 NTHETA =       0 NPHIA =       0 NUMBND =       1
+ NUMANG =       0 NPTRA  =       0 NATYP =       2 NPHB   =       0
+ IFBOX  =       0 NMXRS  =       2 IFCAP =       0 NEXTRA =       0
+ NCOPY  =       0
+
+
+|     Memory Use     Allocated
+|     Real                 112
+|     Hollerith              9
+|     Integer            20023
+|     Max Pairs              1
+|     Max Rstack             1
+|     Max Istack             1
+|       Total               79 kbytes
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+ACE                                                                             
+
+General flags:
+     imin    =       6, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       1, irest   =       0, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       1, ntpr    =      50, ntrx    =       1, ntwr    =     500
+     iwrap   =       0, ntwx    =       0, ntwv    =       0, ntwe    =       0
+     ioutfm  =       0, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       1, ntb     =       1, ipb     =       1, nsnb    =      25
+     ipol    =       0, gbsa    =       0, iesp    =       0
+     dielc   =   1.00000, cut     =   8.00000, intdiel =   1.00000
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Energy minimization:
+     maxcyc  =       1, ncyc    =      10, ntmin   =       1
+     dx0     =   0.01000, drms    =   0.00010
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+ACE                                                                             
+ begin time read from input coords =     0.000 ps
+
+ Number of triangulated 3-point waters found:        0
+
+--------------------------------------------------------------------------------
+   4.  RESULTS
+--------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           1 translation           1
+analytical force
+       -0.0509975793        0.0568441544      -22.7847858761
+        0.0231223593       -0.1567942685       22.8746249287
+total analytical force
+       -0.0278752201       -0.0999501141        0.0898390526
+
+ NSTEP =        1   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3783  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3783  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           2 translation           1
+analytical force
+       -0.2746543989        0.1143493768      -22.9040370323
+        0.4338986929       -0.0570697489       23.1009941748
+total analytical force
+        0.1592442941        0.0572796279        0.1969571425
+
+ NSTEP =        2   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4073  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4073  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           3 translation           1
+analytical force
+       -0.2184091244        0.0667309204      -22.8087068557
+        0.4051508384       -0.0219192981       23.1598950518
+total analytical force
+        0.1867417140        0.0448116224        0.3511881961
+
+ NSTEP =        3   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4131  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4131  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           4 translation           1
+analytical force
+       -0.0246909252        0.0574650481      -22.8603891988
+        0.1120036783       -0.1054519562       23.2126153443
+total analytical force
+        0.0873127531       -0.0479869081        0.3522261455
+
+ NSTEP =        4   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4069  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4069  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           5 translation           1
+analytical force
+       -0.0689522681       -0.0015851750      -22.8777535079
+        0.1848223351       -0.0144601203       23.2040239155
+total analytical force
+        0.1158700669       -0.0160452953        0.3262704076
+
+ NSTEP =        5   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4144  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4144  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           6 translation           1
+analytical force
+       -0.0532258010        0.0814334783      -22.8298854361
+       -0.0060159586        0.0480752780       23.1077972829
+total analytical force
+       -0.0592417596        0.1295087562        0.2779118468
+
+ NSTEP =        6   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4019  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4019  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           7 translation           1
+analytical force
+       -0.0576834306       -0.0048316796      -22.8035210045
+        0.1020866211        0.1403620574       23.0526294105
+total analytical force
+        0.0444031905        0.1355303777        0.2491084059
+
+ NSTEP =        7   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3982  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3982  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           8 translation           1
+analytical force
+       -0.0877676096       -0.2564389807      -22.7045286991
+        0.1841173177        0.4148890878       22.8532516233
+total analytical force
+        0.0963497081        0.1584501071        0.1487229241
+
+ NSTEP =        8   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3738  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3738  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1           9 translation           1
+analytical force
+        0.1865661391        0.0753903152      -22.9783646525
+       -0.4395093131       -0.2113896866       23.3633028972
+total analytical force
+       -0.2529431740       -0.1359993714        0.3849382447
+
+ NSTEP =        9   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4344  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4344  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           1          10 translation           1
+analytical force
+        0.3047232712        0.0692058607      -23.0182372832
+       -0.2954471968        0.0166943681       23.0893115052
+total analytical force
+        0.0092760743        0.0859002287        0.0710742220
+
+ NSTEP =       10   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3995  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3995  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           1 translation           1
+analytical force
+       -0.0286005203       -0.1744932478      -22.4325551284
+        0.0925733044        0.1877762312       23.0407700046
+total analytical force
+        0.0639727842        0.0132829834        0.6082148762
+
+ NSTEP =       11   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4002  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4002  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           2 translation           1
+analytical force
+       -0.1749368364        0.1267256340      -22.8197770062
+        0.2914603322       -0.3332256178       23.1735372809
+total analytical force
+        0.1165234958       -0.2064999838        0.3537602747
+
+ NSTEP =       12   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4097  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4097  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           3 translation           1
+analytical force
+       -0.1691889905       -0.2540008121      -22.8537125376
+        0.2343275461        0.3535983209       22.9431428711
+total analytical force
+        0.0651385556        0.0995975088        0.0894303335
+
+ NSTEP =       13   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3858  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3858  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           4 translation           1
+analytical force
+       -0.0220621766        0.1383718632      -22.6749726833
+       -0.0911952230       -0.1272605756       23.0822024326
+total analytical force
+       -0.1132573996        0.0111112876        0.4072297494
+
+ NSTEP =       14   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3993  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3993  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           5 translation           1
+analytical force
+        0.0630112424        0.0697018407      -22.8464307036
+       -0.1270388596       -0.2008324606       23.1740825473
+total analytical force
+       -0.0640276172       -0.1311306199        0.3276518437
+
+ NSTEP =       15   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4115  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4115  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           6 translation           1
+analytical force
+       -0.0963476809        0.0686480937      -22.8485974668
+        0.3508288630        0.1120935584       23.3919900328
+total analytical force
+        0.2544811821        0.1807416520        0.5433925659
+
+ NSTEP =       16   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4335  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4335  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           7 translation           1
+analytical force
+        0.1513305509       -0.1337572295      -22.7639296749
+       -0.3358452287        0.2154333372       22.9449165289
+total analytical force
+       -0.1845146778        0.0816761077        0.1809868539
+
+ NSTEP =       17   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3857  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3857  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           8 translation           1
+analytical force
+       -0.0603813805        0.0858436504      -22.7711515139
+        0.1164885295       -0.1117863839       22.9823530150
+total analytical force
+        0.0561071490       -0.0259427335        0.2112015011
+
+ NSTEP =       18   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3890  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3890  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2           9 translation           1
+analytical force
+       -0.0484639355        0.0347105874      -22.8122376210
+       -0.0246608612       -0.0428894511       23.0245803757
+total analytical force
+       -0.0731247967       -0.0081788637        0.2123427548
+
+ NSTEP =       19   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3952  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3952  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           2          10 translation           1
+analytical force
+        0.1959887111        0.1899549592      -22.7832281578
+       -0.2014992047       -0.3668194516       22.9378123455
+total analytical force
+       -0.0055104936       -0.1768644924        0.1545841877
+
+ NSTEP =       20   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3836  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3836  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           1 translation           1
+analytical force
+       -0.1521954824        0.0575342846      -22.7352188882
+        0.2680605142       -0.0744889620       22.7869709918
+total analytical force
+        0.1158650317       -0.0169546774        0.0517521036
+
+ NSTEP =       21   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3683  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3683  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           2 translation           1
+analytical force
+        0.1567129462       -0.0220949525      -22.8508630508
+       -0.3668452287       -0.0411579523       23.1321354373
+total analytical force
+       -0.2101322826       -0.0632529048        0.2812723865
+
+ NSTEP =       22   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4081  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4081  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           3 translation           1
+analytical force
+        0.1375433786       -0.1411433161      -22.7839624604
+       -0.1011995606        0.2355702990       23.0930156931
+total analytical force
+        0.0363438179        0.0944269829        0.3090532328
+
+ NSTEP =       23   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4024  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4024  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           4 translation           1
+analytical force
+        0.0689602424       -0.0507501425      -22.6467302789
+       -0.0375814015        0.1404800719       23.0947935140
+total analytical force
+        0.0313788409        0.0897299294        0.4480632351
+
+ NSTEP =       24   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4028  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4028  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           5 translation           1
+analytical force
+        0.1218766055       -0.1335211627      -23.0240682283
+       -0.2276055799        0.3863744184       23.4561105909
+total analytical force
+       -0.1057289744        0.2528532557        0.4320423626
+
+ NSTEP =       25   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4478  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4478  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           6 translation           1
+analytical force
+       -0.0541745408        0.0469190483      -22.9057591024
+        0.0066408116       -0.0503943388       23.0295288426
+total analytical force
+       -0.0475337292       -0.0034752905        0.1237697401
+
+ NSTEP =       26   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3926  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3926  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           7 translation           1
+analytical force
+       -0.0705530467        0.0130809026      -23.0270007736
+        0.0754468480       -0.0663876465       23.0795270704
+total analytical force
+        0.0048938012       -0.0533067439        0.0525262968
+
+ NSTEP =       27   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.4039  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.4039  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           8 translation           1
+analytical force
+        0.0176904590       -0.1159993031      -22.7351906139
+        0.0335695238        0.3048462210       23.0435602605
+total analytical force
+        0.0512599828        0.1888469179        0.3083696465
+
+ NSTEP =       28   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3969  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3969  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3           9 translation           1
+analytical force
+        0.1522187994       -0.0051662952      -22.6838663576
+       -0.0274471030        0.0559787818       23.0629417948
+total analytical force
+        0.1247716964        0.0508124866        0.3790754372
+
+ NSTEP =       29   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3981  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3981  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+--------------------------------
+rotation           3          10 translation           1
+analytical force
+       -0.1086845906        0.0707430392      -22.5510408851
+        0.0992842428       -0.2069112287       22.9321884403
+total analytical force
+       -0.0094003478       -0.1361681895        0.3811475551
+
+ NSTEP =       30   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =       -87.3795  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =         0.0000
+ EELEC  =         0.0000  EPB     =       -87.3795  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+   5.  TIMINGS
+--------------------------------------------------------------------------------
+
+| Total time                     0.97
+| Read prm/crd time              0.00
+| Force time                     0.97
+| Nonbond force                  0.97
+| PB Nonbond                     0.97
+| PB FD grid                     0.00
+| PB FD force                    0.96
+| PB Set linear sys              0.04
+| PB Solver                      0.11
+| PB exmol                       0.03
+| PB exmol setup                 0.01
+| PB exmol part a                0.00
+| PB exmol part b                0.00
+| PB exmol part d                0.00
+| PB exmol part e                0.00
+| PB epsbnd                      0.00
+| PB epsmap                      0.01
+|           Job began  at 17:41:33.820  on 03/21/2019
+|           Setup done at 17:41:33.822  on 03/21/2019
+|           Run   done at 17:41:34.791  on 03/21/2019
+|     wallclock() was called    2164 times

@@ -1,0 +1,177 @@
+#!/bin/bash
+
+function getE () {
+  local FNAME=${1}
+  local KEYWD=${2}  
+  local PLACE=${3}
+  if [ -e tmp ] ; then
+    rm tmp
+  fi
+  for OUTP in pep1_R1 pep1_R2 pep1_R3 trpcage_S1_R1 trpcage_S1_R2 \
+	      trpcage_S2_T1 trpcage_S2_T2 trpcage_S2_T3 trpcage_S2_T4 trpcage_S2_T5 \
+	      pep2_R1 pep2_R2 pep3_P1 pep3_P2 pep3_P3 trpcage ; do
+    if [ -e ${OUTP}.out ] ; then
+      grep "${KEYWD}: " ${OUTP}.out | grep -v "%" >> tmp
+    fi
+  done
+  echo "${KEYWD} = [" > ${FNAME}
+  if [ ${PLACE} -eq 2 ] ; then
+    cat tmp | awk {'print $2'} >> ${FNAME}
+  elif [ ${PLACE} -eq 4 ] ; then
+    cat tmp | awk {'print $4'} >> ${FNAME}
+  elif [ ${PLACE} -eq 6 ] ; then
+    cat tmp | awk {'print $6'} >> ${FNAME}
+  fi
+  echo "];" >> ${FNAME}
+  rm tmp
+}
+
+# Check for the existence of an alternative version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${1}" ] ; then
+  MDGX=${1}
+  echo "MDGX set to ${MDGX}"
+fi
+SEEKREXT=0
+if [ -n "${2}" ] ; then
+  REXT=${2}
+  SEEKREXT=1
+  echo "Referencing results with extension ${REXT}"
+fi
+
+# Write an input file to test the MTS protocol in many conditions
+cat > mdgx.in << EOF
+&files
+  -osf     .out
+  -rsf     .rst
+  -xsf     .trj
+  -fsf     .frc
+&end
+
+&cntrl
+  DoRATTLE = 0,
+  Vdw14Fac = 2.0,   Elec14Fac = 1.2,
+  dt = 0.001,       nstlim = 20,    nfistep = 0,
+  ntpr = 1,         ntwr = 20,      ntwx = 10,
+  temp0 = 0.0,      ntt = 0,
+  ioutfm = 1,
+&end
+
+&pptd
+  igb = 8,
+  MinorSteps = 4,
+  oligomer -p  pep1.top -c pep1.crd N-rep 3
+  oligomer -p  trpcage.prmtop -c trpcage.inpcrd N-rep 2
+  oligomer -p  trpcage.prmtop -c trpcage.inpcrd Tmin 278.0  Tmax 358.0  T-rep 5
+  oligomer -p  pep2.top -c pep2.crd N-rep 2
+  oligomer -pi pep3.top -pf pep3x.top -c pep3.crd  P-rep 3
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i mdgx.in -Reckless
+
+# Get an abstract of the energies
+getE kine_mts.dat EKtot 4
+getE energy_mts.dat EPtot 6
+getE bond_mts.dat Bond 2
+getE angl_mts.dat Angle 4
+getE dihe_mts.dat Dihedral 6
+getE elec_mts.dat Elec 2
+getE vdw_mts.dat vdW 4
+getE solv_mts.dat Solvent 6
+
+# Test the result
+for KEY in energy kine bond angl dihe elec vdw solv ; do
+  if [ ${SEEKREXT} == 1 ] ; then
+    ${AMBERHOME}/test/dacdif -a 0.2 ${KEY}_mts.${REXT}.dat.save ${KEY}_mts.dat
+  else
+    ${AMBERHOME}/test/dacdif -a 0.2 ${KEY}_mts.dat.save ${KEY}_mts.dat
+  fi
+done
+
+# Write an input file to test RATTLE in many conditions
+cat > mdgx.in << EOF
+&files
+  -osf     .out
+  -rsf     .rst
+  -xsf     .trj
+  -fsf     .frc
+&end
+
+&cntrl
+  DoRATTLE = 1,     RattleTol = 1.0e-8,
+  Vdw14Fac = 2.0,   Elec14Fac = 1.2,
+  dt = 0.001,       nstlim = 20,    nfistep = 0,
+  ntpr = 1,         ntwr = 20,      ntwx = 10,
+  temp0 = 0.0,      ntt = 0,
+  ioutfm = 1,
+&end
+
+&pptd
+  igb = 8,
+  MinorSteps = 1,
+  oligomer -p  pep1.top -c pep1.crd N-rep 3
+  oligomer -p  trpcage.prmtop -c trpcage.inpcrd N-rep 2
+  oligomer -p  trpcage.prmtop -c trpcage.inpcrd Tmin 278.0  Tmax 358.0  T-rep 5
+  oligomer -p  pep2.top -c pep2.crd N-rep 2
+  oligomer -pi pep3.top -pf pep3x.top -c pep3.crd  P-rep 3
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i mdgx.in -Reckless
+
+# Get an abstract of the energies
+getE energy_rtt.dat EPtot 6
+
+# Test the result
+if [ ${SEEKREXT} == 1 ] ; then
+  ${AMBERHOME}/test/dacdif -a 0.2 energy_rtt.${REXT}.dat.save energy_rtt.dat
+else
+  ${AMBERHOME}/test/dacdif -a 0.2 energy_rtt.dat.save energy_rtt.dat
+fi
+
+# Write input files to test different GB models
+cat > mdgx.in.head << EOF
+&files
+  -osf     .out
+  -rsf     .rst
+  -xsf     .trj
+  -fsf     .frc
+&end
+
+&cntrl
+  DoRATTLE = 1,     RattleTol = 1.0e-8,
+  Vdw14Fac = 2.0,   Elec14Fac = 1.2,
+  dt = 0.001,       nstlim = 20,    nfistep = 0,
+  ntpr = 1,         ntwr = 20,      ntwx = 10,
+  temp0 = 0.0,      ntt = 0,
+  ioutfm = 1,
+&end
+
+&pptd
+EOF
+
+cat > mdgx.in.tail << EOF
+  MinorSteps = 1,
+  oligomer -p  trpcage.prmtop -c trpcage.inpcrd
+&end
+EOF
+
+# Run the program, get an abstract of the energies, and test the result
+for I in 1 2 5 6 7 ; do
+  cp mdgx.in.head mdgx.in
+  echo "  igb = ${I}," >> mdgx.in
+  cat mdgx.in.tail >> mdgx.in
+  ${MDGX} -O -i mdgx.in -Reckless
+  getE solv_igb${I}.dat Solvent 6
+  if [ ${SEEKREXT} == 1 ] ; then
+    ${AMBERHOME}/test/dacdif -a 0.2 solv_igb${I}.${REXT}.dat.save solv_igb${I}.dat
+  else
+    ${AMBERHOME}/test/dacdif -a 0.2 solv_igb${I}.dat.save solv_igb${I}.dat
+  fi
+done
+
+# Clean up
+/bin/rm pep*out pep*rst pep*trj trpcage*out trpcage*rst trpcage*trj mdgx.in*

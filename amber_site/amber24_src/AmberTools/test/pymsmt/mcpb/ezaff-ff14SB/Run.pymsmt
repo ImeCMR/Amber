@@ -1,0 +1,54 @@
+#!/bin/sh
+
+. ../../../program_error.sh
+
+if [ -z "$mcpbpy" ]; then
+   mcpbpy="$AMBERHOME/bin/MCPB.py"
+fi
+
+input=1A5T.in
+output=mcpbpy.out
+
+$mcpbpy -i $input -s 1 > $output 2>&1 || error
+$mcpbpy -i $input -s 2e >> $output 2>&1 || error
+$mcpbpy -i $input -s 3 >> $output 2>&1 || error
+$mcpbpy -i $input -s 4 >> $output 2>&1 || error
+tleap -s -f 1A5T_tleap.in > 1A5T_tleap.out
+
+#For modeling files generation
+$AMBERHOME/AmberTools/test/dacdif 1A5T_small.pdb.save 1A5T_small.pdb
+$AMBERHOME/AmberTools/test/dacdif 1A5T_small_opt.com.save 1A5T_small_opt.com
+$AMBERHOME/AmberTools/test/dacdif 1A5T_small_opt.inp.save 1A5T_small_opt.inp
+$AMBERHOME/AmberTools/test/dacdif 1A5T_small_fc.inp.save 1A5T_small_fc.inp
+$AMBERHOME/AmberTools/test/dacdif 1A5T_small_fc.com.save 1A5T_small_fc.com
+$AMBERHOME/AmberTools/test/dacdif 1A5T_standard.pdb.save 1A5T_standard.pdb
+$AMBERHOME/AmberTools/test/dacdif 1A5T_standard.fingerprint.save 1A5T_standard.fingerprint
+$AMBERHOME/AmberTools/test/dacdif 1A5T_large_mk.inp.save 1A5T_large_mk.inp
+$AMBERHOME/AmberTools/test/dacdif 1A5T_large_mk.com.save 1A5T_large_mk.com
+$AMBERHOME/AmberTools/test/dacdif 1A5T_large.pdb.save 1A5T_large.pdb
+$AMBERHOME/AmberTools/test/dacdif 1A5T_large.fingerprint.save 1A5T_large.fingerprint
+#For parameter calcualtion
+$AMBERHOME/AmberTools/test/dacdif 1A5T_mcpbpy_pre.frcmod.save 1A5T_mcpbpy_pre.frcmod
+$AMBERHOME/AmberTools/test/dacdif 1A5T_mcpbpy.frcmod.save 1A5T_mcpbpy.frcmod
+#For resp charge fitting
+$AMBERHOME/AmberTools/test/dacdif resp1.in.save resp1.in
+$AMBERHOME/AmberTools/test/dacdif resp2.in.save resp2.in
+$AMBERHOME/AmberTools/test/dacdif ZN1.mol2.save ZN1.mol2
+$AMBERHOME/AmberTools/test/dacdif CM4.mol2.save CM4.mol2
+$AMBERHOME/AmberTools/test/dacdif CM3.mol2.save CM3.mol2
+$AMBERHOME/AmberTools/test/dacdif CM2.mol2.save CM2.mol2
+$AMBERHOME/AmberTools/test/dacdif CM1.mol2.save CM1.mol2
+#For generating new PDB file
+$AMBERHOME/AmberTools/test/dacdif 1A5T_mcpbpy.pdb.save 1A5T_mcpbpy.pdb
+#For the tleap modeling
+$AMBERHOME/AmberTools/test/dacdif 1A5T_tleap.in.save 1A5T_tleap.in
+$AMBERHOME/AmberTools/test/dacdif 1A5T_dry.prmtop.save 1A5T_dry.prmtop
+$AMBERHOME/AmberTools/test/dacdif 1A5T_dry.inpcrd.save 1A5T_dry.inpcrd
+$AMBERHOME/AmberTools/test/dacdif 1A5T_dry.pdb.save 1A5T_dry.pdb
+$AMBERHOME/AmberTools/test/dacdif 1A5T_solv.prmtop.save 1A5T_solv.prmtop
+$AMBERHOME/AmberTools/test/dacdif 1A5T_solv.inpcrd.save 1A5T_solv.inpcrd
+$AMBERHOME/AmberTools/test/dacdif 1A5T_solv.pdb.save 1A5T_solv.pdb
+
+/bin/rm -f $output leap.log 1A5T_large_mk.esp resp1.chg resp1.out resp1.pch resp1_calc.esp resp2.chg resp2.out resp2.pch resp2_calc.esp 1A5T_small.res 1A5T_tleap.out
+
+exit 0

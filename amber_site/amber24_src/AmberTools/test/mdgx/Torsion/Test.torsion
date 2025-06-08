@@ -1,0 +1,151 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+cat > Systems.txt << EOF
+&param
+  System  ALA.top  ALA1.crd -0.49490733974730E+03
+  System  ALA.top  ALA2.crd -0.49490668802353E+03
+  System  ALA.top  ALA3.crd -0.49490530938280E+03
+  System  ALA.top  ALA4.crd -0.49490634633895E+03
+  System  ALA.top  ALA5.crd -0.49489937316220E+03
+  System  ALA.top  ALA6.crd -0.49490560963539E+03
+  System  ALA.top  ALA7.crd -0.49490908966362E+03
+  System  ALA.top  ALA8.crd -0.49490614007549E+03
+  System  ALA.top  ALA9.crd -0.49490888983737E+03
+  System  ALA.top  ALA10.crd -0.49491039573344E+03
+  System  ALA.top  ALA11.crd -0.49490845004292E+03
+  System  ALA.top  ALA12.crd -0.49490903232841E+03
+  System  ALA.top  ALA13.crd -0.49490827613265E+03
+  System  ALA.top  ALA14.crd -0.49490857392870E+03
+  System  ALA.top  ALA15.crd -0.49490733662040E+03
+  System  ALA.top  ALA16.crd -0.49491506528850E+03
+  System  ALA.top  ALA17.crd -0.49491274596211E+03
+  System  ALA.top  ALA18.crd -0.49491082297554E+03
+  System  ALA.top  ALA19.crd -0.49490534582633E+03
+  System  ALA.top  ALA20.crd -0.49490870244676E+03
+  System  ALA.top  ALA21.crd -0.49490793366489E+03
+  System  ALA.top  ALA22.crd -0.49491122078426E+03
+  System  ALA.top  ALA23.crd -0.49490375604991E+03
+  System  ALA.top  ALA24.crd -0.49490622461040E+03
+  System  ALA.top  ALA25.crd -0.49491200090871E+03
+  System  ALA.top  ALA26.crd -0.49490625940661E+03
+  System  ALA.top  ALA27.crd -0.49490775041944E+03
+  System  ALA.top  ALA28.crd -0.49489483970845E+03
+  System  ALA.top  ALA29.crd -0.49491000657418E+03
+  System  ALA.top  ALA30.crd -0.49489684377564E+03
+  System  ALA.top  ALA31.crd -0.49490555656495E+03
+  System  ALA.top  ALA32.crd -0.49491159797478E+03
+  System  ALA.top  ALA33.crd -0.49490828139181E+03
+  System  ALA.top  ALA34.crd -0.49490276124464E+03
+  System  ALA.top  ALA35.crd -0.49490353162320E+03
+  System  ALA.top  ALA36.crd -0.49490620290045E+03
+  System  ALA.top  ALA37.crd -0.49490510860205E+03
+  System  ALA.top  ALA38.crd -0.49491089226325E+03
+  System  ALA.top  ALA39.crd -0.49490481292318E+03
+  System  ALA.top  ALA40.crd -0.49490552805196E+03
+  System  THR.top  THR1.crd -0.60925658234939E+03
+  System  THR.top  THR2.crd -0.60924595988277E+03
+  System  THR.top  THR3.crd -0.60924752887255E+03
+  System  THR.top  THR4.crd -0.60924660886827E+03
+  System  THR.top  THR5.crd -0.60924653066851E+03
+  System  THR.top  THR6.crd -0.60924058939685E+03
+  System  THR.top  THR7.crd -0.60924635603838E+03
+  System  THR.top  THR8.crd -0.60924253928119E+03
+  System  THR.top  THR9.crd -0.60924623200990E+03
+  System  THR.top  THR10.crd -0.60924126064549E+03
+  System  THR.top  THR11.crd -0.60924211874144E+03
+  System  THR.top  THR12.crd -0.60924257655237E+03
+  System  THR.top  THR13.crd -0.60924924774144E+03
+  System  THR.top  THR14.crd -0.60924530004283E+03
+  System  THR.top  THR15.crd -0.60924298690484E+03
+  System  THR.top  THR16.crd -0.60924728659218E+03
+  System  THR.top  THR17.crd -0.60924690233969E+03
+  System  THR.top  THR18.crd -0.60926066446525E+03
+  System  THR.top  THR19.crd -0.60925450473841E+03
+  System  THR.top  THR20.crd -0.60925020565461E+03
+  System  THR.top  THR21.crd -0.60924492564268E+03
+  System  THR.top  THR22.crd -0.60924941416991E+03
+  System  THR.top  THR23.crd -0.60925263006717E+03
+  System  THR.top  THR24.crd -0.60924633493431E+03
+  System  THR.top  THR25.crd -0.60924856962415E+03
+  System  THR.top  THR26.crd -0.60924239643510E+03
+  System  THR.top  THR27.crd -0.60924943709339E+03
+  System  THR.top  THR28.crd -0.60925240647890E+03
+  System  THR.top  THR29.crd -0.60924862991137E+03
+  System  THR.top  THR30.crd -0.60924769460272E+03
+EOF
+
+# Write a simple input file for plain torsion optimization
+cat > mdgx.in << EOF
+&files
+  -parm    mockparm.dat
+  -fmod    mockA.frcmod
+  -fmod    mockB.frcmod
+  -d       someparms.dat
+  -o       train.out
+&end
+EOF
+cat Systems.txt >> mdgx.in
+cat >> mdgx.in << EOF
+  printpts 1,
+  verbose  0,
+  torsions 1,
+  hrst 0.0002,
+  rscaling spy,
+  shrst N CX C N  0.0001,
+  eunits   hartree,
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i mdgx.in
+tail -478 train.out > tmp
+mv tmp train.out
+
+# Analyze the relevant output
+${AMBERHOME}/AmberTools/test/dacdif train.out.save train.out
+${AMBERHOME}/AmberTools/test/dacdif someparms.dat.save someparms.dat
+
+# Write a simple input file for torsion optimization with angles
+cat > mdgx.in << EOF
+&files
+  -parm    mockparm.dat
+  -fmod    mockA.frcmod
+  -fmod    mockB.frcmod
+  -d       someparmspa.dat
+  -o       train.out
+&end
+EOF
+cat Systems.txt >> mdgx.in
+cat >> mdgx.in << EOF
+  verbose    0,
+  torsions   1,
+  FitAnglEq  1,
+  fita       N CX C,
+  fita       CX C N,
+  hrst       0.0002,
+  shrst      N CX C N  0.0001,
+  arst       0.0001,
+  arstcpl    1.0,
+  rscaling   spy,
+  eunits     hartree,
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i mdgx.in
+tail -500 train.out > trainpa.out
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif trainpa.out.save trainpa.out
+${AMBERHOME}/test/dacdif someparmspa.dat.save someparmspa.dat
+
+# Tidy up
+/bin/rm -f mdgx.in Systems.txt
+/bin/rm -f someparms.dat someparmspa.dat train.out trainpa.out

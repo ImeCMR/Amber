@@ -1,0 +1,53 @@
+#!/bin/csh -f
+
+
+set fixremdcouts=$AMBERHOME/bin/fixremdcouts.py
+
+# Testing 1D
+
+$fixremdcouts -O -prefix reord.1d.pt1 -couts 1d.cpout.rep* || goto error
+$fixremdcouts -O -prefix reord.1d.pt2 -couts 1d.ceout.rep* || goto error
+$fixremdcouts -O -prefix reord.1d.both -couts 1d.c?out.rep* || goto error
+
+../dacdif reord.1d.cpout.E_0.7500000.save reord.1d.pt1.cpout.E_0.7500000
+../dacdif reord.1d.cpout.E_0.7500000.save reord.1d.both.cpout.E_0.7500000
+../dacdif reord.1d.ceout.E_0.8100000.save reord.1d.pt2.ceout.E_0.8100000
+../dacdif reord.1d.ceout.E_0.8100000.save reord.1d.both.ceout.E_0.8100000
+
+/bin/rm -f reord.1d.pt1.cpout.E_0.7800000 reord.1d.pt1.cpout.E_0.8?00000
+/bin/rm -f reord.1d.both.cpout.E_0.7800000 reord.1d.both.cpout.E_0.8?00000
+/bin/rm -f reord.1d.pt2.ceout.E_0.8400000 reord.1d.pt2.ceout.E_0.7?00000
+/bin/rm -f reord.1d.both.ceout.E_0.8400000 reord.1d.both.ceout.E_0.7?00000
+
+# Testing 2D
+
+$fixremdcouts -O -prefix reord.2d -couts 2d.c?out.rep* || goto error
+
+../dacdif reord.2d.cpout.E_0.8400000.T_280.00.save reord.2d.cpout.E_0.8400000.T_280.00
+../dacdif reord.2d.ceout.E_0.8400000.T_280.00.save reord.2d.ceout.E_0.8400000.T_280.00
+
+if (-e reord.2d.cpout.E_0.8400000.T_280.00) cp reord.2d.cpout.E_0.8400000.T_280.00 reord.2d.cpout.E_0.8400000.T_280.00.temp
+if (-e reord.2d.ceout.E_0.8400000.T_280.00) cp reord.2d.ceout.E_0.8400000.T_280.00 reord.2d.ceout.E_0.8400000.T_280.00.temp
+/bin/rm -f reord.2d.c?out.E_0.??00000.T_??0.00
+if (-e reord.2d.cpout.E_0.8400000.T_280.00.temp) mv reord.2d.cpout.E_0.8400000.T_280.00.temp reord.2d.cpout.E_0.8400000.T_280.00
+if (-e reord.2d.ceout.E_0.8400000.T_280.00.temp) mv reord.2d.ceout.E_0.8400000.T_280.00.temp reord.2d.ceout.E_0.8400000.T_280.00
+
+# Testing 3D
+
+$fixremdcouts -O -prefix reord.3d -couts 3d.c?out.rep* || goto error
+
+../dacdif reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00.save reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00
+../dacdif reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00.save reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00
+
+if (-e reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00) cp reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00 reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00.temp
+if (-e reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00) cp reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00 reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00.temp
+/bin/rm -f reord.3d.c?out.E_0.??00000.pH_??.?00.T_??0.00
+if (-e reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00.temp) mv reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00.temp reord.3d.cpout.E_0.8100000.pH_10.500.T_300.00
+if (-e reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00.temp) mv reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00.temp reord.3d.ceout.E_0.8100000.pH_10.500.T_300.00
+
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+

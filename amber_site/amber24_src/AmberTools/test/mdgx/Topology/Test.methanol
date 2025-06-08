@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# Check the existence of a test version of the mdgx program
+MDGX="${AMBERHOME}/bin/mdgx"
+if [ -n "${TESTmdgx}" ] ; then
+  MDGX=${TESTmdgx}
+  echo "MDGX set to ${MDGX}"
+fi
+
+# Write the rules to turn TIP3P into TIP4P-Ew water
+cat > FD4.rule << EOF
+&rule
+  epname     EPM
+  eptype     FD-4
+  parent     C1
+  frame2     HC1
+  frame3     HC2
+  frame4     HC3
+  residue    MOH
+  v1e        0.40000
+  v13        0.40000
+  v23        0.40000
+  q          0.10000
+&end
+
+&rule
+  atom       C1
+  eptype     NONE
+  residue    MOH
+  q         -0.08340
+&end
+EOF
+
+# Write an mdgx input file for topology conversion
+cat > newsys.in << EOF
+&files
+  -p     meoh.top
+  -xpt   FD4.rule
+  -c     meoh.inpcrd
+  -o     buildsystem.out
+&end
+
+&parmedit
+  NewPrmtop    Meoh_FD4.top
+  PrmtopTitle  "Methanol made with the FD-4 type frame"
+  NewInpcrd    Meoh_FD4.crd
+&end
+EOF
+
+# Run the mdgx program
+${MDGX} -O -i newsys.in
+
+# Analyze the relevant output
+${AMBERHOME}/test/dacdif Meoh_FD4.top.save Meoh_FD4.top
+${AMBERHOME}/test/dacdif Meoh_FD4.crd.save Meoh_FD4.crd
+
+# Clean up this mess
+/bin/rm -f buildsystem.out newsys.in FD4.rule

@@ -1,0 +1,2 @@
+# Replica REPNUM for E,pH,T-REMD
+-O -i mdin.rep.REPNUM -p prmtop -c min.x -o mdout.rep.REPNUM -r rst7.rep.REPNUM

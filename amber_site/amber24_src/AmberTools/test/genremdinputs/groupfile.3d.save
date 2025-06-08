@@ -1,0 +1,432 @@
+# Replica 001 for E,pH,T-REMD
+-O -i mdin.rep.001 -p prmtop -c min.x -o mdout.rep.001 -r rst7.rep.001
+
+# Replica 002 for E,pH,T-REMD
+-O -i mdin.rep.002 -p prmtop -c min.x -o mdout.rep.002 -r rst7.rep.002
+
+# Replica 003 for E,pH,T-REMD
+-O -i mdin.rep.003 -p prmtop -c min.x -o mdout.rep.003 -r rst7.rep.003
+
+# Replica 004 for E,pH,T-REMD
+-O -i mdin.rep.004 -p prmtop -c min.x -o mdout.rep.004 -r rst7.rep.004
+
+# Replica 005 for E,pH,T-REMD
+-O -i mdin.rep.005 -p prmtop -c min.x -o mdout.rep.005 -r rst7.rep.005
+
+# Replica 006 for E,pH,T-REMD
+-O -i mdin.rep.006 -p prmtop -c min.x -o mdout.rep.006 -r rst7.rep.006
+
+# Replica 007 for E,pH,T-REMD
+-O -i mdin.rep.007 -p prmtop -c min.x -o mdout.rep.007 -r rst7.rep.007
+
+# Replica 008 for E,pH,T-REMD
+-O -i mdin.rep.008 -p prmtop -c min.x -o mdout.rep.008 -r rst7.rep.008
+
+# Replica 009 for E,pH,T-REMD
+-O -i mdin.rep.009 -p prmtop -c min.x -o mdout.rep.009 -r rst7.rep.009
+
+# Replica 010 for E,pH,T-REMD
+-O -i mdin.rep.010 -p prmtop -c min.x -o mdout.rep.010 -r rst7.rep.010
+
+# Replica 011 for E,pH,T-REMD
+-O -i mdin.rep.011 -p prmtop -c min.x -o mdout.rep.011 -r rst7.rep.011
+
+# Replica 012 for E,pH,T-REMD
+-O -i mdin.rep.012 -p prmtop -c min.x -o mdout.rep.012 -r rst7.rep.012
+
+# Replica 013 for E,pH,T-REMD
+-O -i mdin.rep.013 -p prmtop -c min.x -o mdout.rep.013 -r rst7.rep.013
+
+# Replica 014 for E,pH,T-REMD
+-O -i mdin.rep.014 -p prmtop -c min.x -o mdout.rep.014 -r rst7.rep.014
+
+# Replica 015 for E,pH,T-REMD
+-O -i mdin.rep.015 -p prmtop -c min.x -o mdout.rep.015 -r rst7.rep.015
+
+# Replica 016 for E,pH,T-REMD
+-O -i mdin.rep.016 -p prmtop -c min.x -o mdout.rep.016 -r rst7.rep.016
+
+# Replica 017 for E,pH,T-REMD
+-O -i mdin.rep.017 -p prmtop -c min.x -o mdout.rep.017 -r rst7.rep.017
+
+# Replica 018 for E,pH,T-REMD
+-O -i mdin.rep.018 -p prmtop -c min.x -o mdout.rep.018 -r rst7.rep.018
+
+# Replica 019 for E,pH,T-REMD
+-O -i mdin.rep.019 -p prmtop -c min.x -o mdout.rep.019 -r rst7.rep.019
+
+# Replica 020 for E,pH,T-REMD
+-O -i mdin.rep.020 -p prmtop -c min.x -o mdout.rep.020 -r rst7.rep.020
+
+# Replica 021 for E,pH,T-REMD
+-O -i mdin.rep.021 -p prmtop -c min.x -o mdout.rep.021 -r rst7.rep.021
+
+# Replica 022 for E,pH,T-REMD
+-O -i mdin.rep.022 -p prmtop -c min.x -o mdout.rep.022 -r rst7.rep.022
+
+# Replica 023 for E,pH,T-REMD
+-O -i mdin.rep.023 -p prmtop -c min.x -o mdout.rep.023 -r rst7.rep.023
+
+# Replica 024 for E,pH,T-REMD
+-O -i mdin.rep.024 -p prmtop -c min.x -o mdout.rep.024 -r rst7.rep.024
+
+# Replica 025 for E,pH,T-REMD
+-O -i mdin.rep.025 -p prmtop -c min.x -o mdout.rep.025 -r rst7.rep.025
+
+# Replica 026 for E,pH,T-REMD
+-O -i mdin.rep.026 -p prmtop -c min.x -o mdout.rep.026 -r rst7.rep.026
+
+# Replica 027 for E,pH,T-REMD
+-O -i mdin.rep.027 -p prmtop -c min.x -o mdout.rep.027 -r rst7.rep.027
+
+# Replica 028 for E,pH,T-REMD
+-O -i mdin.rep.028 -p prmtop -c min.x -o mdout.rep.028 -r rst7.rep.028
+
+# Replica 029 for E,pH,T-REMD
+-O -i mdin.rep.029 -p prmtop -c min.x -o mdout.rep.029 -r rst7.rep.029
+
+# Replica 030 for E,pH,T-REMD
+-O -i mdin.rep.030 -p prmtop -c min.x -o mdout.rep.030 -r rst7.rep.030
+
+# Replica 031 for E,pH,T-REMD
+-O -i mdin.rep.031 -p prmtop -c min.x -o mdout.rep.031 -r rst7.rep.031
+
+# Replica 032 for E,pH,T-REMD
+-O -i mdin.rep.032 -p prmtop -c min.x -o mdout.rep.032 -r rst7.rep.032
+
+# Replica 033 for E,pH,T-REMD
+-O -i mdin.rep.033 -p prmtop -c min.x -o mdout.rep.033 -r rst7.rep.033
+
+# Replica 034 for E,pH,T-REMD
+-O -i mdin.rep.034 -p prmtop -c min.x -o mdout.rep.034 -r rst7.rep.034
+
+# Replica 035 for E,pH,T-REMD
+-O -i mdin.rep.035 -p prmtop -c min.x -o mdout.rep.035 -r rst7.rep.035
+
+# Replica 036 for E,pH,T-REMD
+-O -i mdin.rep.036 -p prmtop -c min.x -o mdout.rep.036 -r rst7.rep.036
+
+# Replica 037 for E,pH,T-REMD
+-O -i mdin.rep.037 -p prmtop -c min.x -o mdout.rep.037 -r rst7.rep.037
+
+# Replica 038 for E,pH,T-REMD
+-O -i mdin.rep.038 -p prmtop -c min.x -o mdout.rep.038 -r rst7.rep.038
+
+# Replica 039 for E,pH,T-REMD
+-O -i mdin.rep.039 -p prmtop -c min.x -o mdout.rep.039 -r rst7.rep.039
+
+# Replica 040 for E,pH,T-REMD
+-O -i mdin.rep.040 -p prmtop -c min.x -o mdout.rep.040 -r rst7.rep.040
+
+# Replica 041 for E,pH,T-REMD
+-O -i mdin.rep.041 -p prmtop -c min.x -o mdout.rep.041 -r rst7.rep.041
+
+# Replica 042 for E,pH,T-REMD
+-O -i mdin.rep.042 -p prmtop -c min.x -o mdout.rep.042 -r rst7.rep.042
+
+# Replica 043 for E,pH,T-REMD
+-O -i mdin.rep.043 -p prmtop -c min.x -o mdout.rep.043 -r rst7.rep.043
+
+# Replica 044 for E,pH,T-REMD
+-O -i mdin.rep.044 -p prmtop -c min.x -o mdout.rep.044 -r rst7.rep.044
+
+# Replica 045 for E,pH,T-REMD
+-O -i mdin.rep.045 -p prmtop -c min.x -o mdout.rep.045 -r rst7.rep.045
+
+# Replica 046 for E,pH,T-REMD
+-O -i mdin.rep.046 -p prmtop -c min.x -o mdout.rep.046 -r rst7.rep.046
+
+# Replica 047 for E,pH,T-REMD
+-O -i mdin.rep.047 -p prmtop -c min.x -o mdout.rep.047 -r rst7.rep.047
+
+# Replica 048 for E,pH,T-REMD
+-O -i mdin.rep.048 -p prmtop -c min.x -o mdout.rep.048 -r rst7.rep.048
+
+# Replica 049 for E,pH,T-REMD
+-O -i mdin.rep.049 -p prmtop -c min.x -o mdout.rep.049 -r rst7.rep.049
+
+# Replica 050 for E,pH,T-REMD
+-O -i mdin.rep.050 -p prmtop -c min.x -o mdout.rep.050 -r rst7.rep.050
+
+# Replica 051 for E,pH,T-REMD
+-O -i mdin.rep.051 -p prmtop -c min.x -o mdout.rep.051 -r rst7.rep.051
+
+# Replica 052 for E,pH,T-REMD
+-O -i mdin.rep.052 -p prmtop -c min.x -o mdout.rep.052 -r rst7.rep.052
+
+# Replica 053 for E,pH,T-REMD
+-O -i mdin.rep.053 -p prmtop -c min.x -o mdout.rep.053 -r rst7.rep.053
+
+# Replica 054 for E,pH,T-REMD
+-O -i mdin.rep.054 -p prmtop -c min.x -o mdout.rep.054 -r rst7.rep.054
+
+# Replica 055 for E,pH,T-REMD
+-O -i mdin.rep.055 -p prmtop -c min.x -o mdout.rep.055 -r rst7.rep.055
+
+# Replica 056 for E,pH,T-REMD
+-O -i mdin.rep.056 -p prmtop -c min.x -o mdout.rep.056 -r rst7.rep.056
+
+# Replica 057 for E,pH,T-REMD
+-O -i mdin.rep.057 -p prmtop -c min.x -o mdout.rep.057 -r rst7.rep.057
+
+# Replica 058 for E,pH,T-REMD
+-O -i mdin.rep.058 -p prmtop -c min.x -o mdout.rep.058 -r rst7.rep.058
+
+# Replica 059 for E,pH,T-REMD
+-O -i mdin.rep.059 -p prmtop -c min.x -o mdout.rep.059 -r rst7.rep.059
+
+# Replica 060 for E,pH,T-REMD
+-O -i mdin.rep.060 -p prmtop -c min.x -o mdout.rep.060 -r rst7.rep.060
+
+# Replica 061 for E,pH,T-REMD
+-O -i mdin.rep.061 -p prmtop -c min.x -o mdout.rep.061 -r rst7.rep.061
+
+# Replica 062 for E,pH,T-REMD
+-O -i mdin.rep.062 -p prmtop -c min.x -o mdout.rep.062 -r rst7.rep.062
+
+# Replica 063 for E,pH,T-REMD
+-O -i mdin.rep.063 -p prmtop -c min.x -o mdout.rep.063 -r rst7.rep.063
+
+# Replica 064 for E,pH,T-REMD
+-O -i mdin.rep.064 -p prmtop -c min.x -o mdout.rep.064 -r rst7.rep.064
+
+# Replica 065 for E,pH,T-REMD
+-O -i mdin.rep.065 -p prmtop -c min.x -o mdout.rep.065 -r rst7.rep.065
+
+# Replica 066 for E,pH,T-REMD
+-O -i mdin.rep.066 -p prmtop -c min.x -o mdout.rep.066 -r rst7.rep.066
+
+# Replica 067 for E,pH,T-REMD
+-O -i mdin.rep.067 -p prmtop -c min.x -o mdout.rep.067 -r rst7.rep.067
+
+# Replica 068 for E,pH,T-REMD
+-O -i mdin.rep.068 -p prmtop -c min.x -o mdout.rep.068 -r rst7.rep.068
+
+# Replica 069 for E,pH,T-REMD
+-O -i mdin.rep.069 -p prmtop -c min.x -o mdout.rep.069 -r rst7.rep.069
+
+# Replica 070 for E,pH,T-REMD
+-O -i mdin.rep.070 -p prmtop -c min.x -o mdout.rep.070 -r rst7.rep.070
+
+# Replica 071 for E,pH,T-REMD
+-O -i mdin.rep.071 -p prmtop -c min.x -o mdout.rep.071 -r rst7.rep.071
+
+# Replica 072 for E,pH,T-REMD
+-O -i mdin.rep.072 -p prmtop -c min.x -o mdout.rep.072 -r rst7.rep.072
+
+# Replica 073 for E,pH,T-REMD
+-O -i mdin.rep.073 -p prmtop -c min.x -o mdout.rep.073 -r rst7.rep.073
+
+# Replica 074 for E,pH,T-REMD
+-O -i mdin.rep.074 -p prmtop -c min.x -o mdout.rep.074 -r rst7.rep.074
+
+# Replica 075 for E,pH,T-REMD
+-O -i mdin.rep.075 -p prmtop -c min.x -o mdout.rep.075 -r rst7.rep.075
+
+# Replica 076 for E,pH,T-REMD
+-O -i mdin.rep.076 -p prmtop -c min.x -o mdout.rep.076 -r rst7.rep.076
+
+# Replica 077 for E,pH,T-REMD
+-O -i mdin.rep.077 -p prmtop -c min.x -o mdout.rep.077 -r rst7.rep.077
+
+# Replica 078 for E,pH,T-REMD
+-O -i mdin.rep.078 -p prmtop -c min.x -o mdout.rep.078 -r rst7.rep.078
+
+# Replica 079 for E,pH,T-REMD
+-O -i mdin.rep.079 -p prmtop -c min.x -o mdout.rep.079 -r rst7.rep.079
+
+# Replica 080 for E,pH,T-REMD
+-O -i mdin.rep.080 -p prmtop -c min.x -o mdout.rep.080 -r rst7.rep.080
+
+# Replica 081 for E,pH,T-REMD
+-O -i mdin.rep.081 -p prmtop -c min.x -o mdout.rep.081 -r rst7.rep.081
+
+# Replica 082 for E,pH,T-REMD
+-O -i mdin.rep.082 -p prmtop -c min.x -o mdout.rep.082 -r rst7.rep.082
+
+# Replica 083 for E,pH,T-REMD
+-O -i mdin.rep.083 -p prmtop -c min.x -o mdout.rep.083 -r rst7.rep.083
+
+# Replica 084 for E,pH,T-REMD
+-O -i mdin.rep.084 -p prmtop -c min.x -o mdout.rep.084 -r rst7.rep.084
+
+# Replica 085 for E,pH,T-REMD
+-O -i mdin.rep.085 -p prmtop -c min.x -o mdout.rep.085 -r rst7.rep.085
+
+# Replica 086 for E,pH,T-REMD
+-O -i mdin.rep.086 -p prmtop -c min.x -o mdout.rep.086 -r rst7.rep.086
+
+# Replica 087 for E,pH,T-REMD
+-O -i mdin.rep.087 -p prmtop -c min.x -o mdout.rep.087 -r rst7.rep.087
+
+# Replica 088 for E,pH,T-REMD
+-O -i mdin.rep.088 -p prmtop -c min.x -o mdout.rep.088 -r rst7.rep.088
+
+# Replica 089 for E,pH,T-REMD
+-O -i mdin.rep.089 -p prmtop -c min.x -o mdout.rep.089 -r rst7.rep.089
+
+# Replica 090 for E,pH,T-REMD
+-O -i mdin.rep.090 -p prmtop -c min.x -o mdout.rep.090 -r rst7.rep.090
+
+# Replica 091 for E,pH,T-REMD
+-O -i mdin.rep.091 -p prmtop -c min.x -o mdout.rep.091 -r rst7.rep.091
+
+# Replica 092 for E,pH,T-REMD
+-O -i mdin.rep.092 -p prmtop -c min.x -o mdout.rep.092 -r rst7.rep.092
+
+# Replica 093 for E,pH,T-REMD
+-O -i mdin.rep.093 -p prmtop -c min.x -o mdout.rep.093 -r rst7.rep.093
+
+# Replica 094 for E,pH,T-REMD
+-O -i mdin.rep.094 -p prmtop -c min.x -o mdout.rep.094 -r rst7.rep.094
+
+# Replica 095 for E,pH,T-REMD
+-O -i mdin.rep.095 -p prmtop -c min.x -o mdout.rep.095 -r rst7.rep.095
+
+# Replica 096 for E,pH,T-REMD
+-O -i mdin.rep.096 -p prmtop -c min.x -o mdout.rep.096 -r rst7.rep.096
+
+# Replica 097 for E,pH,T-REMD
+-O -i mdin.rep.097 -p prmtop -c min.x -o mdout.rep.097 -r rst7.rep.097
+
+# Replica 098 for E,pH,T-REMD
+-O -i mdin.rep.098 -p prmtop -c min.x -o mdout.rep.098 -r rst7.rep.098
+
+# Replica 099 for E,pH,T-REMD
+-O -i mdin.rep.099 -p prmtop -c min.x -o mdout.rep.099 -r rst7.rep.099
+
+# Replica 100 for E,pH,T-REMD
+-O -i mdin.rep.100 -p prmtop -c min.x -o mdout.rep.100 -r rst7.rep.100
+
+# Replica 101 for E,pH,T-REMD
+-O -i mdin.rep.101 -p prmtop -c min.x -o mdout.rep.101 -r rst7.rep.101
+
+# Replica 102 for E,pH,T-REMD
+-O -i mdin.rep.102 -p prmtop -c min.x -o mdout.rep.102 -r rst7.rep.102
+
+# Replica 103 for E,pH,T-REMD
+-O -i mdin.rep.103 -p prmtop -c min.x -o mdout.rep.103 -r rst7.rep.103
+
+# Replica 104 for E,pH,T-REMD
+-O -i mdin.rep.104 -p prmtop -c min.x -o mdout.rep.104 -r rst7.rep.104
+
+# Replica 105 for E,pH,T-REMD
+-O -i mdin.rep.105 -p prmtop -c min.x -o mdout.rep.105 -r rst7.rep.105
+
+# Replica 106 for E,pH,T-REMD
+-O -i mdin.rep.106 -p prmtop -c min.x -o mdout.rep.106 -r rst7.rep.106
+
+# Replica 107 for E,pH,T-REMD
+-O -i mdin.rep.107 -p prmtop -c min.x -o mdout.rep.107 -r rst7.rep.107
+
+# Replica 108 for E,pH,T-REMD
+-O -i mdin.rep.108 -p prmtop -c min.x -o mdout.rep.108 -r rst7.rep.108
+
+# Replica 109 for E,pH,T-REMD
+-O -i mdin.rep.109 -p prmtop -c min.x -o mdout.rep.109 -r rst7.rep.109
+
+# Replica 110 for E,pH,T-REMD
+-O -i mdin.rep.110 -p prmtop -c min.x -o mdout.rep.110 -r rst7.rep.110
+
+# Replica 111 for E,pH,T-REMD
+-O -i mdin.rep.111 -p prmtop -c min.x -o mdout.rep.111 -r rst7.rep.111
+
+# Replica 112 for E,pH,T-REMD
+-O -i mdin.rep.112 -p prmtop -c min.x -o mdout.rep.112 -r rst7.rep.112
+
+# Replica 113 for E,pH,T-REMD
+-O -i mdin.rep.113 -p prmtop -c min.x -o mdout.rep.113 -r rst7.rep.113
+
+# Replica 114 for E,pH,T-REMD
+-O -i mdin.rep.114 -p prmtop -c min.x -o mdout.rep.114 -r rst7.rep.114
+
+# Replica 115 for E,pH,T-REMD
+-O -i mdin.rep.115 -p prmtop -c min.x -o mdout.rep.115 -r rst7.rep.115
+
+# Replica 116 for E,pH,T-REMD
+-O -i mdin.rep.116 -p prmtop -c min.x -o mdout.rep.116 -r rst7.rep.116
+
+# Replica 117 for E,pH,T-REMD
+-O -i mdin.rep.117 -p prmtop -c min.x -o mdout.rep.117 -r rst7.rep.117
+
+# Replica 118 for E,pH,T-REMD
+-O -i mdin.rep.118 -p prmtop -c min.x -o mdout.rep.118 -r rst7.rep.118
+
+# Replica 119 for E,pH,T-REMD
+-O -i mdin.rep.119 -p prmtop -c min.x -o mdout.rep.119 -r rst7.rep.119
+
+# Replica 120 for E,pH,T-REMD
+-O -i mdin.rep.120 -p prmtop -c min.x -o mdout.rep.120 -r rst7.rep.120
+
+# Replica 121 for E,pH,T-REMD
+-O -i mdin.rep.121 -p prmtop -c min.x -o mdout.rep.121 -r rst7.rep.121
+
+# Replica 122 for E,pH,T-REMD
+-O -i mdin.rep.122 -p prmtop -c min.x -o mdout.rep.122 -r rst7.rep.122
+
+# Replica 123 for E,pH,T-REMD
+-O -i mdin.rep.123 -p prmtop -c min.x -o mdout.rep.123 -r rst7.rep.123
+
+# Replica 124 for E,pH,T-REMD
+-O -i mdin.rep.124 -p prmtop -c min.x -o mdout.rep.124 -r rst7.rep.124
+
+# Replica 125 for E,pH,T-REMD
+-O -i mdin.rep.125 -p prmtop -c min.x -o mdout.rep.125 -r rst7.rep.125
+
+# Replica 126 for E,pH,T-REMD
+-O -i mdin.rep.126 -p prmtop -c min.x -o mdout.rep.126 -r rst7.rep.126
+
+# Replica 127 for E,pH,T-REMD
+-O -i mdin.rep.127 -p prmtop -c min.x -o mdout.rep.127 -r rst7.rep.127
+
+# Replica 128 for E,pH,T-REMD
+-O -i mdin.rep.128 -p prmtop -c min.x -o mdout.rep.128 -r rst7.rep.128
+
+# Replica 129 for E,pH,T-REMD
+-O -i mdin.rep.129 -p prmtop -c min.x -o mdout.rep.129 -r rst7.rep.129
+
+# Replica 130 for E,pH,T-REMD
+-O -i mdin.rep.130 -p prmtop -c min.x -o mdout.rep.130 -r rst7.rep.130
+
+# Replica 131 for E,pH,T-REMD
+-O -i mdin.rep.131 -p prmtop -c min.x -o mdout.rep.131 -r rst7.rep.131
+
+# Replica 132 for E,pH,T-REMD
+-O -i mdin.rep.132 -p prmtop -c min.x -o mdout.rep.132 -r rst7.rep.132
+
+# Replica 133 for E,pH,T-REMD
+-O -i mdin.rep.133 -p prmtop -c min.x -o mdout.rep.133 -r rst7.rep.133
+
+# Replica 134 for E,pH,T-REMD
+-O -i mdin.rep.134 -p prmtop -c min.x -o mdout.rep.134 -r rst7.rep.134
+
+# Replica 135 for E,pH,T-REMD
+-O -i mdin.rep.135 -p prmtop -c min.x -o mdout.rep.135 -r rst7.rep.135
+
+# Replica 136 for E,pH,T-REMD
+-O -i mdin.rep.136 -p prmtop -c min.x -o mdout.rep.136 -r rst7.rep.136
+
+# Replica 137 for E,pH,T-REMD
+-O -i mdin.rep.137 -p prmtop -c min.x -o mdout.rep.137 -r rst7.rep.137
+
+# Replica 138 for E,pH,T-REMD
+-O -i mdin.rep.138 -p prmtop -c min.x -o mdout.rep.138 -r rst7.rep.138
+
+# Replica 139 for E,pH,T-REMD
+-O -i mdin.rep.139 -p prmtop -c min.x -o mdout.rep.139 -r rst7.rep.139
+
+# Replica 140 for E,pH,T-REMD
+-O -i mdin.rep.140 -p prmtop -c min.x -o mdout.rep.140 -r rst7.rep.140
+
+# Replica 141 for E,pH,T-REMD
+-O -i mdin.rep.141 -p prmtop -c min.x -o mdout.rep.141 -r rst7.rep.141
+
+# Replica 142 for E,pH,T-REMD
+-O -i mdin.rep.142 -p prmtop -c min.x -o mdout.rep.142 -r rst7.rep.142
+
+# Replica 143 for E,pH,T-REMD
+-O -i mdin.rep.143 -p prmtop -c min.x -o mdout.rep.143 -r rst7.rep.143
+
+# Replica 144 for E,pH,T-REMD
+-O -i mdin.rep.144 -p prmtop -c min.x -o mdout.rep.144 -r rst7.rep.144
+

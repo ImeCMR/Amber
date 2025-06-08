@@ -1,0 +1,38 @@
+#!/bin/sh
+
+. ../program_error.sh
+
+# This is a test file to check for the existence of MMPBSA.py*
+
+# Define executable
+if [ -z "$DO_PARALLEL" ]; then
+   EXE=$AMBERHOME/bin/MMPBSA.py
+else
+   numprocs=`$DO_PARALLEL ../numprocs | sed -n '$p'`
+   # There is no limit in theory, but in practice:
+   if [ "$numprocs" -gt 64 ] ; then
+     echo "This test cannot be run with more than 64 processes."
+     echo ""
+     exit 0
+   fi
+   EXE=$AMBERHOME/bin/MMPBSA.py.MPI
+fi
+
+if [ ! -e "$EXE" ]; then
+   echo "$EXE does not exist!"
+   error
+elif [ ! -x "$EXE" ]; then
+   echo "$EXE cannot be executed!"
+   error
+fi
+
+output=mmpbsa.out
+
+# Execute the program; MMPBSA.py.MPI command line options are not
+# sensibly parallelized so use uniq to remove duplicated output.
+$DO_PARALLEL $EXE --clean | uniq > $output 2>&1 || error
+
+../dacdif $output.save $output
+
+exit 0
+

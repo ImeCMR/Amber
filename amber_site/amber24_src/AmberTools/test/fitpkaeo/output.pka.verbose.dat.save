@@ -1,0 +1,6 @@
+Initial guess for residue   GL4 12: pKa =   5.75000 ; Hill coefficient =  1.000; X2 factor =   0.494637
+Initial guess for residue   PRN 15: pKa =   5.75000 ; Hill coefficient =  1.000; X2 factor =   0.666304
+Initial guess for residue   PRN 16: pKa =   5.75000 ; Hill coefficient =  1.000; X2 factor =   0.313480
+Final results for residue   GL4 12: pKa =   4.94386 (+- 0.05179 ) ; Hill coefficient =  0.919 (+- 0.089 ); X2 factor =   0.026493
+Final results for residue   PRN 15: pKa =   6.68198 (+- 0.11953 ) ; Hill coefficient =  0.735 (+- 0.131 ); X2 factor =   0.112885
+Final results for residue   PRN 16: pKa =   6.37199 (+- 0.03392 ) ; Hill coefficient =  1.066 (+- 0.078 ); X2 factor =   0.013179

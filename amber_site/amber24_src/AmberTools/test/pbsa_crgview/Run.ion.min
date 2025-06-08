@@ -1,0 +1,47 @@
+#!/bin/csh -f
+
+
+if( ! $?TESTsander ) set TESTsander = "$AMBERHOME/bin/pbsa"
+
+if( ! $?DO_PARALLEL ) then
+   setenv DO_PARALLEL " "
+else
+   echo "This test not set up for parallel"
+   echo " cannot run in parallel with pbsa"
+   exit 0
+endif
+
+foreach bb ( 1 2 )
+cat > mdin <<EOF
+ test of NPB charge view and field view consistency
+ &cntrl 
+   ntx=1, imin=1, ipb=1, inp=0,
+ /
+ &pb
+   npbverb=1, npbopt=1, bcopt=1,
+   epsout=80.0d0, epsin=1.0d0, radiopt=0, dprob=1.4,
+   istrng=1000, iprob=2.0,
+   space=1.0, nfocus=1, fillratio=2.0, solvopt=1,
+   accept=1e-9, laccept=1e-9, maxitn=10000,
+   eneopt=$bb, frcopt=0, cutfd=9, cutnb=9
+ /
+EOF
+
+set output = at.out
+
+$DO_PARALLEL $TESTsander -O -i mdin -p at.prmtop -c at.inpcrd  -o $output < /dev/null || goto error
+
+../dacdif -a 1.e-6 at.out.eneopt$bb.save $output
+
+rm mdinfo
+
+goto next
+
+error:
+echo "  ${0}:  Program error"
+exit(1)
+  
+next:
+end
+
+/bin/rm -f mdin

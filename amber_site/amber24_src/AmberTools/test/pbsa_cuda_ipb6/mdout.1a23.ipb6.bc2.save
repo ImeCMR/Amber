@@ -1,0 +1,272 @@
+
+          -------------------------------------------------------
+          PBSA VERSION 2019                       UC Irvine
+          -------------------------------------------------------
+
+| Run on 03/26/2019 at 11:33:26
+  [-O]verwriting output
+
+File Assignments:
+|  MDIN: min.in                                                                
+| MDOUT: mdout.1a23.ipb6.bc2                                                   
+|INPCRD: 1a23.inpcrd                                                           
+|  PARM: 1a23.prmtop                                                           
+|
+
+ Here is the input file:
+
+ test of pbsa                                                                  
+ &cntrl                                                                        
+   ntx=1, imin=1, ipb=6, inp=0                                                 
+ /                                                                             
+ &pb                                                                           
+   npbverb=0, istrng=0,                                                        
+   epsout=80.0, epsin=1.0, dprob=1.4, radiopt=0, sasopt=2,                     
+   fillratio=1.5, nfocus=1, space=0.5,                                         
+   accept=0.0001, maxitn=10000,                                                
+   npbopt=0, bcopt=2,                                                          
+   eneopt=1, frcopt=0, cutnb=15, cutsa=8, cutfd=7                              
+ /                                                                             
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+| Flags:                                                                        
+| New format PARM file being parsed.
+| Version =    1.000 Date = 11/25/05 Time = 12:53:21
+ NATOM  =    2955 NTYPES =      14 NBONH =    1467 MBONA  =    1520
+ NTHETH =    3348 MTHETA =    2055 NPHIH =    6057 MPHIA  =    2850
+ NHPARM =       0 NPARM  =       0 NNB   =   16324 NRES   =     189
+ NBONA  =    1520 NTHETA =    2055 NPHIA =    2850 NUMBND =      40
+ NUMANG =      89 NPTRA  =      30 NATYP =      27 NPHB   =       0
+ IFBOX  =       0 NMXRS  =      24 IFCAP =       0 NEXTRA =       0
+ NCOPY  =       0
+
+
+|     Memory Use     Allocated
+|     Real              109472
+|     Hollerith           9056
+|     Integer           139964
+|     Max Pairs              1
+|     Max Rstack             1
+|     Max Istack             1
+|       Total             1437 kbytes
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+                                                                                
+
+General flags:
+     imin    =       1, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       1, irest   =       0, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       1, ntpr    =      50, ntrx    =       1, ntwr    =     500
+     iwrap   =       0, ntwx    =       0, ntwv    =       0, ntwe    =       0
+     ioutfm  =       0, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       1, ntb     =       1, ipb     =       6, nsnb    =      25
+     ipol    =       0, gbsa    =       0, iesp    =       0
+     dielc   =   1.00000, cut     =   8.00000, intdiel =   1.00000
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Energy minimization:
+     maxcyc  =       1, ncyc    =      10, ntmin   =       1
+     dx0     =   0.01000, drms    =   0.00010
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+                                                                                
+ begin time read from input coords =     0.000 ps
+
+ Number of triangulated 3-point waters found:        0
+
+--------------------------------------------------------------------------------
+   4.  RESULTS
+--------------------------------------------------------------------------------
+
+ Warning!          67          91          35 Irre31 Inconsistent Constraints
+ Warning!          76          66          40 Irre31 Inconsistent Constraints
+ Warning!          61          71          40 Irre31 Inconsistent Constraints
+ Warning!          51          85          40 Irre31 Inconsistent Constraints
+ Warning!         105          63          41 Irre31 Inconsistent Constraints
+ Warning!          46          91          41 Irre31 Inconsistent Constraints
+ Warning!          70          58          42 Irre31 Inconsistent Constraints
+ Warning!          73         109          42 Irre31 Inconsistent Constraints
+ Warning!          61         104          43 Irre31 Inconsistent Constraints
+ Warning!          73         109          43 Irre31 Inconsistent Constraints
+ Warning!          79          70          44 Irre31 Inconsistent Constraints
+ Warning!          42          77          44 Irre31 Inconsistent Constraints
+ Warning!          86          84          45 Irre31 Inconsistent Constraints
+ Warning!          59         111          45 Irre31 Inconsistent Constraints
+ Warning!          74         113          45 Irre31 Inconsistent Constraints
+ Warning!          45          93          46 Irre31 Inconsistent Constraints
+ Warning!          87          97          46 Irre31 Inconsistent Constraints
+ Warning!          88          95          47 Irre31 Inconsistent Constraints
+ Warning!          84         116          47 Irre31 Inconsistent Constraints
+ Warning!          79          55          48 Irre31 Inconsistent Constraints
+ Warning!          55          67          48 Irre31 Inconsistent Constraints
+ Warning!          72         122          48 Irre31 Inconsistent Constraints
+ Warning!         115          43          49 Irre31 Inconsistent Constraints
+ Warning!          83          55          49 Irre31 Inconsistent Constraints
+ Warning!          58          67          49 Irre31 Inconsistent Constraints
+ Warning!          44          94          49 Irre31 Inconsistent Constraints
+ Warning!          69         116          49 Irre31 Inconsistent Constraints
+ Warning!          91          89          51 Irre31 Inconsistent Constraints
+ Warning!          60          59          52 Irre31 Inconsistent Constraints
+ Warning!          90          69          52 Irre31 Inconsistent Constraints
+ Warning!          88          71          52 Irre31 Inconsistent Constraints
+ Warning!          75          52          53 Irre31 Inconsistent Constraints
+ Warning!          57          68          53 Irre31 Inconsistent Constraints
+ Warning!         103          82          53 Irre31 Inconsistent Constraints
+ Warning!          75          52          54 Irre31 Inconsistent Constraints
+ Warning!          64          57          54 Irre31 Inconsistent Constraints
+ Warning!          77          40          55 Irre31 Inconsistent Constraints
+ Warning!          91          89          55 Irre31 Inconsistent Constraints
+ Warning!          74         127          55 Irre31 Inconsistent Constraints
+ Warning!          56         114          56 Irre31 Inconsistent Constraints
+ Warning!          37         110          57 Irre31 Inconsistent Constraints
+ Warning!          75          77          58 Irre31 Inconsistent Constraints
+ Warning!          75          78          58 Irre31 Inconsistent Constraints
+ Warning!          58          76          59 Irre31 Inconsistent Constraints
+ Warning!          44          78          60 Irre31 Inconsistent Constraints
+ Warning!          54          95          60 Irre31 Inconsistent Constraints
+ Warning!          41         100          61 Irre31 Inconsistent Constraints
+ Warning!          65         123          61 Irre31 Inconsistent Constraints
+ Warning!          87          36          62 Irre31 Inconsistent Constraints
+ Warning!          87          37          62 Irre31 Inconsistent Constraints
+ Warning!          43          67          62 Irre31 Inconsistent Constraints
+ Warning!          75          74          63 Irre31 Inconsistent Constraints
+ Warning!          41         100          63 Irre31 Inconsistent Constraints
+ Warning!         133          56          64 Irre31 Inconsistent Constraints
+ Warning!          72          73          64 Irre31 Inconsistent Constraints
+ Warning!          73          77          64 Irre31 Inconsistent Constraints
+ Warning!          72          35          65 Irre31 Inconsistent Constraints
+ Warning!         133          58          65 Irre31 Inconsistent Constraints
+ Warning!          73          80          65 Irre31 Inconsistent Constraints
+ Warning!          52          70          66 Irre31 Inconsistent Constraints
+ Warning!          54          87          66 Irre31 Inconsistent Constraints
+ Warning!         111          37          67 Irre31 Inconsistent Constraints
+ Warning!          58          75          67 Irre31 Inconsistent Constraints
+ Warning!          40          98          67 Irre31 Inconsistent Constraints
+ Warning!          40          99          67 Irre31 Inconsistent Constraints
+ Warning!          40         100          67 Irre31 Inconsistent Constraints
+ Warning!          41         102          67 Irre31 Inconsistent Constraints
+ Warning!          76         116          67 Irre31 Inconsistent Constraints
+ Warning!         111          38          68 Irre31 Inconsistent Constraints
+ Warning!          88         112          68 Irre31 Inconsistent Constraints
+ Warning!          56         117          68 Irre31 Inconsistent Constraints
+ Warning!         133          67          69 Irre31 Inconsistent Constraints
+ Warning!          94         109          69 Irre31 Inconsistent Constraints
+ Warning!          73          47          71 Irre31 Inconsistent Constraints
+ Warning!          92          36          72 Irre31 Inconsistent Constraints
+ Warning!          33         109          72 Irre31 Inconsistent Constraints
+ Warning!          51          91          73 Irre31 Inconsistent Constraints
+ Warning!         111          92          73 Irre31 Inconsistent Constraints
+ Warning!         122          50          74 Irre31 Inconsistent Constraints
+ Warning!          51          91          74 Irre31 Inconsistent Constraints
+ Warning!         130          60          76 Irre31 Inconsistent Constraints
+ Warning!          99          94          76 Irre31 Inconsistent Constraints
+ Warning!         123          51          77 Irre31 Inconsistent Constraints
+ Warning!         115          91          78 Irre31 Inconsistent Constraints
+ Warning!          39         108          78 Irre31 Inconsistent Constraints
+ Warning!          79          39          80 Irre31 Inconsistent Constraints
+ Warning!         113          46          80 Irre31 Inconsistent Constraints
+ Warning!          48          79          80 Irre31 Inconsistent Constraints
+ Warning!          48          83          80 Irre31 Inconsistent Constraints
+ Warning!         128          74          81 Irre31 Inconsistent Constraints
+ Warning!          92          96          81 Irre31 Inconsistent Constraints
+ Warning!          92          36          82 Irre31 Inconsistent Constraints
+ Warning!         123          73          82 Irre31 Inconsistent Constraints
+ Warning!         105          96          82 Irre31 Inconsistent Constraints
+ Warning!          88         115          82 Irre31 Inconsistent Constraints
+ Warning!         117          85          83 Irre31 Inconsistent Constraints
+ Warning!         109          95          83 Irre31 Inconsistent Constraints
+ Warning!          88         115          83 Irre31 Inconsistent Constraints
+ Warning!         115          61          84 Irre31 Inconsistent Constraints
+ Warning!         101          73          84 Irre31 Inconsistent Constraints
+ Warning!          68          84          84 Irre31 Inconsistent Constraints
+ Warning!          79          55          85 Irre31 Inconsistent Constraints
+ Warning!         113          66          85 Irre31 Inconsistent Constraints
+ Warning!         110          92          86 Irre31 Inconsistent Constraints
+ Warning!          60          94          86 Irre31 Inconsistent Constraints
+ Warning!          96         101          87 Irre31 Inconsistent Constraints
+ Warning!          90         115          87 Irre31 Inconsistent Constraints
+ Warning!          86          76          88 Irre31 Inconsistent Constraints
+ Warning!          74          92          88 Irre31 Inconsistent Constraints
+ Warning!          74          93          88 Irre31 Inconsistent Constraints
+ Warning!          99          98          88 Irre31 Inconsistent Constraints
+ Warning!          71         113          88 Irre31 Inconsistent Constraints
+ Warning!          88          50          91 Irre31 Inconsistent Constraints
+ Warning!          77          78          91 Irre31 Inconsistent Constraints
+ Warning!          77         100          91 Irre31 Inconsistent Constraints
+ Warning!          92          82          92 Irre31 Inconsistent Constraints
+ Warning!          71         100          92 Irre31 Inconsistent Constraints
+ Warning!          77          85          95 Irre31 Inconsistent Constraints
+ Warning!          85          96          95 Irre31 Inconsistent Constraints
+ Warning!          81          98          95 Irre31 Inconsistent Constraints
+ Warning!          86          91          98 Irre31 Inconsistent Constraints
+ Warning!          82         106         102 Irre31 Inconsistent Constraints
+ Warning!          78          94         104 Irre31 Inconsistent Constraints
+  PB IIM: nonzero elements requested     24158331
+
+ NSTEP =        1   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =    -17043.9272  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =     -1361.9167
+ EELEC  =    -13725.7319  EPB     =     -1956.2786  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+
+
+  Maximum number of minimization cycles reached.
+
+
+                    FINAL RESULTS
+
+
+ NSTEP =        1   TIME(PS) =       0.000  TEMP(K) =     0.00  PRESS =     0.0
+ Etot   =    -17043.9272  EKtot   =         0.0000  EPtot      =         0.0000
+ BOND   =         0.0000  ANGLE   =         0.0000  DIHED      =         0.0000
+ 1-4 NB =         0.0000  1-4 EEL =         0.0000  VDWAALS    =     -1361.9167
+ EELEC  =    -13725.7319  EPB     =     -1956.2786  RESTRAINT  =         0.0000
+ ECAVITY=         0.0000  EDISPER =         0.0000
+ ------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+   5.  TIMINGS
+--------------------------------------------------------------------------------
+
+| Total time                    10.02
+| Read prm/crd time              0.03
+| Force time                     9.99
+| Nonbond force                  9.99
+| PB Nonbond                     9.99
+| PB NB list                     0.10
+| PB FD grid                     0.00
+| PB Sasa                        0.04
+| PB FD force                    9.87
+| PB Set linear sys              8.23
+| PB Solver                      1.63
+| PB Direct                      0.01
+| PB SA srf                      0.04
+| PB exmol                       1.14
+| PB exmol setup                 0.01
+| PB exmol part a                0.00
+| PB epsbnd                      0.69
+|           Job began  at 11:33:26.139  on 03/26/2019
+|           Setup done at 11:33:26.170  on 03/26/2019
+|           Run   done at 11:33:36.159  on 03/26/2019
+|     wallclock() was called      54 times

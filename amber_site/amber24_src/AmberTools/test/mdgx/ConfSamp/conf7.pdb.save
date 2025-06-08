@@ -1,0 +1,69 @@
+HEADER  Printed by mdgx
+REMARK   4
+REMARK   4 Topology used to create this configuration:
+REMARK   4   ../Torsion/THR.top
+REMARK   4
+REMARK   4 Restraints used to create this configuration:
+REMARK   4 &rst
+REMARK   4  iat=7,11,
+REMARK   4  r1=2.0901, r2=2.5901, r3=2.5901, r4=3.0901,
+REMARK   4  rk2=128.0000, rk3=128.0000,
+REMARK   4 &end
+REMARK   4 &rst
+REMARK   4  iat=19,18,
+REMARK   4  r1=4.4926, r2=4.9926, r3=4.9926, r4=5.4926,
+REMARK   4  rk2=256.0000, rk3=256.0000,
+REMARK   4 &end
+REMARK   4 &rst
+REMARK   4  iat=7,9,10,
+REMARK   4  r1=87.6021, r2=116.2500, r3=116.2500, r4=144.8979,
+REMARK   4  rk2=256.0000, rk3=256.0000,
+REMARK   4 &end
+REMARK   4 &rst
+REMARK   4  iat=5,7,9,19,
+REMARK   4  r1=-169.8675, r2=-141.2196, r3=-141.2196, r4=-112.5717,
+REMARK   4  rk2=64.0000, rk3=64.0000,
+REMARK   4 &end
+REMARK   4 &rst
+REMARK   4  iat=7,9,11,17,
+REMARK   4  r1=64.4311, r2=93.0790, r3=113.0790, r4=141.7269,
+REMARK   4  rk2=32.0000, rk3=32.0000,
+REMARK   4 &end
+REMARK   4
+REMARK   4 Molecular mechanics energy decomposition (kcal/mol):
+REMARK   4   Bond               12.8354
+REMARK   4   Angle              24.2661
+REMARK   4   Dihedral            7.1424 (sum of proper and improper terms)
+REMARK   4   van-der Waals       1.7434 (includes 1-4 interactions)
+REMARK   4   Electrostatic     -34.8802 (includes 1-4 interactions)
+REMARK   4   Restraints         10.3408
+REMARK   4   Total energy       21.4478 (includes restraint energy)
+REMARK   4
+CRYST1  200.000  200.000  200.000  90.00  90.00  90.00 P 1 1 1
+ATOM      1 HH31 ACE A   0      16.494   3.412  28.551
+ATOM      2 CH3  ACE A   0      15.426   3.371  28.342
+ATOM      3 HH32 ACE A   0      15.271   3.035  27.316
+ATOM      4 HH33 ACE A   0      15.002   4.368  28.461
+ATOM      5 C    ACE A   0      14.756   2.419  29.326
+ATOM      6 O    ACE A   0      14.775   2.659  30.527
+ATOM      7 N    THR A   1      14.207   1.306  28.833
+ATOM      8 H    THR A   1      14.244   1.187  27.832
+ATOM      9 CA   THR A   1      13.231   0.438  29.540
+ATOM     10 HA   THR A   1      13.354   0.434  30.624
+ATOM     11 CB   THR A   1      11.729   1.139  29.504
+ATOM     12 HB   THR A   1      11.177   0.515  30.211
+ATOM     13 CG2  THR A   1      11.711   2.547  30.103
+ATOM     14 HG21 THR A   1      10.686   2.874  30.272
+ATOM     15 HG22 THR A   1      12.232   2.550  31.061
+ATOM     16 HG23 THR A   1      12.186   3.253  29.423
+ATOM     17 OG1  THR A   1      10.774   1.297  28.383
+ATOM     18 HG1  THR A   1      10.093   2.056  28.435
+ATOM     19 C    THR A   1      13.660  -1.111  29.323
+ATOM     20 O    THR A   1      12.811  -1.994  29.305
+ATOM     21 N    NME A   2      14.964  -1.377  29.198
+ATOM     22 H    NME A   2      15.598  -0.598  29.281
+ATOM     23 CH3  NME A   2      15.508  -2.719  29.016
+ATOM     24 HH31 NME A   2      15.257  -3.343  29.877
+ATOM     25 HH32 NME A   2      15.101  -3.165  28.106
+ATOM     26 HH33 NME A   2      16.593  -2.669  28.924
+END

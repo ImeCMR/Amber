@@ -1,0 +1,72 @@
+# Replica 001 for pH,T-REMD
+-O -i mdin.rep.001 -p file1.prmtop -c min.x -o mdout.rep.001 -r rst7.rep.001
+
+# Replica 002 for pH,T-REMD
+-O -i mdin.rep.002 -p file1.prmtop -c min.x -o mdout.rep.002 -r rst7.rep.002
+
+# Replica 003 for pH,T-REMD
+-O -i mdin.rep.003 -p file1.prmtop -c min.x -o mdout.rep.003 -r rst7.rep.003
+
+# Replica 004 for pH,T-REMD
+-O -i mdin.rep.004 -p file1.prmtop -c min.x -o mdout.rep.004 -r rst7.rep.004
+
+# Replica 005 for pH,T-REMD
+-O -i mdin.rep.005 -p file2.prmtop -c min.x -o mdout.rep.005 -r rst7.rep.005
+
+# Replica 006 for pH,T-REMD
+-O -i mdin.rep.006 -p file2.prmtop -c min.x -o mdout.rep.006 -r rst7.rep.006
+
+# Replica 007 for pH,T-REMD
+-O -i mdin.rep.007 -p file2.prmtop -c min.x -o mdout.rep.007 -r rst7.rep.007
+
+# Replica 008 for pH,T-REMD
+-O -i mdin.rep.008 -p file2.prmtop -c min.x -o mdout.rep.008 -r rst7.rep.008
+
+# Replica 009 for pH,T-REMD
+-O -i mdin.rep.009 -p file3.prmtop -c min.x -o mdout.rep.009 -r rst7.rep.009
+
+# Replica 010 for pH,T-REMD
+-O -i mdin.rep.010 -p file3.prmtop -c min.x -o mdout.rep.010 -r rst7.rep.010
+
+# Replica 011 for pH,T-REMD
+-O -i mdin.rep.011 -p file3.prmtop -c min.x -o mdout.rep.011 -r rst7.rep.011
+
+# Replica 012 for pH,T-REMD
+-O -i mdin.rep.012 -p file3.prmtop -c min.x -o mdout.rep.012 -r rst7.rep.012
+
+# Replica 013 for pH,T-REMD
+-O -i mdin.rep.013 -p file4.prmtop -c min.x -o mdout.rep.013 -r rst7.rep.013
+
+# Replica 014 for pH,T-REMD
+-O -i mdin.rep.014 -p file4.prmtop -c min.x -o mdout.rep.014 -r rst7.rep.014
+
+# Replica 015 for pH,T-REMD
+-O -i mdin.rep.015 -p file4.prmtop -c min.x -o mdout.rep.015 -r rst7.rep.015
+
+# Replica 016 for pH,T-REMD
+-O -i mdin.rep.016 -p file4.prmtop -c min.x -o mdout.rep.016 -r rst7.rep.016
+
+# Replica 017 for pH,T-REMD
+-O -i mdin.rep.017 -p file5.prmtop -c min.x -o mdout.rep.017 -r rst7.rep.017
+
+# Replica 018 for pH,T-REMD
+-O -i mdin.rep.018 -p file5.prmtop -c min.x -o mdout.rep.018 -r rst7.rep.018
+
+# Replica 019 for pH,T-REMD
+-O -i mdin.rep.019 -p file5.prmtop -c min.x -o mdout.rep.019 -r rst7.rep.019
+
+# Replica 020 for pH,T-REMD
+-O -i mdin.rep.020 -p file5.prmtop -c min.x -o mdout.rep.020 -r rst7.rep.020
+
+# Replica 021 for pH,T-REMD
+-O -i mdin.rep.021 -p file6.prmtop -c min.x -o mdout.rep.021 -r rst7.rep.021
+
+# Replica 022 for pH,T-REMD
+-O -i mdin.rep.022 -p file6.prmtop -c min.x -o mdout.rep.022 -r rst7.rep.022
+
+# Replica 023 for pH,T-REMD
+-O -i mdin.rep.023 -p file6.prmtop -c min.x -o mdout.rep.023 -r rst7.rep.023
+
+# Replica 024 for pH,T-REMD
+-O -i mdin.rep.024 -p file6.prmtop -c min.x -o mdout.rep.024 -r rst7.rep.024
+

@@ -1,0 +1,7 @@
+This test case is to show that the charge view energy is consistent
+with the FDPB energy for the full nonlinear PB equation. The
+consistency can be very high when the finite-difference green's function
+is used up to 40x40x40 grid spacing separations in the charge view
+pairwise summations. Also the consistency is only possible with the bcopt=1,
+i.e. the conductor BC because the other BC's are only approximated. Note
+PBC doesn't work for nonlinear PB yet.
