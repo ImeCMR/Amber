@@ -1,0 +1,24 @@
+ frcfieldfile = ../amoeba.prm
+ found a-axis =  18.1020000000000
+ num_xyz_atoms =  480
+ numres =  40
+ num_atoms =  480
+ vdw: num_vdw_types =  2
+ num_bonds =  480
+ no success finding Urey-Bradley!
+ num_tot_angles =  720
+ num regular, trigonal angles =  0 720
+ num_out_of_plane_bends =  720
+ numtor =  960
+ num1,num_torsions =  960 2160
+ no success finding Stretch-Torsions
+ num_pitorsions =  240
+ num_stretch_bends =  720
+ no success finding Torsion-Torsions
+ num_molecules =  40
+ num_multipoles =  480
+ number of frame def list =  960
+ num_12 =  480
+ num_13 =  720
+ num_14 =  960
+ num_15 =  720

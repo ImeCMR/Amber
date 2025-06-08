@@ -1,0 +1,19 @@
+The builds:
+
+Use the following scripts to build the indicated version of gem.pmemd:
+
+build_ser.gnu - builds serial pmemd.gem using gfortran/gcc.
+
+build_par.gnu - builds parallel pmemd.gem.MPI using gfortran/gcc; assumes that
+                MPICH2 Rel 1.5 has been installed under $AMBERHOME per
+                Amber install scripts.
+
+build_ser.int - builds serial pmemd.gem using intel compilers, with
+                full optimization.  Assumes installation of intel s/w.
+
+build_par.int - builds parallel pmemd.gem.MPI using intel compiler and intel
+                MPI. Assumes installation of intel s/w with intel mpi* scripts
+                in path.
+
+All builds leave the pmemd.gem or pmemd.gem.MPI executable under
+$AMBERHOME/bin.

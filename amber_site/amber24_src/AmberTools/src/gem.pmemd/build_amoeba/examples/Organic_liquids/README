@@ -1,0 +1,66 @@
+
+THE INITIAL INGREDIENTS FOR THE 3 SIMULATIONS WERE 
+
+benzbox.dyn benzbox.key benzbox.xyz
+formbox.dyn formbox.key formbox.xyz
+meohbox.dyn meohbox.key meohbox.xyz
+
+courtesy of Pengyu Ren
+
+TO CONVERT TO prmtop AND inpcrd files, amoeba_parm NEEDS
+
+benzbox.pdb and benzbox.analout
+formbox.pdb and formbox.analout
+meohbox.pdb and meohbox.analout
+
+NOTE that the key files refer to the param file amoeba.prm which comes with 
+TINKER (amoebapro.prm is for proteins and water)
+
+THE benzbox.analout FILE WAS PRODUCED ON MY MACHINE BY THE COMMAND 
+~/Tinker4/Tinker4.3/bin/analyze benzbox PC > benzbox.analout
+[note that versions before 4.3 will not give enough info in analout file]
+
+THE benzbox.pdb file WAS PRODUCED BY THE COMMAND
+~/Tinker4/Tinker4.3/bin/xyzpdb benzbox
+i edited the pdb file to change residue names to BEN
+the pdb file is necessary in order to get atom and residue names
+into the prmtop file
+
+THE benzbox.parmtop and benzbox.inpcrd files WERE PRODUCED ON MY
+MACHINE BY THE COMMAND
+~/AMBER/amber9/g95/src/build_amoeba/amoeba_parm -name benzbox 
+-title "benzene box" > benzbox.amoeba_parm.out
+
+FINALLY the sander run was typical
+~/AMBER/amber9/g95/src/sander/sander -i benzbox.mdin -c benzbox.inpcrd 
+-p benzbox.prmtop -o benzbox.mdout -r benzbox.restrt
+
+|-----------------------|
+|About the benzbox.mdin:|
+|-----------------------|
+
+&cntrl and &ewald have no new variables
+---note that the box size is about 1.2x bigger than the usual 1 angstrom grid
+for charges and that spline order is 5 (needs to be at least 5 since 3 derivs
+are necessary---so far 5 seems ok)
+
+&amoeba contains the key variable  do_amoeba which controls whether the
+amoeba code is executed---also a bunch of other flags mainly for debugging
+
+note do_vdw_longrange and do_vdw_taper: the latter gives a polynomial switch
+for vdw--this is used by tinker--do_vdw_longrange turns on a long range
+continuum correction---not currently in tinker
+
+dipole_scf_tol sets the tolerance (in debye) for successive dipole iterates
+  in the SCF. 
+dipole_scf_iter_max says when to give up on convergence
+sor_coefficient controls the successive over relaxation in the SCF
+
+ee_damped_cut  is the distance at which the Thole' damping turns ON
+ee_dsum_cut is the direct sum ewald interaction cutoff 
+[note ee_dsum_cut must be less than or equal to cut which serves as vdw cutoff 
+as well as setting up the list cutoff--which is why ee_dsum_cut must be <= cut]
+
+------------------------------------------------------------------------
+SIMILAR COMMENTS APPLY FOR MEOHBOX AND FORMBOX
+
