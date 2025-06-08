@@ -1,0 +1,39 @@
+example i-pi driver input
+&cntrl
+  irest  = 0     ! no initial velocities
+  ntx    = 1     ! not restarting a sim
+  imin   = 0     ! run i-pi interface
+  nstlim = 5000  ! 5 ps
+  dt     = 0.001 ! 1 fs/step
+  ntt    = 3     ! NVT, Langevin
+gamma_ln = 2.
+tempi    = 298.
+temp0    = 298.
+  ntb    = 1     ! periodic
+  ntp    = 0     ! no volume changes
+  ntc    = 1     ! no shake
+  ntf    = 1     ! eval all energies
+  jfastw = 4     ! flexible water
+  nmropt = 1     ! no restraint on bead crds
+!
+  ntwr   = 5000 ! rst7 write freq
+  ntwx   = 500   ! nc write freq
+  ntpr   = 100   ! mdout write freq
+!
+  iwrap  = 1
+  ntxo   = 1    ! read/write formatted rst7
+  ioutfm = 1    ! write nc as netcdf
+  cut    = 9.0  ! nonbond cutoff
+  ifqnt  = 0    ! read &qmmm ?
+  ig     = 71277
+/
+
+&wt
+type='DUMPFREQ', istep1=20
+&end
+&wt
+  type='END',
+&end
+DISANG=system.disang
+DUMPAVE=system.dumpave
+

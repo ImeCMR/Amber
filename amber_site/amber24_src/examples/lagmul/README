@@ -1,0 +1,24 @@
+About this example
+
+This is a simple example of the Lagrangian Multiplier (LM) constraint method 
+(iconstr > 0), which prohibits the rotation of defined 2-center internal 
+coordinates. The system is bulk TIP3P water (25 angstroms, octahedral 
+PBC). Included files are the following, 
+
+corr.png,	the result of LM constraints
+disang.rst, 	the NMR restraint definition file
+md5restrt, 	inpcrd file
+mdin, 		sander mdin
+mdinfo, 	sander mdinfo
+oct25.top, 	prmtop file
+restrt, 	sander restart file after 10 ps of applying constraint
+mdout,  	sander mdout (10 ps)
+
+In disang.rst, atoms 48 and 19 are used to define the internal coordinate, which 
+was constrained throughout the MD simulation. The self correlation of this 
+internal coordinate can be calculated with ptraj or in VMD. An example of the 
+self correlation plot of constrained and unconstrained internal coordinates can 
+be found in corr.png. The internal coordinates can be defined using the mass 
+centers of two groups. An example is included as well (see gcorr.png). The 
+trajectory of the 10 ps constrained MD is not included due to the large file 
+size.
