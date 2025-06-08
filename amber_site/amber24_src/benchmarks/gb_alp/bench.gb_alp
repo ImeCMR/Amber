@@ -1,0 +1,27 @@
+#!/bin/csh -f
+
+if( ! $?DO_PARALLEL ) then
+        setenv DO_PARALLEL " "
+endif
+
+set sander = "sander"
+if( $?TESTsander ) then
+   set sander = $TESTsander
+endif
+
+cat <<EOF > mdin
+  alpha-lytic protease from 1qq4.pdb
+ &cntrl
+   irest=1, ntx=5,
+   imin=0, ntpr=100,
+   nstlim=500, temp0=300., gamma_ln=0.5, ntt=3, 
+   igb=5, ntb=0, cut=15., rgbmax=15., saltcon=0.1, gbsa=1,
+   ntr=0, nrespa=4,
+ /
+EOF
+
+set output = bench.gb_alp.out
+$DO_PARALLEL $sander -O -i mdin -c md8.x -o $output < /dev/null
+../../test/dacdif $output.save $output
+
+/bin/rm restrt mdin mdinfo

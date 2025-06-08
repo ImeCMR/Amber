@@ -1,0 +1,28 @@
+#!/bin/csh -f
+
+if( ! $?DO_PARALLEL ) then
+        setenv DO_PARALLEL " "
+endif
+
+set sander = "sander"
+if( $?TESTsander ) then
+   set sander = $TESTsander
+endif
+
+cat > gbin <<EOF
+ test of gen. Born, on myoglobin
+ &cntrl                                                                        
+   nstlim=1000, cut=20.0, igb=1, saltcon=0.2,
+   ntpr=200, ntwr=100000, ntt=0,
+   ntx=5, irest=1, 
+   ntc=2, ntf=2, tol=0.000001,
+   dt=0.001, ntb=0,
+   nrespa=4,
+ /
+EOF
+
+set output = bench.gb_mb.out
+$DO_PARALLEL $sander -O -i gbin -o $output < /dev/null
+../../test/dacdif $output.save $output
+
+/bin/rm restrt gbin mdinfo

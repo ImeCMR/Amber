@@ -1,0 +1,30 @@
+#!/bin/csh -f
+echo " "
+echo "  py_resp demo: bis-napthyl - a 2-stage fit on 2 conformations"
+echo " "
+
+echo RESP stage 1:
+$AMBERHOME/bin/py_resp.py -O \
+		-i ../../../../examples/PyRESP/test/bis-naphthyl/resp/bis_1.in \
+		-o bis_1.out \
+		-t bis_1.chg \
+		-s bis_1_calc.esp \
+		-e ../../../../examples/PyRESP/test/bis-naphthyl/bis_esp.dat			|| goto error
+
+echo RESP stage 2:
+$AMBERHOME/bin/py_resp.py -O \
+		-i ../../../../examples/PyRESP/test/bis-naphthyl/resp/bis_2.in \
+		-o bis_2.out \
+		-e ../../../../examples/PyRESP/test/bis-naphthyl/bis_esp.dat \
+		-q bis_1.chg \
+		-s bis_2_calc.esp \
+		-t bis_2.chg			|| goto error
+
+foreach i (*out *chg *esp)
+../../../dacdif -r 1e-6 $i.save $i
+end
+exit(0)
+
+error:
+echo "  ${0}:  Program error"
+exit(1)

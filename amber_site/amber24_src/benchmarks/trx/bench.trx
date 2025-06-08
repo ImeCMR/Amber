@@ -1,0 +1,41 @@
+#!/bin/csh -f
+
+#PBS -l ncpus=1
+#PBS -l walltime=0:10:00
+#PBS -l cput=1:00:00
+#PBS -l mem=1gb
+
+if( ! $?DO_PARALLEL ) then
+        setenv DO_PARALLEL " "
+endif
+
+set sander = "sander"
+if( $?TESTsander ) then
+   set sander = $TESTsander
+endif
+
+cat <<eof >mdin
+  thioredoxin , ff00 with extra points
+ &cntrl
+  ipol=1,
+  ntx=7, irest=1,
+  ntb=1, ntt=0, temp0=300.0, tautp=2.0,
+  ntp=0, pres0=1.0, nscm=0,
+  nstlim=100, dt=0.001,
+  ntf=2,   ntc=2,    tol=0.0000005,
+  cut=8.0,
+  ntpr=25, ntwx=0,  ntwv=0, ntwe=0,
+  ioutfm=0, ntr=0,
+ /
+ &ewald
+    maxiter=10, indmeth = 3, diptau = 1.0,
+    frameon=1, irstdip=1, scaldip=0,
+ /
+eof
+
+set output = bench.trx.out
+$DO_PARALLEL $sander -O -i mdin -c md46.x -idip md46.dip \
+   -o $output < /dev/null
+../../test/dacdif $output.save $output
+
+/bin/rm mdin restrt mdinfo rstdip

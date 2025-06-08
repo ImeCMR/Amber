@@ -1,0 +1,43 @@
+Method to (approximately) convert the jac benchmark to desmond:
+
+1.  Run tleap -f leap.in, where this is the leap.in file:
+
+    source leaprc.ff99SB
+    x = loadpdb equil.pdb
+    set x box 62.23
+    saveamberparm x prmtop7 prmcrd7
+    quit
+
+2.  Run the following jobs to create a cms file:
+
+    $SCHRODINGER/run amber_prm2cms.py -p prmtop7 -c prmcrd7 -o jac.cms
+
+    [Note: the desmond manual says that you also have to run the
+    "build_constraints.py" file, but Istvan Kolossvary reports that this
+    is not necessary.]
+
+3.  Open up a maestro window, use File -> Import Structures to open the
+    jac.cms file.  Then go to Applications -> desmond; load the workspace
+    structure into desmond; set up parameters you want, then select "write"
+    to save the files under "jac_desmond".   You can then edit the
+    jac_desmond.cfg file to remove unused blocks, and/or to tweak the input
+    parameters.
+
+    If you like, you can just edit the jac_desmond.cfg file in this directory,
+    which is a cleaned-up version of one that Maestro created.
+
+    [Note: it's not yet clear to me what is different between jac.cms and
+    jac_desmond.cms, i.e. what if anything Maestro adds to the cms file.]
+
+    If you add the following line at the end of the Desmond .cfg file, 
+    you'll get a detailed breakdown of timing and function calls.
+
+    profile = {}
+
+4.  To run the benchmark, type:
+
+    $SCHRODINGER/desmond -HOST gyges -P 1 -c jac_desmond.cfg -in jac_desmond.cms
+
+    where you substitute "gyges" for some entry in your schrodinger.hosts
+    file in directory $SCHRODINGER.
+

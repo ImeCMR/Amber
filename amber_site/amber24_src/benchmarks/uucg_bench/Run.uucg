@@ -1,0 +1,42 @@
+#!/bin/bash -f
+#SBATCH -n 2
+#SBATCH -t 100:00
+#SBATCH -p main
+#SBATCH --gres=gpu:0
+#SBATCH --export=ALL
+#SBATCH -o uucg-%j.out
+#SBATCH -e uucg-%j.err
+
+cd /home/dacase/amber14/benchmarks/uucg_bench
+cat <<eof >mdin
+MD NVE                                                                 
+ &cntrl                                                                        
+  imin = 0, irest = 1, ntx = 7,                                                
+  cut = 9.0,                                                                   
+  ntc = 2, ntf = 2, tol = 0.0000005                                            
+  nstlim = 100, dt = 0.001,                                               
+  ntt = 0, ntb = 0, ntb =1 ,                                                   
+  ntpr = 1,                                                                 
+  ntwx = 2000,                                                                 
+  ntwr = 20000,                                                                 
+  ioutfm = 0,                                                                  
+  iwrap = 0                                                                    
+ /                                                                             
+ &ewald                                                                        
+ dsum_tol = 0.000001                                                           
+ /                     
+eof
+
+#export LD_LIBRARY_PATH=/opt/sw/packages/cuda/6.5/lib64:/home/dacase/amber14/lib:/opt/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64:/opt/intel/compilers_and_libraries_2016.1.150/linux/mpi/intel64/lib:/opt/intel/compilers_and_libraries_2016.1.150/linux/mpi/mic/lib:/opt/intel/compilers_and_libraries_2016.1.150/linux/ipp/lib/intel64:/opt/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64:/opt/intel/compilers_and_libraries_2016.1.150/linux/mkl/lib/intel64:/opt/intel/compilers_and_libraries_2016.1.150/linux/tbb/lib/intel64/gcc4.4:/opt/intel/debugger_2016/libipt/intel64/lib:/opt/intel/compilers_and_libraries_2016.1.150/linux/daal/lib/intel64_lin:/opt/intel/compilers_and_libraries_2016.1.150/linux/tbb/lib/intel64_lin/gcc4.4:/opt/intel/compilers_and_libraries_2016.1.150/linux/compiler/lib/intel64_lin
+
+output=uucg_sander.2.o
+mpirun -np 2 sander.MPI -O -i mdin -p uucg_tip4pew_10.parm7 \
+   -c restrt.26_dyn -o $output 
+#srun --mpi=pmi2 pmemd.MPI -O -i mdin  -o $output 
+#pmemd -O -i mdin -o $output 
+#sander -O -i mdin -o $output 
+#srun pmemd.cuda -O -i mdin -o $output 
+
+#/bin/rm mdin mdcrd restrt mdinfo
+
+

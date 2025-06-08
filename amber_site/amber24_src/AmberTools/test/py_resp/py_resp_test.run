@@ -1,0 +1,23 @@
+#!/bin/sh
+
+check_f90nml=$(amber.conda list f90nml)
+
+if echo "$check_f90nml" | grep -q "f90nml"
+then
+  for i in water bis-naphthyl CH3SCH3-pyrespgen
+  do
+    cd $i
+    for j in resp*
+    do
+      cd $j
+      ./py_resp.run
+      cd ..
+    done
+    cd ..
+  done
+else
+  echo 'Missing module f90nml'
+  echo 'py_resp.py test skipped'
+fi
+
+exit 0                

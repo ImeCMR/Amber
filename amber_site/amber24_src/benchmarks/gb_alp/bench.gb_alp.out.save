@@ -1,0 +1,211 @@
+
+          -------------------------------------------------------
+          Amber 11 SANDER                              2010
+          -------------------------------------------------------
+
+| Run on 03/18/2008 at 10:20:07
+  [-O]verwriting output
+
+File Assignments:
+|  MDIN: mdin                                                                  
+| MDOUT: bench.gb_alp.out                                                      
+|INPCRD: md8.x                                                                 
+|  PARM: prmtop                                                                
+|RESTRT: restrt                                                                
+|  REFC: refc                                                                  
+| MDVEL: mdvel                                                                 
+|  MDEN: mden                                                                  
+| MDCRD: mdcrd                                                                 
+|MDINFO: mdinfo                                                                
+|INPDIP: inpdip                                                                
+|RSTDIP: rstdip                                                                
+
+
+ Here is the input file:
+
+  alpha-lytic protease from 1qq4.pdb                                           
+ &cntrl                                                                        
+   irest=1, ntx=5,                                                             
+   imin=0, ntpr=100,                                                           
+   nstlim=500, temp0=300., gamma_ln=0.5, ntt=3,                                
+   igb=5, ntb=0, cut=15., rgbmax=15., saltcon=0.1, gbsa=1,                     
+   ntr=0, nrespa=4,                                                            
+ /                                                                             
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+| Flags:                                                                        
+| New format PARM file being parsed.
+| Version =    1.000 Date = 12/03/03 Time = 10:57:18
+ NATOM  =    2752 NTYPES =      14 NBONH =    1360 MBONA  =    1414
+ NTHETH =    3043 MTHETA =    1921 NPHIH =    5901 MPHIA  =    4120
+ NHPARM =       0 NPARM  =       0 NNB   =   15005 NRES   =     198
+ NBONA  =    1414 NTHETA =    1921 NPHIA =    4120 NUMBND =      41
+ NUMANG =      90 NPTRA  =      48 NATYP =      27 NPHB   =       0
+ IFBOX  =       0 NMXRS  =      24 IFCAP =       0 NEXTRA =       0
+ NCOPY  =       0
+
+
+|     Memory Use     Allocated
+|     Real              157231
+|     Hollerith          16712
+|     Integer           272037
+|     Max Pairs              1
+|     nblistReal             0
+|     nblist Int             0
+|       Total             2356 kbytes
+| Duplicated    0 dihedrals
+| Duplicated    0 dihedrals
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+                                                                                
+
+General flags:
+     imin    =       0, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       5, irest   =       1, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       1, ntpr    =     100, ntrx    =       1, ntwr    =     500
+     iwrap   =       0, ntwx    =       0, ntwv    =       0, ntwe    =       0
+     ioutfm  =       0, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       1, ntb     =       0, igb     =       5, nsnb    =      25
+     ipol    =       0, gbsa    =       1, iesp    =       0
+     dielc   =   1.00000, cut     =  15.00000, intdiel =   1.00000
+     saltcon =   0.10000, offset  =   0.09000, gbalpha=    1.00000
+     gbbeta  =   0.80000, gbgamma =   4.85100, surften =   0.00500
+     rdt     =   0.00000, rgbmax  =  15.00000  extdiel =  78.50000
+     alpb  =        0
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Molecular dynamics:
+     nstlim  =       500, nscm    =      1000, nrespa  =         4
+     t       =   0.00000, dt      =   0.00100, vlimit  =  20.00000
+
+Langevin dynamics temperature regulation:
+     ig      =   71277
+     temp0   = 300.00000, tempi   =   0.00000, gamma_ln=   0.50000
+|  INFO: Old style inpcrd file read
+
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+                                                                                
+ begin time read from input coords =  2128.000 ps
+
+ Number of triangulated 3-point waters found:        0
+
+--------------------------------------------------------------------------------
+   4.  RESULTS
+--------------------------------------------------------------------------------
+
+|  # of SOLUTE  degrees of freedom (RNDFP):    8256.
+|  # of SOLVENT degrees of freedom (RNDFS):       0.
+|  NDFMIN =    8256.     NUM_NOSHAKE =      0     CORRECTED RNDFP =    8256.
+|  TOTAL # of degrees of freedom (RNDF) =    8256.
+
+ NSTEP =      100   TIME(PS) =    2128.100  TEMP(K) =   303.00  PRESS =     0.0
+ Etot   =      -280.3838  EKtot   =      2485.5234  EPtot      =     -2765.9072
+ BOND   =       984.6331  ANGLE   =      1290.5142  DIHED      =      2024.8027
+ 1-4 NB =       625.4323  1-4 EEL =      7723.4066  VDWAALS    =     -1434.9872
+ EELEC  =    -13262.5868  EGB     =      -758.7879  RESTRAINT  =         0.0000
+ ESURF=        41.6658
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =      200   TIME(PS) =    2128.200  TEMP(K) =   301.16  PRESS =     0.0
+ Etot   =      -266.0104  EKtot   =      2470.4241  EPtot      =     -2736.4345
+ BOND   =       972.5012  ANGLE   =      1335.8246  DIHED      =      2031.8013
+ 1-4 NB =       606.3502  1-4 EEL =      7714.8625  VDWAALS    =     -1425.3168
+ EELEC  =    -13458.3476  EGB     =      -555.4282  RESTRAINT  =         0.0000
+ ESURF=        41.3183
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =      300   TIME(PS) =    2128.300  TEMP(K) =   301.67  PRESS =     0.0
+ Etot   =      -258.7722  EKtot   =      2474.6647  EPtot      =     -2733.4369
+ BOND   =       968.1772  ANGLE   =      1363.2498  DIHED      =      2020.1953
+ 1-4 NB =       598.2566  1-4 EEL =      7698.3327  VDWAALS    =     -1422.1816
+ EELEC  =    -13245.5736  EGB     =      -754.7256  RESTRAINT  =         0.0000
+ ESURF=        40.8324
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =      400   TIME(PS) =    2128.400  TEMP(K) =   302.85  PRESS =     0.0
+ Etot   =      -276.8897  EKtot   =      2484.3002  EPtot      =     -2761.1899
+ BOND   =       962.6880  ANGLE   =      1306.9290  DIHED      =      2035.0596
+ 1-4 NB =       598.1321  1-4 EEL =      7735.5469  VDWAALS    =     -1435.7915
+ EELEC  =    -12896.4848  EGB     =     -1107.6780  RESTRAINT  =         0.0000
+ ESURF=        40.4087
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =      500   TIME(PS) =    2128.500  TEMP(K) =   306.05  PRESS =     0.0
+ Etot   =      -277.5661  EKtot   =      2510.5797  EPtot      =     -2788.1458
+ BOND   =       990.4188  ANGLE   =      1310.0379  DIHED      =      2013.8172
+ 1-4 NB =       602.1333  1-4 EEL =      7735.8902  VDWAALS    =     -1428.2715
+ EELEC  =    -13022.9833  EGB     =     -1029.3047  RESTRAINT  =         0.0000
+ ESURF=        40.1164
+ ------------------------------------------------------------------------------
+
+
+      A V E R A G E S   O V E R     125 S T E P S
+
+
+ NSTEP =      500   TIME(PS) =    2128.500  TEMP(K) =   303.23  PRESS =     0.0
+ Etot   =      -271.9762  EKtot   =      2487.4563  EPtot      =     -2759.4326
+ BOND   =       979.6920  ANGLE   =      1328.5123  DIHED      =      2020.5288
+ 1-4 NB =       604.1016  1-4 EEL =      7726.8790  VDWAALS    =     -1431.4363
+ EELEC  =    -13133.5966  EGB     =      -895.1624  RESTRAINT  =         0.0000
+ ESURF=        41.0491
+ ------------------------------------------------------------------------------
+
+
+      R M S  F L U C T U A T I O N S
+
+
+ NSTEP =      500   TIME(PS) =    2128.500  TEMP(K) =     3.50  PRESS =     0.0
+ Etot   =         9.6430  EKtot   =        28.7241  EPtot      =        29.0984
+ BOND   =        23.1207  ANGLE   =        24.9468  DIHED      =        11.8925
+ 1-4 NB =         8.4815  1-4 EEL =        23.2933  VDWAALS    =        12.8231
+ EELEC  =       224.7469  EGB     =       226.4675  RESTRAINT  =         0.0000
+ ESURF=         0.5688
+ ------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+   5.  TIMINGS
+--------------------------------------------------------------------------------
+
+|    Read coords time           0.03 ( 0.01% of Total)
+|                Calc gb radii            149.18 (41.92% of Gen B)
+|                Calc gb diag              62.37 (17.52% of Gen B)
+|                Calc gb off-diag         121.86 (34.24% of Gen B)
+|                Surface area energy       22.47 ( 6.31% of Gen B)
+|             Gen Born time            355.89 (100.0% of Nonbo)
+|          Nonbond force            355.89 (98.33% of Force)
+|          Bond/Angle/Dihedral        6.05 ( 1.67% of Force)
+|       Force time               361.95 (99.56% of Runmd)
+|       Verlet update time         1.61 ( 0.44% of Runmd)
+|    Runmd Time               363.56 (100.0% of Total)
+|    Other                      0.07 ( 0.02% of Total)
+| Total time               363.66 (100.0% of ALL  )
+
+| Highest rstack allocated:          0
+| Highest istack allocated:          0
+|           Job began  at 10:20:07.815  on 03/18/2008
+|           Setup done at 10:20:07.920  on 03/18/2008
+|           Run   done at 10:26:11.480  on 03/18/2008
+|     wallclock() was called   10510 times

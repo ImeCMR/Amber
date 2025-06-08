@@ -1,0 +1,278 @@
+
+          -------------------------------------------------------
+          Amber 10 SANDER                              2008
+          -------------------------------------------------------
+
+| Run on 01/27/2006 at 18:01:42
+  [-O]verwriting output
+
+File Assignments:
+|  MDIN: mdin                                                                  
+| MDOUT: bench.trx.out                                                         
+|INPCRD: md46.x                                                                
+|  PARM: prmtop                                                                
+|RESTRT: restrt                                                                
+|  REFC: refc                                                                  
+| MDVEL: mdvel                                                                 
+|  MDEN: mden                                                                  
+| MDCRD: mdcrd                                                                 
+|MDINFO: mdinfo                                                                
+|INPDIP: md46.dip                                                              
+|RSTDIP: rstdip                                                                
+
+ 
+ Here is the input file:
+ 
+  thioredoxin , ff00 with extra points                                         
+ &cntrl                                                                        
+  ipol=1,                                                                      
+  ntx=7, irest=1,                                                              
+  ntb=1, ntt=0, temp0=300.0, tautp=2.0,                                        
+  ntp=0, pres0=1.0, nscm=0,                                                    
+  nstlim=100, dt=0.001,                                                        
+  ntf=2,   ntc=2,    tol=0.0000005,                                            
+  cut=8.0,
+  ntpr=25, ntwx=0,  ntwv=0, ntwe=0,                                            
+  ioutfm=0, ntr=0,                                                             
+ /                                                                             
+ &ewald                                                                        
+    maxiter=10, indmeth = 3, diptau = 1.0,                                     
+    frameon=1, irstdip=1, scaldip=0,                                           
+ /                                                                             
+
+--------------------------------------------------------------------------------
+   1.  RESOURCE   USE: 
+--------------------------------------------------------------------------------
+
+| Flags:                                                                        
+ getting new box info from bottom of inpcrd
+|  INFO: Old style inpcrd file read
+
+| peek_ewald_inpcrd: Box info found
+|Largest sphere to fit in unit cell has radius =    22.983
+|  INFO: Old style PARM file read
+
+ NATOM  =   14093 NTYPES =      18 NBONH =   13012 MBONA  =    1093
+ NTHETH =    1929 MTHETA =    1527 NPHIH =    3579 MPHIA  =    2661
+ NHPARM =       0 NPARM  =       0 NNB   =   26652 NRES   =    4172
+ NBONA  =    1093 NTHETA =    1527 NPHIA =    2661 NUMBND =      48
+ NUMANG =      99 NPTRA  =      45 NATYP =      31 NPHB   =       1
+ IFBOX  =       2 NMXRS  =      26 IFCAP =       0 NEXTRA =     255
+ NCOPY  =       0
+
+
+|     Memory Use     Allocated
+|     Real              960358
+|     Hollerith         300127
+|     Integer           442252
+|     Max Pairs        5637200
+|     nblistReal        169116
+|     nblist Int        541217
+|       Total            35858 kbytes
+| Duplicated    0 dihedrals
+| Duplicated    0 dihedrals
+
+     BOX TYPE: TRUNCATED OCTAHEDRON
+
+--------------------------------------------------------------------------------
+   2.  CONTROL  DATA  FOR  THE  RUN
+--------------------------------------------------------------------------------
+
+                                                                                
+
+General flags:
+     imin    =       0, nmropt  =       0
+
+Nature and format of input:
+     ntx     =       7, irest   =       1, ntrx    =       1
+
+Nature and format of output:
+     ntxo    =       1, ntpr    =      25, ntrx    =       1, ntwr    =     500
+     iwrap   =       0, ntwx    =       0, ntwv    =       0, ntwe    =       0
+     ioutfm  =       0, ntwprt  =       0, idecomp =       0, rbornstat=      0
+
+Potential function:
+     ntf     =       2, ntb     =       1, igb     =       0, nsnb    =      25
+     ipol    =       1, gbsa    =       0, iesp    =       0
+     dielc   =   1.00000, cut     =   8.00000, intdiel =   1.00000
+
+Frozen or restrained atoms:
+     ibelly  =       0, ntr     =       0
+
+Molecular dynamics:
+     nstlim  =       100, nscm    = 999999999, nrespa  =         1
+     t       =   0.00000, dt      =   0.00100, vlimit  =  20.00000
+
+SHAKE:
+     ntc     =       2, jfastw  =       0
+     tol     =   0.00000
+
+Extra-points options:
+     frameon =       1, chngmask=       1
+
+Polarizable options:
+     indmeth =       3, maxiter =      10, irstdip =       1, scaldip =       0
+     diptau  =   1.00000, dipmass =   0.33000
+
+Ewald parameters:
+     verbose =       0, ew_type =       0, nbflag  =       1, use_pme =       1
+     vdwmeth =       1, eedmeth =       1, netfrc  =       1
+     Box X =   56.297   Box Y =   56.297   Box Z =   56.297
+     Alpha =  109.471   Beta  =  109.471   Gamma =  109.471
+     NFFT1 =   60       NFFT2 =   60       NFFT3 =   60
+     Cutoff=    8.000   Tol   =0.100E-04
+     Ewald Coefficient =  0.34864
+     Interpolation order =    4
+|      EXTRA_PTS, trim_bonds: num bonds BEFORE trim = 13012     0
+|      EXTRA_PTS, trim_bonds: num bonds AFTER  trim = 13012     0
+|      EXTRA_PTS, trim_bonds: num bonds BEFORE trim =  1093     0
+|      EXTRA_PTS, trim_bonds: num bonds AFTER  trim =   838     0
+|      EXTRA_PTS, trim_theta: num angle BEFORE trim =  1929     0
+|      EXTRA_PTS, trim_theta: num angle AFTER  trim =  1911     0
+|      EXTRA_PTS, trim_theta: num angle BEFORE trim =  1527     0
+|      EXTRA_PTS, trim_theta: num angle AFTER  trim =  1138     0
+|      EXTRA_PTS, trim_phi:  num diheds BEFORE trim =  3579     0
+|      EXTRA_PTS, trim_phi:  num diheds AFTER  trim =  3535     0
+|      EXTRA_PTS, trim_phi:  num diheds BEFORE trim =  2661     0
+|      EXTRA_PTS, trim_phi:  num diheds AFTER  trim =  2155     0
+
+--------------------------------------------------------------------------------
+   3.  ATOMIC COORDINATES AND VELOCITIES
+--------------------------------------------------------------------------------
+
+                                                                                
+ begin time read from input coords = 11625.000 ps
+
+
+   3.  induced dipoles and velocities
+
+                                                                                
+ begin time read from input dipoles = 11625.000 ps
+
+ Number of triangulated 3-point waters found:     4060
+
+     Sum of charges from parm topology file =  -0.00000027
+     Forcing neutrality...
+
+--------------------------------------------------------------------------------
+   4.  RESULTS
+--------------------------------------------------------------------------------
+
+ ---------------------------------------------------
+ APPROXIMATING switch and d/dx switch using CUBIC SPLINE INTERPOLATION
+ using   5000.0 points per unit in tabled values
+ TESTING RELATIVE ERROR over r ranging from 0.0 to cutoff
+| CHECK switch(x): max rel err =   0.2738E-14   at   2.422500
+| CHECK d/dx switch(x): max rel err =   0.8314E-11   at   2.736960
+ ---------------------------------------------------
+| Local SIZE OF NONBOND LIST =    3010801
+| TOTAL SIZE OF NONBOND LIST =    3010801
+
+ NSTEP =       25   TIME(PS) =   11625.025  TEMP(K) =   296.32  PRESS =     0.0
+ Etot   =    -34117.6276  EKtot   =      8391.6105  EPtot      =    -42509.2382
+ BOND   =       301.2528  ANGLE   =       784.8035  DIHED      =      1000.1359
+ 1-4 NB =       382.0980  1-4 EEL =      6703.5343  VDWAALS    =      5049.7616
+ EELEC  =    -56176.0969  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EPOLZ  =      -554.7273
+ Dipole convergence: rms =  0.741E-02 temperature =   0.21
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =       50   TIME(PS) =   11625.050  TEMP(K) =   297.45  PRESS =     0.0
+ Etot   =    -34117.9742  EKtot   =      8423.5594  EPtot      =    -42541.5336
+ BOND   =       271.6880  ANGLE   =       796.1054  DIHED      =      1005.6164
+ 1-4 NB =       384.9161  1-4 EEL =      6692.7528  VDWAALS    =      4992.8175
+ EELEC  =    -56127.8893  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EPOLZ  =      -557.5402
+ Dipole convergence: rms =  0.772E-02 temperature =   0.21
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =       75   TIME(PS) =   11625.075  TEMP(K) =   297.95  PRESS =     0.0
+ Etot   =    -34117.7029  EKtot   =      8437.8008  EPtot      =    -42555.5038
+ BOND   =       306.1822  ANGLE   =       787.0116  DIHED      =      1003.6434
+ 1-4 NB =       379.4043  1-4 EEL =      6707.4084  VDWAALS    =      4888.8900
+ EELEC  =    -56072.9208  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EPOLZ  =      -555.1229
+ Dipole convergence: rms =  0.866E-02 temperature =   0.18
+ ------------------------------------------------------------------------------
+
+
+ NSTEP =      100   TIME(PS) =   11625.100  TEMP(K) =   293.11  PRESS =     0.0
+ Etot   =    -34117.1926  EKtot   =      8300.6574  EPtot      =    -42417.8500
+ BOND   =       296.3611  ANGLE   =       790.2164  DIHED      =      1010.9573
+ 1-4 NB =       379.5156  1-4 EEL =      6737.9479  VDWAALS    =      4889.1665
+ EELEC  =    -55968.7200  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EPOLZ  =      -553.2948
+ Dipole convergence: rms =  0.103E-01 temperature =   0.19
+ ------------------------------------------------------------------------------
+
+
+      A V E R A G E S   O V E R     100 S T E P S
+
+
+ NSTEP =      100   TIME(PS) =   11625.100  TEMP(K) =   296.24  PRESS =     0.0
+ Etot   =    -34117.6969  EKtot   =      8389.2443  EPtot      =    -42506.9412
+ BOND   =       286.3579  ANGLE   =       791.1263  DIHED      =      1008.9145
+ 1-4 NB =       383.7526  1-4 EEL =      6709.5603  VDWAALS    =      4974.9212
+ EELEC  =    -56106.2084  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+ EPOLZ  =      -555.3656
+ Dipole convergence: rms =  0.879E-02 temperature =   0.18
+ ------------------------------------------------------------------------------
+
+
+      R M S  F L U C T U A T I O N S
+
+
+ NSTEP =      100   TIME(PS) =   11625.100  TEMP(K) =     1.68  PRESS =     0.0
+ Etot   =         0.2764  EKtot   =        47.4544  EPtot      =        47.6337
+ BOND   =        14.6608  ANGLE   =        15.8829  DIHED      =        12.4388
+ 1-4 NB =         2.5545  1-4 EEL =        20.1477  VDWAALS    =        63.0984
+ EELEC  =        52.6299  EHBOND  =         0.0000  RESTRAINT  =         0.0000
+|E(PBS) =         0.1948
+ EPOLZ  =         2.5300
+ Dipole convergence: rms =  0.121E-02 temperature =   0.02
+ ------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+   5.  TIMINGS
+--------------------------------------------------------------------------------
+
+|    Read coords time           0.13 ( 0.24% of Total)
+|                Build the list             2.18 (95.88% of List )
+|                Other                      0.09 ( 4.12% of List )
+|             List time                  2.27 ( 4.13% of Nonbo)
+|                   Short_ene time            37.47 (98.28% of Direc)
+|                   Other                      0.65 ( 1.72% of Direc)
+|                Direct Ewald time         38.13 (72.48% of Ewald)
+|                Adjust Ewald time          0.34 ( 0.65% of Ewald)
+|                   Fill Bspline coeffs        0.60 ( 4.35% of Recip)
+|                   Fill charge grid           2.88 (20.83% of Recip)
+|                   Scalar sum                 2.13 (15.39% of Recip)
+|                   Grad sum                   3.83 (27.63% of Recip)
+|                   FFT time                   4.33 (31.27% of Recip)
+|                   Other                      0.07 ( 0.53% of Recip)
+|                Recip Ewald time          13.85 (26.32% of Ewald)
+|                Force Adjust               0.11 ( 0.21% of Ewald)
+|                Virial junk                0.04 ( 0.08% of Ewald)
+|                Start sycnronization       0.05 ( 0.09% of Ewald)
+|                Other                      0.09 ( 0.17% of Ewald)
+|             Ewald time                52.61 (95.86% of Nonbo)
+|          Nonbond force             54.88 (99.50% of Force)
+|          Bond/Angle/Dihedral        0.24 ( 0.44% of Force)
+|          Other                      0.03 ( 0.06% of Force)
+|       Force time                55.15 (98.13% of Runmd)
+|       Shake time                 0.27 ( 0.47% of Runmd)
+|       Verlet update time         0.71 ( 1.26% of Runmd)
+|       Dipole update time         0.08 ( 0.13% of Runmd)
+|    Runmd Time                56.20 (99.42% of Total)
+|    Other                      0.19 ( 0.34% of Total)
+| Total time                56.53 (100.0% of ALL  )
+
+| Highest rstack allocated:    1022317
+| Highest istack allocated:      14093
+|           Job began  at 18:01:42.644  on 01/27/2006
+|           Setup done at 18:01:43.044  on 01/27/2006
+|           Run   done at 18:02:39.171  on 01/27/2006
+|     wallclock() was called    5022 times

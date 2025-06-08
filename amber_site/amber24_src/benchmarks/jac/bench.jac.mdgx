@@ -1,0 +1,35 @@
+#!/bin/sh
+
+cat > mdgx.inp << EOF
+ this is the "jac production nve" simulation from the Amber web site
+ &files
+  -p       prmtop7
+  -c       inpcrd.equil
+  -r       jac_mdgx
+  -o       jac_mdgx
+  -x       jac_mdgx
+  -f       jac_mdgx
+  -osf     .o
+  -rsf     .x
+  -xsf     .nc
+  -fsf     .frc
+ &end
+ &cntrl
+   DoSETTLE = 1,
+   DoRATTLE = 1,
+   irest=1,
+   ntc=2, ntf=2, tol=0.000001, 
+   nstlim=10000,
+   ntpr=1000, ntwx=1000,
+   dt=0.002, vlimit=10.0,
+   cut=8.0,
+   ntt=0, ioutfm=1,
+ &end
+ &ewald
+  dsum_tol=0.000001,
+ &end
+EOF
+
+mpirun -np 2 mdgx.MPI -O -i mdgx.inp 
+
+/bin/rm mdgx.inp jac_mdgx.x jac_mdgx.nc
