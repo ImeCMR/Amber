@@ -1,0 +1,41 @@
+language: cpp
+
+matrix:
+  include:
+     - { os: linux, env: PYTHON_VERSION=2.7 }
+     - { os: linux, env: PYTHON_VERSION=3.5 } 
+     - { os: linux, env: PYTHON_VERSION=3.6 }
+
+sudo: true
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+    - gfortran
+    - unzip
+
+before_install:
+    - source devtools/ci/setup_env.sh
+    - source devtools/ci/install_parmed.sh # always install after AmberTools
+    - python -c "import parmed; print(parmed); print(parmed.__version__)"
+
+install:
+    - source devtools/ci/install_pdb4amber.sh # always install after AmberTools
+
+script:
+    - reduce -Version
+    - tleap -h
+    - pdb4amber -v
+    - which AddToBox
+    - source devtools/ci/run_tests.sh
+
+after_success:
+    - echo "Congrats"
+    - (cd tests && ../devtools/ci/coveralls)
+
+notifications:
+  email: false
