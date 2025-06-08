@@ -1,0 +1,17 @@
+DEBUG
+build/
+bin/
+lib/
+obj/
+test/runs/
+src/config.h
+debug.*
+*.out
+*.a
+*.so
+*.o
+*.mod
+*.dat
+*~
+*.bak
+make.in
