@@ -1,0 +1,317 @@
+%VERSION  VERSION_STAMP = V0001.000  DATE = 09/09/13  07:54:20
+%FLAG TITLE
+%FORMAT(a)
+water dimer
+%FLAG POINTERS
+%FORMAT(10I8)
+       6       1       1       1       1       1       1       1       0       0
+       6       2       1       1       1       1       1       1       1       1
+       0       0       0       0       0       0       0       1       0       0
+       0       0
+%FLAG ATOM_NAME
+%FORMAT(20a4)
+O   H   H   H   O   H   
+%FLAG CHARGE
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+  0.00000000E+00
+%FLAG MASS
+%FORMAT(5E16.8)                                                                 
+  0.15999000E+02  0.10080000E+01  0.10080000E+01  0.10080000E+01  0.15999000E+02
+  0.10080000E+01
+%FLAG ATOM_TYPE_INDEX
+%FORMAT(10I8)
+       1       1       1       1       1       1
+%FLAG NUMBER_EXCLUDED_ATOMS
+%FORMAT(10I8)
+       2       1       0       2       1       0
+%FLAG NONBONDED_PARM_INDEX
+%FORMAT(10I8)
+       1
+%FLAG RESIDUE_LABEL
+%FORMAT(20a4)
+HOH HOH 
+%FLAG RESIDUE_POINTER
+%FORMAT(10I8)
+       1       4
+%FLAG BOND_FORCE_CONSTANT
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG BOND_EQUIL_VALUE
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG ANGLE_FORCE_CONSTANT
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG ANGLE_EQUIL_VALUE
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG DIHEDRAL_FORCE_CONSTANT
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG DIHEDRAL_PERIODICITY
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG DIHEDRAL_PHASE
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG SOLTY
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG LENNARD_JONES_ACOEF
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01
+%FLAG LENNARD_JONES_BCOEF
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01
+%FLAG BONDS_INC_HYDROGEN
+%FORMAT(10I8)
+       1       1       1
+%FLAG BONDS_WITHOUT_HYDROGEN
+%FORMAT(10I8)
+       1       1       1
+%FLAG ANGLES_INC_HYDROGEN
+%FORMAT(10I8)
+       1       1       1       1
+%FLAG ANGLES_WITHOUT_HYDROGEN
+%FORMAT(10I8)
+       1       1       1       1
+%FLAG DIHEDRALS_INC_HYDROGEN
+%FORMAT(10I8)
+       1       1       1       1       1
+%FLAG DIHEDRALS_WITHOUT_HYDROGEN
+%FORMAT(10I8)
+       1       1       1       1       1
+%FLAG EXCLUDED_ATOMS_LIST
+%FORMAT(10I8)
+       2       3       3       5       6       6
+%FLAG HBOND_ACOEF
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG HBOND_BCOEF
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00
+%FLAG HBCUT
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01
+%FLAG AMBER_ATOM_TYPE
+%FORMAT(20a4)
+O   H   H   H   O   H   
+%FLAG TREE_CHAIN_CLASSIFICATION
+%FORMAT(20a4)
+BLA BLA BLA BLA BLA BLA 
+%FLAG JOIN_ARRAY
+%FORMAT(10I8)
+       0       0       0       0       0       0
+%FLAG IROTAT
+%FORMAT(10I8)
+       0       0       0       0       0       0
+%FLAG SOLVENT_POINTERS
+%FORMAT(10I8)
+       0       2       0
+%FLAG ATOMS_PER_MOLECULE
+%FORMAT(10I8)
+       3       3
+%FLAG BOX_DIMENSIONS
+%FORMAT(5E16.8)                                                                 
+  0.90000000E+02  0.10000000E+01  0.10000000E+01  0.10000000E+01
+%FLAG AMOEBA_FORCEFIELD
+%COMMENT This indicates that this parm file is specific to amoeba
+%COMMENT This must be present if do_amoeba(in mdin) is 1
+%COMMENT This must NOT be present if do_amoeba is 0
+%FORMAT(i5)
+    1
+%FLAG AMOEBA_ATOM_TYPE_INDEX
+%COMMENT   dimension = (6)             
+%FORMAT(10I8)
+     247     248     248     248     247     248
+%FLAG AMOEBA_ATOMIC_NUMBER
+%COMMENT   dimension = (6)             
+%FORMAT(10I8)
+       8       1       1       1       8       1
+%FLAG AMOEBA_ATOM_CLASS_INDEX
+%COMMENT   dimension = (6)             
+%FORMAT(10I8)
+      43      44      44      44      43      44
+%FLAG AMOEBA_REGULAR_BOND_NUM_LIST
+%FORMAT(I8)
+       4
+%FLAG AMOEBA_REGULAR_BOND_LIST
+%COMMENT   dimension = (3,4)           
+%FORMAT(10I8)
+       1       2       1       1       3       1       4       5       1       5
+       6       1
+%FLAG AMOEBA_REGULAR_BOND_NUM_PARAMS
+%FORMAT(I8)
+       1
+%FLAG AMOEBA_REGULAR_BOND_FORCE_CONSTANT
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+  0.55685000E+03
+%FLAG AMOEBA_REGULAR_BOND_EQUIL_VALUE
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+  0.95720000E+00
+%FLAG AMOEBA_REGULAR_BOND_FTAB_DEGREE
+%FORMAT(I8)
+       4
+%FLAG AMOEBA_REGULAR_BOND_FTAB_COEFFS
+%COMMENT   dimension = (0:4)           
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.10000000E+01 -0.25500000E+01  0.37931250E+01
+%FLAG AMOEBA_UREY_BRADLEY_BOND_NUM_LIST
+%FORMAT(I8)
+       2
+%FLAG AMOEBA_UREY_BRADLEY_BOND_LIST
+%COMMENT   dimension = (3,2)           
+%FORMAT(10I8)
+       2       3       1       4       6       1
+%FLAG AMOEBA_UREY_BRADLEY_BOND_NUM_PARAMS
+%FORMAT(I8)
+       1
+%FLAG AMOEBA_UREY_BRADLEY_BOND_FORCE_CONSTANT
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+ -0.76000000E+01
+%FLAG AMOEBA_UREY_BRADLEY_BOND_EQUIL_VALUE
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+  0.15326000E+01
+%FLAG AMOEBA_UREY_BRADLEY_BOND_FTAB_DEGREE
+%FORMAT(I8)
+       2
+%FLAG AMOEBA_UREY_BRADLEY_BOND_FTAB_COEFFS
+%COMMENT   dimension = (0:2)           
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.10000000E+01
+%FLAG AMOEBA_REGULAR_ANGLE_NUM_LIST
+%FORMAT(I8)
+       2
+%FLAG AMOEBA_REGULAR_ANGLE_LIST
+%COMMENT   dimension = (4,2)           
+%FORMAT(10I8)
+       2       1       3       1       4       5       6       1
+%FLAG AMOEBA_REGULAR_ANGLE_NUM_PARAMS
+%FORMAT(I8)
+       1
+%FLAG AMOEBA_REGULAR_ANGLE_FORCE_CONSTANT
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+  0.48700000E+02
+%FLAG AMOEBA_REGULAR_ANGLE_EQUIL_VALUE
+%COMMENT   dimension = (1)             
+%FORMAT(5E16.8)                                                                 
+  0.10850000E+03
+%FLAG AMOEBA_REGULAR_ANGLE_FTAB_DEGREE
+%FORMAT(I8)
+       6
+%FLAG AMOEBA_REGULAR_ANGLE_FTAB_COEFFS
+%COMMENT   dimension = (0:6)           
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.10000000E+01 -0.14000000E-01  0.56000000E-04
+ -0.70000000E-06  0.22000000E-07
+%FLAG AMOEBA_VDW_ATOM_TYPES_NUM_LIST
+%FORMAT(I8)
+       6
+%FLAG AMOEBA_VDW_ATOM_TYPES_LIST
+%COMMENT   dimension = (1,6)               
+%FORMAT(10I8)
+       1       2       2       2       1       2
+%FLAG AMOEBA_VDW_ATOM_PARENT_LIST
+%COMMENT   dimension = (1,6)               
+%FORMAT(10I8)
+       1       1       1       5       5       5
+%FLAG AMOEBA_VDW_PARENT_COORD_WEIGHT_LIST
+%COMMENT   dimension = (1,6)               
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01  0.90000000E-01  0.90000000E-01  0.90000000E-01  0.10000000E+01
+  0.90000000E-01
+%FLAG AMOEBA_VDW_BUFFER_DELTA
+%FORMAT(E16.8)
+  0.70000000E-01
+%FLAG AMOEBA_VDW_BUFFER_GAMMA
+%FORMAT(E16.8)
+  0.12000000E+00
+%FLAG AMOEBA_VDW_PARAMS_NUM_LIST
+%FORMAT(I8)
+       2
+%FLAG AMOEBA_VDW_MIXED_RADII_LIST
+%COMMENT   dimension = (2,2)               
+%FORMAT(5E16.8)                                                                 
+  0.34050000E+01  0.31214215E+01  0.31214215E+01  0.26550000E+01
+%FLAG AMOEBA_VDW_MIXED_EPSILONS_LIST
+%COMMENT   dimension = (2,2)               
+%FORMAT(5E16.8)                                                                 
+  0.11000000E+00  0.29615390E-01  0.29615390E-01  0.13500000E-01
+%FLAG AMOEBA_LOCAL_FRAME_MULTIPOLES_NUM_LIST
+%FORMAT(I8)
+       6
+%FLAG AMOEBA_LOCAL_FRAME_MULTIPOLES_LIST
+%COMMENT   dimension = (10,6)           
+%FORMAT(5E16.8)                                                                 
+ -0.51966000E+00  0.00000000E+00  0.00000000E+00  0.14279000E+00  0.18964000E+00
+ -0.20904500E+00  0.19405000E-01  0.00000000E+00  0.00000000E+00  0.00000000E+00
+  0.25983000E+00 -0.38590000E-01  0.00000000E+00 -0.58180000E-01 -0.18365000E-01
+ -0.53695000E-01  0.72060000E-01  0.00000000E+00 -0.20300000E-02  0.00000000E+00
+  0.25983000E+00 -0.38590000E-01  0.00000000E+00 -0.58180000E-01 -0.18365000E-01
+ -0.53695000E-01  0.72060000E-01  0.00000000E+00 -0.20300000E-02  0.00000000E+00
+  0.25983000E+00 -0.38590000E-01  0.00000000E+00 -0.58180000E-01 -0.18365000E-01
+ -0.53695000E-01  0.72060000E-01  0.00000000E+00 -0.20300000E-02  0.00000000E+00
+ -0.51966000E+00  0.00000000E+00  0.00000000E+00  0.14279000E+00  0.18964000E+00
+ -0.20904500E+00  0.19405000E-01  0.00000000E+00  0.00000000E+00  0.00000000E+00
+  0.25983000E+00 -0.38590000E-01  0.00000000E+00 -0.58180000E-01 -0.18365000E-01
+ -0.53695000E-01  0.72060000E-01  0.00000000E+00 -0.20300000E-02  0.00000000E+00
+%FLAG AMOEBA_FRAME_DEF_NUM_LIST
+%FORMAT(I8)
+      14
+%FLAG AMOEBA_FRAME_DEF_LIST
+%COMMENT   dimension = (5,14)           
+%FORMAT(10I8)
+       1       1       1       2       2       1       1       1       3       2
+       1       2       1       3       1       2       1       2       1       1
+       2       2       2       3       1       3       1       3       1       1
+       3       2       3       2       1       4       1       4       5       1
+       4       2       4       6       1       5       1       5       4       2
+       5       1       5       6       2       5       2       5       6       1
+       6       1       6       5       1       6       2       6       4       1
+%FLAG AMOEBA_ADJUST_NUM_LIST
+%FORMAT(I8)
+       6
+%FLAG AMOEBA_ADJUST_LIST
+%COMMENT   dimension = (3,6)            
+%FORMAT(10I8)
+       1       2       5       1       3       5       2       3       6       4
+       5       5       4       6       6       5       6       5
+%FLAG AMOEBA_ADJUST_VDW_WEIGHTS_LIST
+%COMMENT   dimension = (9)
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.10000000E+01  0.10000000E+01  0.00000000E+00
+  0.00000000E+00  0.10000000E+01  0.10000000E+01  0.10000000E+01
+%FLAG AMOEBA_ADJUST_MPOLE_WEIGHTS_LIST
+%COMMENT   dimension = (9)
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.40000000E+00  0.80000000E+00  0.00000000E+00
+  0.00000000E+00  0.40000000E+00  0.80000000E+00  0.10000000E+01
+%FLAG AMOEBA_ADJUST_DIRECT_WEIGHTS_LIST
+%COMMENT   dimension = (9)
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01  0.10000000E+01  0.10000000E+01  0.10000000E+01  0.00000000E+00
+  0.00000000E+00  0.00000000E+00  0.00000000E+00  0.00000000E+00
+%FLAG AMOEBA_ADJUST_POLAR_WEIGHTS_LIST
+%COMMENT   dimension = (9)
+%FORMAT(5E16.8)                                                                 
+  0.00000000E+00  0.00000000E+00  0.10000000E+01  0.10000000E+01  0.00000000E+00
+  0.00000000E+00  0.50000000E+00  0.10000000E+01  0.10000000E+01
+%FLAG AMOEBA_ADJUST_MUTUAL_WEIGHTS_LIST
+%COMMENT   dimension = (9)
+%FORMAT(5E16.8)                                                                 
+  0.10000000E+01  0.10000000E+01  0.10000000E+01  0.10000000E+01  0.10000000E+01
+  0.10000000E+01  0.10000000E+01  0.10000000E+01  0.10000000E+01
+%FLAG AMOEBA_POLARIZABILITY_NUM_LIST
+%FORMAT(I8)
+       6
+%FLAG AMOEBA_POLARIZABILITY_LIST
+%COMMENT   dimension = (6)              
+%FORMAT(5E16.8)                                                                 
+  0.83700000E+00  0.49600000E+00  0.49600000E+00  0.49600000E+00  0.83700000E+00
+  0.49600000E+00

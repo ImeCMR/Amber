@@ -1,0 +1,49 @@
+#!/bin/csh -f
+#TEST-PROGRAM sander
+#TEST-DESCRIP TO_BE_DEtermined
+#TEST-PURPOSE regression, advanced
+#TEST-STATE   not finished
+
+set sander = "${AMBERHOME}/bin/sander"
+# Right now, this test doesn't quite work with anything but sander
+#if( $?TESTsander ) then
+#   set sander = $TESTsander
+#endif
+
+#if( ! $?DO_PARALLEL ) then
+#        setenv DO_PARALLEL " "
+#endif
+
+cat <<EOF > mmlv.in
+Constraint Langevin dynamics
+ &cntrl
+    ntx=1, ntb=0, igb=1,
+    pencut= 0.1, nmropt=1, ipnlty=1,
+    imin=1, maxcyc=0,  
+    ntc=2, ntf=2, cut=9.0,
+    iemap=1, ntxo=1,
+ /
+ &emap
+  mapfile='mmlv_rna_cut1.ccp4',atmask=':1-132',fcons=0.02,
+  resolution=15., ifit=2, grids=1,1,1,2,2,2,
+ /
+ &wt type='END'   /
+LISTOUT=POUT
+DISANG=DISANG-noe-chir-aco-hb-plan-pp-hh1.RST
+EOF
+
+$sander  -O -p mmlv.top -c mmlv_rot.rst7 -i mmlv.in -o emap2.out -r emap2.x 
+
+../dacdif -f emap2.out.save emap2.out
+../dacdif -f -a 1.e-5 emap2.x.save emap2.x
+
+/bin/rm -f mdinfo mmlv.in
+
+
+
+
+
+
+
+
+

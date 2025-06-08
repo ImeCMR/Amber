@@ -1,0 +1,26 @@
+
+     ######################################################################
+   ##########################################################################
+  ###                                                                      ###
+ ###            TINKER  ---  Software Tools for Molecular Design            ###
+ ##                                                                          ##
+ ##                        Version 6.2  February 2013                        ##
+ ##                                                                          ##
+ ##               Copyright (c)  Jay William Ponder  1990-2013               ##
+ ###                           All Rights Reserved                          ###
+  ###                                                                      ###
+   ##########################################################################
+     ######################################################################
+
+
+ Limited Memory BFGS Quasi-Newton Optimization :
+
+ QN Iter     F Value      G RMS     F Move    X Move   Angle  FG Call  Comment
+
+     0       -5.0375     0.0076                                   1
+
+ LBFGS  --  Normal Termination due to SmallGrad
+
+ Final Function Value :           -5.0375
+ Final RMS Gradient :              0.0076
+ Final Gradient Norm :             0.0185

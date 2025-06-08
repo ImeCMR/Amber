@@ -1,0 +1,24 @@
+#!/bin/csh -f
+#TEST-PROGRAM 
+#TEST-DESCRIP TO_BE_DEtermined
+#TEST-PURPOSE regression, basic
+#TEST-STATE   undocumented
+
+echo " "
+echo "  Amber 8 demo/ setup script:"
+echo "      run ADDLES, Leu dipeptide"
+echo " "
+
+ < input_ > out_
+../dacdif out_.cs out_
+ < .in > .out
+../dacdif pimd.restrt.save pimd.restrt
+
+
+
+
+
+
+
+
+
