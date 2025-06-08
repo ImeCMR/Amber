@@ -1,0 +1,8 @@
+include lib/edgembar/pkgdata/vis-network.min.js
+include lib/edgembar/pkgdata/vis-iface.js
+include lib/edgembar/pkgdata/sorttable.js
+include lib/edgembar/pkgdata/tschart.js
+include lib/edgembar/pkgdata/selerow.js
+include lib/edgembar/pkgdata/edge.css
+include lib/edgembar/pkgdata/graph.css
+include lib/edgembar/pkgdata/__init__.py
