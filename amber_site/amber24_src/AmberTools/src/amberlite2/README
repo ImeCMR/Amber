@@ -1,0 +1,11 @@
+This directory contains the "amberlite2" set of tools from Romain M. Wolf.
+These build on AmberTools itself, and provide a relatively simple path
+for users to carry out certain protein and ligand manipulations that are
+useful in drug discovery and other applications.
+
+Documentation is in the *.pdf files.
+
+Content under the amberlite directory is licensed under the terms of the
+GNU General Public License (GPL) version 3, or (at your option) any
+later version.  See the ../../LICENSE file for the text of GPLv3.
+

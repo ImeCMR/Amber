@@ -1,0 +1,172 @@
+name: Cpptraj Tests
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  linux_build:
+    runs-on: ubuntu-latest
+    name: Build ${{ matrix.compiler }} with CMake ${{ matrix.use_cmake }}
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler: ["gnu", "clang"]
+        use_cmake: ["0", "1"]
+        use_openmp: ["no"]
+        use_mpi: ["no"]
+        include:
+          - use_openmp: "yes"
+            compiler: "gnu"
+            use_mpi: "no"
+            use_cmake: "0"
+          - use_openmp: "no"
+            compiler: "gnu"
+            use_mpi: "yes"
+            use_cmake: "0"
+          - use_openmp: "yes"
+            compiler: "gnu"
+            use_mpi: "yes"
+            use_cmake: "0"
+          - use_openmp: "no"
+            compiler: "gnu"
+            use_mpi: "yes"
+            use_cmake: "1"
+
+    env:
+      COMPILER: ${{ matrix.compiler }}
+      USE_CMAKE: ${{ matrix.use_cmake }}
+      BUILD_TYPE: "install"
+      TEST_TYPE: "test.showerrors"
+      USE_MPI: ${{ matrix.use_mpi }}
+      USE_OPENMP: ${{ matrix.use_openmp }}
+
+    steps:
+      - name: Install prerequisite packages
+        run: |
+          sudo apt-get install gfortran
+          sudo apt-get install libbz2-dev
+          sudo apt-get install libblas-dev liblapack-dev
+          sudo apt-get install libfftw3-dev
+          sudo apt-get install clang
+          sudo apt-get install cmake-data cmake
+
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Compile and test cpptraj
+        shell: bash -lex {0}
+        run: |
+          curl -OL https://anaconda.org/AmberMD/amber_phenix/0.9.6/download/linux-64/amber_phenix-0.9.6-0.tar.bz2
+          tar jxf amber_phenix-0.9.6-0.tar.bz2 lib/libsander.so AmberTools/src/sander/sander.h
+          mkdir -p include && mv AmberTools/src/sander/sander.h include
+          mv lib include $HOME
+
+          if [ $USE_OPENMP = "yes" ]; then
+            export OPT="openmp"
+            export OMP_NUM_THREADS=4
+            if [ "$USE_CMAKE" = "1" ]; then
+              export BUILD_FLAGS="-DOPENMP=TRUE"
+            else
+              export BUILD_FLAGS="-openmp"
+            fi
+          fi
+
+          if [ $USE_MPI = "yes" ]; then
+            curl -OL http://www.mpich.org/static/downloads/3.4.2/mpich-3.4.2.tar.gz
+            tar -zxf mpich-3.4.2.tar.gz
+            cd mpich-3.4.2
+            export FFLAGS=-fallow-argument-mismatch
+            ./configure --with-device=ch3 --prefix=$HOME
+            make -j2
+            make install
+            cd ..
+            export PATH=$HOME/bin:$PATH
+            export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
+            export DO_PARALLEL="mpirun -n 2"
+            if [ $USE_OPENMP = "yes" ]; then
+              export OMP_NUM_THREADS=1
+            fi
+            if [ "$USE_CMAKE" = "1" ]; then
+              export BUILD_FLAGS="-DMPI=TRUE ${BUILD_FLAGS}"
+            else
+              export BUILD_FLAGS="-mpi ${BUILD_FLAGS}"
+            fi
+          fi
+
+          if [ "$USE_CMAKE" = "1" ]; then
+            curl -OL https://github.com/Unidata/netcdf-c/archive/refs/tags/v4.9.2.tar.gz
+            tar -zxf v4.9.2.tar.gz
+            cd netcdf-c-4.9.2
+            ./configure --disable-byterange --disable-libxml2 --disable-netcdf-4 --disable-dap --disable-doxygen --prefix=$HOME
+            make -j2
+            make install
+            cd ..
+            export PATH=$HOME/bin:$PATH
+            export LD_LIBRARY_PATH=$HOME/lib:${LD_LIBRARY_PATH}
+
+            mkdir build install
+            installdir=$(pwd)
+            cd build
+            cmake .. $BUILD_FLAGS -DCOMPILER=${COMPILER^^} -DINSTALL_HEADERS=FALSE \
+                     -DCMAKE_INSTALL_PREFIX=$installdir -DCMAKE_LIBRARY_PATH=$HOME/lib \
+                     -DPRINT_PACKAGING_REPORT=TRUE -DNetCDF_LIBRARIES_C=$HOME/lib/libnetcdf.so \
+                     -DNetCDF_INCLUDES=$HOME/include
+            make -j2 install
+            cd ..
+            export PATH=$installdir/bin:$PATH
+          else
+            export LD_LIBRARY_PATH=$HOME/lib:${LD_LIBRARY_PATH}
+            ./configure --buildlibs ${BUILD_FLAGS} ${COMPILER}
+            source cpptraj.sh
+            make -j2 install
+          fi
+          cd test && make $TEST_TYPE
+
+  build-pytraj:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+    steps:
+    - name: Install prerequisite packages
+      run: |
+        sudo apt-get install gfortran
+        sudo apt-get install libbz2-dev
+        sudo apt-get install libblas-dev liblapack-dev
+        sudo apt-get install libfftw3-dev
+        sudo apt-get install clang
+        sudo apt-get install cmake-data cmake    
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install conda packages
+      run: |
+        which conda
+        conda install conda=23.11.0 python=3.10
+        conda --version
+        conda env update --file devtools/ci/environment.yml --name base
+    - name: Install cpptraj
+      run: |
+        export PATH=$HOME/bin:${PATH}
+        export LD_LIBRARY_PATH=$HOME/lib:${LD_LIBRARY_PATH}
+        export MAKE_COMMAND="make -j2"
+        ./configure --buildlibs -openmp -shared gnu
+        source cpptraj.sh
+        make -j2 libcpptraj
+    - name: Install pytraj
+      run: |        
+        git clone https://github.com/Amber-MD/pytraj.git
+        source cpptraj.sh
+        cd pytraj
+        python setup.py install
+        cd ..
+    - name: Test with pytest
+      run: |
+        source cpptraj.sh && cd pytraj/tests && pytest -vs --ignore=test_parallel_pmap

@@ -1,0 +1,13 @@
+  Instructions for AMBAT - Membrane Builder
+
+  AMBAT-Membrane Builder have an interactive command line interface
+ 
+  It allows the user around 9 different options broadly classified into:
+    
+    pure_bilayer      : Symmetric or asymmetric lipid bilayer
+
+    vesicles_and_DIBs : For forming vesicles and Droplet Interface Bilayer systems (DIBs)
+
+    lipid_molecule    : Molecule/(s) associated with either symmetric or asymmetric lipid bilayer 
+
+    lipid_protein     : Polypepdtide associated with either symmetric or asymmetric lipid bilayer

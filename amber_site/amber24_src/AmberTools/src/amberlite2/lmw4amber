@@ -1,0 +1,142 @@
+#!/usr/bin/env python
+
+# =====================================================================
+# lmw4amber version 0.2, February 2019
+# Author: Romain M. Wolf
+#======================================================================
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#=======================================================================
+
+import os, sys, string
+from optparse import OptionParser
+from subprocess import Popen, PIPE
+"""
+Usage: lmwf4amber [options] or -h (--help) for HELP
+--------------------
+This version requires AmberTools17 or higher
+--------------------
+low-molecular-weight compound files are given in SDF format, charges are computed via AM1/BCC
+"""
+#======================================================================
+def tleap(cmd, filename):
+#======================================================================
+  cmdline = "tleap -f %s > %s.leap.output"%(cmd, filename)
+  os.system(cmdline)
+#======================================================================
+def antechamber(file, charge, gaff_version, fileformat, lmwname):
+#======================================================================
+  """
+  calls antechamber and parmchk2 to generate a MOL2 and an frcmod file
+  for leap; cleans up some temporary files
+  """
+  if gaff_version == 'gaff':
+    gaff_flag = 1
+  else:
+    gaff_flag = 2
+  sqmk = 'qm_theory=\'AM1\', grms_tol=0.05, tight_p_conv=0, scfconv=1.d-8, peptide_corr=1,'
+  cmdline = 'antechamber -i %s '%(file)
+  cmdline += '-fi %s -rn %s -o %s.ac.mol2 -fo mol2 '%(fileformat, lmwname, lmwname)
+  cmdline += '-at "%s" -c bcc -nc %s -pf y -ek "%s"'%(gaff_version, charge, sqmk)
+  cmdline += ' >/dev/null 2>&1'
+  os.system(cmdline)
+# make command line for parmchk2
+  cmdline = "parmchk2 -s %s -i %s.ac.mol2 -f mol2 -o %s.frcmod"%(gaff_flag, lmwname, lmwname)
+# run parmchk2 to generate frcmod file for the organic ligand
+  os.system(cmdline)
+
+#******************************************
+# main calls
+#*******************************************
+if __name__ ==  "__main__":
+  parser = OptionParser()
+  parser.add_option("--lmw", metavar = "FILE", dest = "lmw", 
+        help = "ligand SD file (sdf)           (no default)")
+  parser.add_option("--name", default = "XYZ", metavar = "STRING", dest = "lmw_name", 
+        help = "3-letter code for lmw          (default = XYZ)")
+  parser.add_option("--lfrc", default = "gaff2", metavar = "STRING", dest = "lfrc", 
+        help = "ligand force field             (default: gaff2)")
+  parser.add_option("--chrg", default = 0, metavar = "INTEGER", dest = "chrg",
+        help = "formal charge on ligand        (default: 0)")
+  parser.add_option("--rad", default = "mbondi2", metavar = "STRING", dest = "rad",
+        help = "radius type for PB/GB          (default: mbondi2)")
+#  parser.add_option("--ctrl", default = "XYZ.cmd", metavar = "FILE", dest = "ctrl", 
+#        help = "leap command file name                 (default: XYZ.cmd)")
+
+  if len(sys.argv) == 1:
+    print("\n--------------------------------------------")
+    print(" lmw4amber version 0.2")
+    print(" Romain M. Wolf (February 2019)")
+    print("--------------------------------------------")
+    parser.print_help()
+    sys.exit(-1)
+  (opt, args) = parser.parse_args()
+# check if AMBERHOME is defined:
+  amberhome = os.getenv("AMBERHOME")
+  if not amberhome:
+    print 'no AMBERHOME environment variable defined'
+    print 'this means trouble...bye'
+# check if we are in Amber16+later or Amber15+earlier, based on TIP3P tleap cmd
+  if not os.path.exists('%s/dat/leap/cmd/leaprc.water.tip3p'%os.getenv('AMBERHOME')):
+    print 'AmberTools version too old for this tool'
+    print 'You should use at least AmberTools17...bye'
+# the following executables must be in the path for mdfiles17 to work:
+  for prog in ['tleap', 'sqm', 'antechamber', 'parmchk2']:
+    try:
+      Popen([prog, '-h'], stdin = PIPE, stdout = PIPE, stderr = PIPE)
+    except OSError,e:
+      print '...%s does not seem to be in the path...bye '%prog
+      sys.exit(-1)
+# check if specified input files for protein or ligand exist:
+  if opt.lmw and not os.path.exists(opt.lmw):
+    print("...the file %s cannot be found...bye"%opt.lmw)
+    sys.exit(-1)
+    
+  if (opt.lmw):
+    extension = os.path.splitext(os.path.split(opt.lmw)[1])[1]
+    filename = opt.lmw_name.upper()
+
+# write the command file for tleap:
+  leapcmd = "%s.leap.cmd"%filename
+  ctrl = open(leapcmd, 'w')
+  frcwater = "leaprc.water.tip3p"
+# ligand force field default gaff2
+  frcligand = "leaprc.%s"%opt.lfrc
+  ctrl.write("source %s\n"%frcligand)
+  ctrl.write("set default pbradii %s\n"%opt.rad)
+
+# generate files for the lmw compound----------
+# NOTE: the mol2 file input is an option now, but it does not necessarily
+# work with just any mol2 file, so use very carefully and double-check results!!!
+  if (opt.lmw):
+#    filename = os.path.splitext(os.path.split(opt.lmw)[1])[0]
+    extension = os.path.splitext(os.path.split(opt.lmw)[1])[1]
+    filename = opt.lmw_name.upper()
+    fileformat='mdl'
+# call antechamber
+    antechamber("%s"%opt.lmw, opt.chrg, "%s"%opt.lfrc, fileformat, filename)
+# check if antechamber has succeeded by creating ...ac.mol2 file and
+# if not, get out...
+    if not os.path.exists('%s.ac.mol2'%filename):
+      print(
+        '''... antechamber seems to have failed...
+... this could be due to a wrong formal charge for the ligand
+... use the '--chrg' option correctly and try again...''')
+    ctrl.write("%s = loadmol2 %s.ac.mol2\n"%(filename,filename))
+    ctrl.write("frcmod = loadamberparams %s.frcmod\n"%filename)
+    ctrl.write("saveoff %s %s.lib\n"%(filename, filename))
+    ctrl.write("saveamberparm %s %s.leap.prm %s.leap.crd\n"%(filename, filename, filename))
+    ctrl.write("savepdb %s %s.leap.pdb\n"%(filename,filename))
+  ctrl.write("quit\n")
+  ctrl.close()
+  tleap(leapcmd, filename)

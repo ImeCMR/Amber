@@ -1,0 +1,231 @@
+#!/usr/bin/env python
+
+# =====================================================================
+# files4amber version 1.0, February 2019
+# Author: Romain M. Wolf
+#======================================================================
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#=======================================================================
+
+import os, sys
+from optparse import OptionParser
+from subprocess import Popen, PIPE
+"""
+Usage: files4amber [options] or -h (--help) for HELP
+--------------------
+This version requires AmberTools16 or later
+--------------------
+Can prepare files for explicit-water molecular dynamics of a receptor,
+or a ligand, or a complex of both. The water model is TIP3P.
+System can be neutralized with counter-ions (default is NOT)
+Implicit solvent (GB) setup is possible; default radii for igb=5
+-------------------
+Ligand files must be given in SDF format, charges are computed via AM1/BCC
+"""
+#======================================================================
+def tleap(cmd):
+#======================================================================
+  cmdline = "tleap -f %s > leap.output"%cmd
+  os.system(cmdline)
+#======================================================================
+def antechamber(file, charge, gaff_version, fileformat):
+#======================================================================
+  """
+  calls antechamber and parmchk2 to generate a MOL2 and an frcmod file
+  for leap; cleans up some temporary files
+  """
+  if gaff_version == 'gaff':
+    gaff_flag = 1
+  else:
+    gaff_flag = 2
+  sqmk = 'qm_theory=\'AM1\', grms_tol=0.05, tight_p_conv=0, scfconv=1.d-8, peptide_corr=1,'
+  cmdline = 'antechamber -i %s '%(file)
+  cmdline += '-fi %s -rn LIG -o %s.ac.mol2 -fo mol2 '%(fileformat, filename)
+  cmdline += '-at "%s" -c bcc -nc %s -pf y -ek "%s"'%(gaff_version, charge, sqmk)
+  cmdline += ' >/dev/null 2>&1'
+  os.system(cmdline)
+# make command line for parmchk2
+  cmdline = "parmchk2 -s %s -i %s.ac.mol2 -f mol2 -o %s.frcmod"%(gaff_flag,filename, filename)
+# run parmchk2 to generate frcmod file for the organic ligand
+  os.system(cmdline)
+
+#******************************************
+# main calls
+#*******************************************
+if __name__ ==  "__main__":
+  parser = OptionParser()
+  parser.add_option("--prot", metavar = "FILE", dest = "prot", 
+        help = "protein PDB file                       (no default)")
+  parser.add_option("--pfrc", default = "ff14SB", metavar = "STRING", dest = "pfrc", 
+        help = "protein force field               (default: ff14SB)")
+  parser.add_option("--disul", metavar = "FILE", dest = "disul", 
+        help = "file with S-S definitions in protein   (no default)")
+  parser.add_option("--lig", metavar = "FILE", dest = "lig", 
+        help = "ligand MDL (sdf) or SYBYL file (mol2)  (no default)")
+  parser.add_option("--chrg", default = 0, metavar = "INTEGER", dest = "chrg",
+        help = "formal charge on ligand                (default: 0)")
+  parser.add_option("--colig", metavar = "FILE", dest = "colig", 
+        help = "co-ligand file (no extension)          (no default)")
+  parser.add_option("--lfrc", default = "gaff2", metavar = "STRING", dest = "lfrc", 
+        help = "ligand force field                 (default: gaff2)")
+  parser.add_option("--cplx", metavar = "FILE", dest = "cplx",
+        help = "name for complex files                 (no default)")
+  parser.add_option("--solv", default = "exp", metavar = "STRING", dest = "solv", 
+        help = "explicit [exp] or implicit [imp]     (default: exp)")
+  parser.add_option("--buffer", default = 12.0, metavar = "FLOAT", dest = "buffer", 
+        help = "solvent box buffer zone           (default: 12.0 A)")
+  parser.add_option("--neut", action = "store_true", dest = "neut",
+        help = "neutralize with ions    (default: don't neutralize)")
+  parser.add_option("--rad", default = "mbondi2", metavar = "STRING", dest = "rad",
+        help = "radius type for PB/GB            (default: mbondi2)")
+  parser.add_option("--ctrl", default = "leap.cmd", metavar = "FILE", dest = "ctrl", 
+        help = "leap command file name          (default: leap.cmd)")
+
+  if len(sys.argv) == 1:
+    print("\n--------------------------------------------")
+    print(" files4amber version 1.0")
+    print(" Romain M. Wolf (February 2019)")
+    print("--------------------------------------------")
+    parser.print_help()
+    sys.exit(-1)
+  (opt, args) = parser.parse_args()
+# check if AMBERHOME is defined:
+  amberhome = os.getenv("AMBERHOME")
+  if not amberhome:
+    print 'no AMBERHOME environment variable defined'
+    print 'this means trouble...bye'
+# check if we are in Amber16+later or Amber15+earlier, based on TIP3P tleap cmd
+  if not os.path.exists('%s/dat/leap/cmd/leaprc.water.tip3p'%os.getenv('AMBERHOME')):
+    print 'AmberTools version too old for this tool'
+    print 'You should use at least AmberTools16, better AmberTools17 or later...bye'
+# the following executables must be in the path for mdfiles17 to work:
+  for prog in ['tleap', 'sqm', 'antechamber', 'parmchk2']:
+    try:
+      Popen([prog, '-h'], stdin = PIPE, stdout = PIPE, stderr = PIPE)
+    except OSError,e:
+      print '...%s does not seem to be in the path...bye '%prog
+      sys.exit(-1)
+# check if specified input files for protein or ligand exist:
+  if opt.lig and not os.path.exists(opt.lig):
+    print("...the ligand file %s cannot be found...bye"%opt.lig)
+    sys.exit(-1)
+  if opt.prot and not os.path.exists(opt.prot):
+    print("...the protein file %s cannot be found...bye"%opt.prot)
+    sys.exit(-1)
+  if opt.colig and not os.path.exists("%s.ac.mol2"%(opt.colig)):
+    print("...co-ligand file %s.ac.mol2 cannot be found...bye"%(opt.colig))
+    sys.exit(-1)
+  if opt.colig and not os.path.exists("%s.frcmod"%(opt.colig)):
+    print("...co-ligand file %s.frcmod cannot be found...bye"%(opt.colig))
+    sys.exit(-1)
+
+# write the command file for tleap:
+  leapcmd = opt.ctrl
+  ctrl = open(leapcmd, 'w')
+  frcprot = "leaprc.protein.%s"%opt.pfrc
+# and other compitable with ff14SB    
+  frcwater = "leaprc.water.tip3p"
+  frcDNA = "leaprc.DNA.OL15"
+  frcRNA = "leaprc.RNA.OL3"
+  frclipid = "leaprc.lipid17"
+# ligand force field default gaff2
+  frcligand = "leaprc.%s"%opt.lfrc
+  ctrl.write("source %s\n"%frcprot)
+  ctrl.write("source %s\n"%frcwater)
+  ctrl.write("source %s\n"%frcDNA)
+  ctrl.write("source %s\n"%frcRNA)
+  ctrl.write("source %s\n"%frcligand)
+  ctrl.write("set default pbradii %s\n"%opt.rad)
+
+# generate files for the ligand----------
+# NOTE: the mol2 file input is an option now, but it does not necessarily
+# work with just any mol2 file, so use very carefully and double-check results!!!
+  if (opt.lig):
+    filename = os.path.splitext(os.path.split(opt.lig)[1])[0]
+    extension = os.path.splitext(os.path.split(opt.lig)[1])[1]
+    if extension == '.mol2':
+      fileformat='mol2'
+    else:
+      fileformat='mdl'
+# call antechamber
+    antechamber("%s"%opt.lig, opt.chrg, "%s"%opt.lfrc, fileformat)
+# check if antechamber has succeeded by creating ...ac.mol2 file and
+# if not, get out...
+    if not os.path.exists('%s.ac.mol2'%filename):
+      print(
+        '''... antechamber seems to have failed...
+... this could be due to a wrong formal charge for the ligand
+... use the '--chrg' option correctly and try again...''')
+    ctrl.write("lig = loadmol2 %s.ac.mol2\n"%filename)
+    ctrl.write("ligcom = loadmol2 %s.ac.mol2\n"%filename)
+    ctrl.write("frcmod = loadamberparams %s.frcmod\n"%filename)
+    if opt.neut:
+      ctrl.write("addions lig Cl- 0\n")
+      ctrl.write("addions lig Na+ 0\n")
+    if opt.solv == 'exp':
+      ctrl.write("solvatebox lig TIP3PBOX %lf iso 1.0 \n"%(float(opt.buffer)))
+    else:
+      pass
+    ctrl.write("saveamberparm lig %s.leap.prm %s.leap.crd\n"%(filename, filename))
+    ctrl.write("savepdb lig %s.leap.pdb\n"%filename)
+
+  if (opt.colig) and (opt.cplx):
+    ctrl.write("coligcom = loadmol2 %s.ac.mol2\n"%opt.colig)
+    ctrl.write("frcmod = loadamberparams %s.frcmod\n"%opt.colig)
+# generate files for protein (receptor)----------
+  if (opt.prot):
+    filename = os.path.splitext(os.path.split(opt.prot)[1])[0]
+    ctrl.write("prot = loadpdb %s\n"%(opt.prot))
+    ctrl.write("protcom = loadpdb %s\n"%(opt.prot))
+# we treat disulfide bonds the old (secure) way, i.e., the user decides if and
+# where they are... (and do not forget to rename the involved CYS to CYX!
+# NOTE: if pdb4amber was used, the resulting 'clean' PDB file might have the
+# CONECT records for disulfides. Then --disulf would be obsolete;
+# ibidem if you add the CONECT record manually with the correct atom numbers
+# in the correct format... make sure to always check that S-S bonds are correct!
+    if (opt.disul):
+      input = open(opt.disul, 'r')
+      for line in input.readlines():
+        cys1 = line.split()[0]
+        cys2 = line.split()[1]
+        ctrl.write("bond prot.%s.SG prot.%s.SG\n"%(cys1, cys2))
+        ctrl.write("bond protcom.%s.SG protcom.%s.SG\n"%(cys1, cys2))
+    if opt.neut:
+      ctrl.write("addions prot Cl- 0\n")
+      ctrl.write("addions prot Na+ 0\n")
+    if opt.solv == 'exp':
+      ctrl.write("solvatebox prot TIP3PBOX %lf iso 1.0 \n"%(float(opt.buffer)))
+    else:
+      pass
+    ctrl.write("saveamberparm prot %s.leap.prm %s.leap.crd\n"%(filename, filename))
+    ctrl.write("savepdb prot %s.leap.pdb\n"%filename)
+    
+# generate files for complex if all criteria are met for that----------
+  if (opt.cplx):
+    if (opt.prot) and (opt.lig) and (opt.colig):
+      ctrl.write("complex = combine {protcom ligcom coligcom}\n")
+    elif (opt.prot) and (opt.lig):
+      ctrl.write("complex = combine {protcom ligcom}\n")
+    if opt.neut:
+      ctrl.write("addions complex Cl- 0\n")
+      ctrl.write("addions complex Na+ 0\n")
+    if opt.solv == 'exp' and (opt.cplx):
+      ctrl.write("solvatebox complex TIP3PBOX %lf iso 1.0 \n"%(float(opt.buffer)))
+
+    ctrl.write("saveamberparm complex %s.leap.prm %s.leap.crd\n" %(opt.cplx, opt.cplx))
+    ctrl.write("savepdb complex %s.leap.pdb\n" %opt.cplx)
+      
+  ctrl.write("quit\n")
+  ctrl.close()
+  tleap(leapcmd)

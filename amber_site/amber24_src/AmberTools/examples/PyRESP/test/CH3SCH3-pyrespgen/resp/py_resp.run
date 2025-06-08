@@ -1,0 +1,30 @@
+#!/bin/csh -f
+echo " "
+echo "  py_resp demo: CH3SCH3"
+echo " "
+echo " Running pyresp_gen.py "
+$AMBERHOME/bin/pyresp_gen.py -i ../CH3SCH3.dat -p chg -f1 1st.in -f2 2nd.in 
+
+echo " RESP stage 1 "
+$AMBERHOME/bin/py_resp.py -O \
+		-i 1st.in \
+		-o 1st.out \
+		-s 1st.esp \
+		-t 1st.chg \
+		-e ../CH3SCH3.dat			|| goto error
+
+echo " RESP stage 2 "
+$AMBERHOME/bin/py_resp.py -O \
+		-i 2nd.in \
+		-o 2nd.out \
+		-q 1st.chg \
+		-s 2nd.esp \
+		-t 2nd.chg \
+		-e ../CH3SCH3.dat			|| goto error
+
+echo No errors detected
+exit(0)
+
+error:
+echo Error: check .out and try again
+exit(1)

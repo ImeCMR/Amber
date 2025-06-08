@@ -1,0 +1,300 @@
+#!/usr/bin/env python
+# =====================================================================
+# run4amber version 1.1, February 2019
+# Author: Romain M. Wolf
+#======================================================================
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+
+#  You should have received a copy of the GNU General Public License
+#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#=======================================================================
+
+import os, sys, re
+from optparse import OptionParser
+import subprocess as sp
+whitespace = re.compile(r'\s+')
+
+"""
+Usage: run4amber [options] or -h (--help) for HELP
+--------------------
+This version requires AmberTools16, better AmberTools17 or later
+--------------------
+Runs complete MD passing through the various steps:
+-minimization (can be used as ONLY minimization)
+-heating
+-equilibration (in case of explicit water)
+-production
+-------------------
+Allows single-processor (serial), multi-processor (parallel)
+       and CUDA (GPU, if installed and configured correctly)
+"""
+
+# Function Definitions
+#==============================
+def setup_minimize(solv, cuda, nsteps, force, mask):
+#==============================
+  mini = open('minimize.in', 'w')
+  mini.write('minimization, conjugate gradient, max. 1000 steps\n')
+  mini.write('&cntrl\n')
+  mini.write('imin=1, nmropt=0, ntx=1, irest=0, ntmin=0, drms=0.001,\n')
+  if force !=0:
+    mini.write("ntr=1, restraintmask='%s', restraint_wt=%lf,\n"%(mask, force))
+  if solv == 'imp': # infinite cutoff for non-bondeds
+    mini.write('ntb=0, cut=999.0d0, igb=5, rgbmax=12.,\n')
+  else: # normal PME for explicit solvent
+    mini.write('ntb=1, cut=8.0,\n')
+  mini.write('ntpr=10, maxcyc=%d,\n/\n'%nsteps)
+  mini.close()
+#===================================
+def run_minimize(nproc, cuda, prm, crd, ref):
+#===================================
+  if cuda == True: # run pmemd.cuda instead of sander or sander.MPI
+    mini_args =  ['pmemd.cuda', '-O', '-suffix', 'min', '-i', 'minimize.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  elif cuda == False and nproc == 1: # run serial sander
+    mini_args = ['sander', '-O', '-suffix', 'min', '-i', 'minimize.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  else: # run sander.pMPI via mpirun
+    mini_args = ['mpirun', '-np', '%d'%nproc, 'sander.MPI',
+               '-O', '-suffix', 'min', '-i', 'minimize.in',
+               '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  p = sp.Popen(mini_args)
+#  print ('minimization running under PID %d\n'%p.pid)
+  p.wait()
+  if p.returncode != None and p.returncode != 0:
+    print ('something went wrong in minimization...')
+    sys.exit(-1)
+#==============================
+def setup_heatup(solv, cuda, nsteps, force, mask):
+#==============================
+  mdheat = open('mdheating.in', 'w')
+  mdheat.write('MD, heating from 0 to 300 K over entire run\n')
+  mdheat.write('&cntrl\n')
+  mdheat.write('imin=0, nmropt=1, ntx=1, irest=0, ntxo=2, ioutfm=1,\n')
+  # check if special constraint settings are required
+  if force !=0:
+    mdheat.write("ntr=1, restraintmask='%s', restraint_wt=%lf,\n"%(mask, force))
+  mdheat.write('ntpr=100, ntwr=5000, ntwx=5000,\n')
+  mdheat.write('nstlim=%d, dt=0.002, nrespa=1,\n'%nsteps)
+  mdheat.write('ntt=3, temp0=300.0, tempi=0.0, ig=-1,\n')
+  mdheat.write('ntc=2, ntf=2, tol=0.000001,\n')
+  # specific settings for implicit GB solvation
+  if solv == 'imp' and cuda == True: # infinite cutoff for non-bondeds if CUDA
+    mdheat.write('cut=999.0d0, rgbmax=12., igb=5, gbsa=0, gamma_ln=5.0,\n/\n')
+  elif solv == 'imp' and cuda == False: # cutoff 12 Angstroem
+    mdheat.write('cut=12.0, rgbmax=12., igb=5, gbsa=0, gamma_ln=5.0,\n/\n')
+  # specific settings for explicit water, constant volume
+  else: # PME with short 8 Angstroem cutoff
+    mdheat.write('cut=8., ntb=1, iwrap=1, gamma_ln=5.0,\n/\n')
+  # heating via variable weighting (nmropt=1 is set already above)
+  mdheat.write('&wt\n')
+  mdheat.write('type=\'TEMP0\', istep1=0, istep2=%d, value1=0.0, value2=300,\n/\n'%nsteps)
+  mdheat.write('&wt\ntype=\'END\',\n/\n')
+  mdheat.close()
+#==============================
+def run_heatup(nproc, cuda, prm, crd, ref):
+#==============================
+  if cuda == True: # pmemd.cuda run
+    heat_args = ['pmemd.cuda', '-O', '-suffix', 'heat', '-i', 'mdheating.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  elif cuda == False and nproc == 1: # standard serial sander
+    heat_args = ['sander', '-O', '-suffix', 'heat', '-i', 'mdheating.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  else: # parallel sander.MPI 
+    heat_args = ['mpirun', '-np', '%d'%nproc, 'sander.MPI',
+                 '-O', '-suffix', 'heat', '-i', 'mdheating.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  p = sp.Popen(heat_args)
+  p.wait()
+  if p.returncode != None and p.returncode != 0:
+    print ('something went wrong in the heat-up phase...')
+    sys.exit(-1)
+#==============================
+def setup_equil(nsteps, force, mask):
+#==============================
+# ! does not use CUDA even if required but reverts to serial or parallel sander !
+# ! having --np >1 is a good idea in this case to accelerate this phase         !
+# ! even if CUDA is selected and the rest runs on a single GPU                  !
+  mdequil = open('mdequilibration.in', 'w')
+  mdequil.write('MD, waterbox, NPT (constant pressure)\n')
+  mdequil.write('&cntrl\n')
+  mdequil.write('imin=0, nmropt=0, ntx=5, irest=1,, ntxo=2, ioutfm=1,\n')
+  if force !=0: # restraints are requested
+    mdequil.write("ntr=1, restraintmask='%s', restraint_wt=%lf,\n"%(mask, force))
+  mdequil.write('ntpr=100, ntwr=5000, ntwx=5000,\n')
+  mdequil.write('idecomp=0, nstlim=%d, dt=0.002, nrespa=1,\n'%nsteps)
+  mdequil.write('ntt=3, temp0=300.0, tempi=300.0, ig=-1, gamma_ln=1.0,\n')
+  mdequil.write('ntp=1, ntb=2, ntc=2, ntf=2, tol=0.000001,\n')
+  mdequil.write('cut=8.0, igb=0, gbsa=0, iwrap=1,\n/\n')
+  mdequil.close()
+#==============================
+def run_equil(nproc, cuda, prm, crd, ref):
+#==============================
+# !!! no CUDA for this phase since pmemd can be unstable in adjusting density !!!
+  if nproc == 1: # standard serial sander
+    equil_args = ['sander', '-O', '-suffix', 'equil', '-i', 'mdequilibration.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  else: # parallel sander.MPI
+    equil_args = ['mpirun', '-np', '%d'%nproc, 'sander.MPI',
+                  '-O', '-suffix', 'equil', '-i', 'mdequilibration.in',
+                  '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  p = sp.Popen(equil_args)
+  p.wait()
+  if p.returncode != None and p.returncode != 0:
+    print ('something went wrong in the equilibration phase...')
+    sys.exit(-1)      
+#==============================
+def setup_prod(solv, cuda, nsteps, force, mask, freq):
+#==============================
+  mdprod = open('mdproduction.in', 'w')
+  mdprod.write('MD production phase\n')
+  mdprod.write('&cntrl\n')
+  mdprod.write('imin=0, nmropt=0, ntx=5, irest=1, ntxo=2, ioutfm=1,\n')
+  if force !=0: # some restraints required
+    mdprod.write("ntr=1, restraintmask='%s', restraint_wt=%lf,\n"%(mask, force))
+  if solv == 'imp' and cuda == True: # CUDA requires high cutoff for implicit solvent
+    mdprod.write('cut=999.0d0, rgbmax=12., ntb=0, igb=5, gbsa=0,\n')
+  elif solv == 'imp' and cuda == False: # standard relatively short cutoff
+    mdprod.write('cut=12., rgbmax=12., ntb=0, igb=5, gbsa=0,\n')
+  # specific settings for explicit water, constant volume
+  else: # PME with the usual settings (small cutoff)
+    mdprod.write('cut=8., ntb=1, iwrap=1, igb=0, gbsa=0,\n')
+  mdprod.write('ntpr=100, ntwr=5000, ntwx=%d,\n'%freq)
+  mdprod.write('nstlim=%d, dt=0.002, nrespa=1,\n'%nsteps)
+  mdprod.write('ntt=3, temp0=300.0, tempi=300.0, ig=-1, gamma_ln=1.0,\n')
+  mdprod.write('ntp=0, ntc=2, ntf=2, tol=0.000001,\n/\n')
+  mdprod.close()
+#==============================
+def run_prod(nproc, cuda, prm, crd, ref):
+#==============================
+  if cuda == True: # pmemd.cuda run
+    prod_args = ['pmemd.cuda', '-O', '-suffix', 'prod', '-i', 'mdproduction.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  elif cuda == False and nproc == 1: # serial sander run
+    prod_args = ['sander', '-O', '-suffix', 'prod', '-i', 'mdproduction.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  else: #sander.MPI run
+    prod_args = ['mpirun', '-np', '%d'%nproc, 'sander.MPI',
+                 '-O', '-suffix', 'prod', '-i', 'mdproduction.in',
+                 '-p', '%s'%prm, '-c', '%s'%crd, '-ref', '%s'%ref]
+  p = sp.Popen(prod_args)
+  p.wait()
+  if p.returncode != None and p.returncode != 0:
+    print ('something went wrong in the production phase...')
+    sys.exit(-1)
+    
+#--------------------main------------------------------------------------------------
+if __name__ ==  "__main__":
+  parser = OptionParser()
+  parser.add_option("-p", "--prm", metavar = "FILE", dest = "prm", default = "com.leap.prm",
+                    help = "parameter-topology file    (default: com.leap.prm)")
+  parser.add_option("-c", "--crd", metavar = "FILE", dest = "crd", default = "com.leap.crd",
+                    help = "Amber coordinate file      (default: com.leap.crd)")
+  parser.add_option("-n", "--np", default = 4, metavar = "INT",
+                    type = "int", dest = "np",
+                    help = "number of processors                  (default: 4)")
+  parser.add_option("--solv", metavar = "STRING", dest = "solv", default = "exp",
+                    help = "explicit [exp] or implicit [imp]    (default: exp)")
+  parser.add_option("--cuda", action="store_true", dest="cuda", default=False,
+                    help = "use GPU (CUDA) if possible           (default: no)")
+  parser.add_option("--mask", metavar = "STRING", dest = "mask", default = ' ',
+                    help = "Amber restraint mask            (default: no mask)")
+  parser.add_option("--force", metavar = "FLOAT", dest = "force", default = 0.0,
+                    type = "float",
+                    help = "restr.force const. (kcal/mol/A2)      (default: 0)")
+  parser.add_option("--ms", default = 1000, metavar = "INT",
+                    type = "int", dest = "msteps",
+                    help = "minimization steps                 (default: 1000)")
+  parser.add_option("--hs", default = 100, metavar = "INT",
+                    type = "int", dest = "hsteps",
+                    help = "heat-up time [picoseconds]          (default: 100)")
+  parser.add_option("--es", default = 100, metavar = "INT",
+                    type = "int", dest = "esteps",
+                    help = "equilibration time [picoseconds]    (default: 100)")
+  parser.add_option("--ps", default = 1000 , metavar = "INT",
+                    type = "int", dest = "psteps",
+                    help = "production time [picoseconds]   (default: 1000 ps)")
+  parser.add_option("--freq", default = 10, metavar = "INT",
+                    type = "int", dest = "freq",
+                    help = "frame write frequency       (default: every 10 ps)")
+  if len(sys.argv) == 1:
+    print("\n-------------------------------------")
+    print(" run4amber version 1.1")
+    print(" Romain M. Wolf (February 2019)")
+    print("-------------------------------------")
+    parser.print_help()
+    sys.exit(-1)
+  else:pass
+  (opt, args) = parser.parse_args()
+# check if GPU (CUDA) module pmemd.cuda exists
+  if opt.cuda == True:
+    try:
+      sp.Popen(['pmemd.cuda', '-h'], stdin = sp.PIPE, stdout = sp.PIPE, stderr = sp.PIPE)
+    except OSError,e:
+      print '\n...pmemd.cuda does not seem to be in the path...'
+      print '...your Amber installation does not support GPU usage...'
+      print '...consider using another Amber installation or use...'
+      print '...serial sander (--np = 1) or parallel sander.MPI (--np > 1) ...bye\n'
+      sys.exit(-1)
+# check if sander.MPI is present when opt.np > 1
+  if opt.np > 1:
+    try:
+      sp.Popen(['sander.MPI', '-h'], stdin = sp.PIPE, stdout = sp.PIPE, stderr = sp.PIPE)
+    except OSError,e:
+      print '\n...sander.MPI does not seem to be in the path...'
+      print '...your Amber installation lacks parallel support...'
+      print '...either use --np = 1 or change to another Amber installation...bye\n'
+      sys.exit(-1)
+# checking for file absences
+  for file in [opt.prm, opt.crd]:
+    if not os.path.exists(file):
+      print('...the file %s cannot be found...bye'%file)
+      sys.exit(-1)
+# check if mask string contains something reasonable,
+# otherwise set force to zero to ensure that nothing will
+# be restrained
+  if (':' not in opt.mask and '@' not in opt.mask):
+    opt.force = 0.0
+# make sure that heating and equilibration always run at least 100 picoseconds:
+  if opt.hsteps < 100:
+    opt.hsteps = 100
+  if opt.esteps < 100:
+    opt.esteps = 100
+    
+# set up the control files for minimization, heating,
+# equilibration, and production
+  if opt.msteps < 0:
+    opt.msteps = abs(opt.msteps)
+    setup_minimize(opt.solv, opt.cuda, opt.msteps, opt.force, opt.mask)
+    run_minimize(opt.np, opt.cuda, opt.prm, opt.crd, opt.crd)
+# stop after minimization
+    sys.exit(0)
+  else:
+    setup_minimize(opt.solv, opt.cuda, opt.msteps, opt.force, opt.mask)
+    setup_heatup(opt.solv, opt.cuda, opt.hsteps*500, opt.force, opt.mask)
+    
+  if opt.solv == 'exp':
+    setup_equil(opt.esteps*500, opt.force, opt.mask)
+
+  setup_prod(opt.solv, opt.cuda, opt.psteps*500, opt.force, opt.mask, opt.freq*500)
+
+# run all stages sequentially
+  run_minimize(opt.np, opt.cuda, opt.prm, opt.crd, opt.crd)
+  run_heatup(opt.np, opt.cuda, opt.prm, 'restrt.min', 'restrt.min')
+  if opt.solv != 'imp': # do equilibration only for explicit solvent
+    # equilibration runs sander or sander.MPI only, fails mostly with CUDA
+    run_equil(opt.np, opt.cuda, opt.prm, 'restrt.heat', 'restrt.min')
+    run_prod(opt.np, opt.cuda, opt.prm, 'restrt.equil', 'restrt.min')
+    sys.exit(0)
+  else:
+    run_prod(opt.np, opt.cuda, opt.prm, 'restrt.heat', 'restrt.min')
+    sys.exit(0)
+ 
