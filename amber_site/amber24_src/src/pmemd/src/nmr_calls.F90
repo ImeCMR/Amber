@@ -3885,6 +3885,7 @@ end subroutine cuda_nmr_setup
 !       (4): The rms deviation, but same definitions of deviations as (3).
 ! devang(3): same as devdis, but for angles
 ! devtor(3): same as devdis, but for torsions
+! restraint_energies.txt : this will output the restraint energies for all the restraints ################ newly added ############
 !
 !*******************************************************************************
 
@@ -3980,6 +3981,7 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
   integer           nstepu
   !######## # newly added lines ######################
   integer         :: nsteps_nmr 
+  integer         :: ierr
   !#####################################################
   double precision  r1
   double precision  r2
@@ -4005,10 +4007,10 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
   integer loop
   !######################### newly added lines ##########################
 ! Allocate the array dynamically based on nmrnum
-  allocate(restraint_data(2, nmrnum))
+  double precision, allocatable :: restraint_data(:,:)
 
 ! Initialize the array to zero
-  restraint_data = 0.0d0
+  !restraint_data = 0.0d0
 !###################################################################
   ! For CUDA MPI
 #ifdef CUDA
@@ -4046,6 +4048,20 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
     enmr(i) = 0.0d0
   end do
   jcoupl = .false.
+
+!#########################################################################################
+
+! Allocate and intialize the array for nmr restraints
+  if (meld == 1) then
+    allocate(restraint_data(2,nmrnum), stat=ierr)
+    if (ierr .ne. 0) then
+      write(*,*) 'Error allocating restraint_data array in nmrnrg'
+      stop 1
+    end if
+    restraint_data = 0.0d0
+  end if
+
+!##########################################################################################
 
 ! Main loop over all the restraints:
   do i = 1, nmrnum
@@ -4327,17 +4343,22 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
 
 !############## newly added lines ##################################
 ! Write the energy to the file
-    nsteps_nmr = nstep+1
-    if (nsteps_nmr == nstlim) then
-      restraint_data(1, i) = i
-      restraint_data(2, i) = e
+    if (meld == 1) then
+      nsteps_nmr = nstep+1
+      if (nsteps_nmr == nstlim) then
+        restraint_data(1, i) = i
+        restraint_data(2, i) = e
+      end if
     end if
 ! ##################################################################
 
   end do !end of loop over all restraints
 
   !################## newly added line ###############################
-  call output_sorted_restraint_energies(nmrnum, nstep, nstlim, restraint_data)
+    if (meld == 1) then
+      call output_sorted_restraint_energies(nmrnum, nstep, nstlim, restraint_data)
+      deallocate(restraint_data)
+    end if
   !####################################################################
   ! End the dump record:
 
@@ -4378,6 +4399,7 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
 
 9074 format('Error: Atom groupings not supported for j-coupling restraints.')
 9075 format('Error: Improper restraint specified.')
+
 
 end subroutine nmrnrg
 
