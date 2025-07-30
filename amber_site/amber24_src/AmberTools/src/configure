@@ -1,6 +1,0 @@
-#!/bin/sh 
-
-echo "Error: You should not run configure from this directory."
-echo "Go up two directories (to \$AMBERHOME) and run configure there."
-
-exit 1

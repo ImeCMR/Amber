@@ -1,7 +1,0 @@
-# The files below are used by libtcpb
-SOURCES=\
-        Ewald.cpp \
-        iface.cpp
-
-# These objects are used by libtcpb
-OBJECTS=$(SOURCES:.cpp=.o)
