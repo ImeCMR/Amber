@@ -3904,7 +3904,7 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
   use parallel_dat_mod
   use ti_mod
   use pmemd_lib_mod
-  use meld_features_mod !################# newly added line  ###################
+  use meld_features_mod, only: meld_active_restraints, select_active_restraints, update_active_restraints !################# newly added line  ###################
 
   implicit none
 
@@ -4065,6 +4065,12 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
 
 ! Main loop over all the restraints:
   do i = 1, nmrnum
+
+  !###################################################
+  if (meld ==1) then
+    if (.not. meld_active_restraints(i)) cycle
+  end if
+  !###################################################
 
 ! Skip restraints if the current step # is outside the applicable range:
 
@@ -4356,8 +4362,15 @@ subroutine nmrnrg(crd, frc, nmrnum, nstep, nmrat, nmrst, r1nmr, r2nmr, r3nmr, &
 
   !################## newly added line ###############################
     if (meld == 1) then
-      call output_sorted_restraint_energies(nmrnum, nstep, nstlim, restraint_data)
-      deallocate(restraint_data)
+    ! convert reatraint_data(2.:) to a 1D array of energies
+      double precision, allocatable :: restraint_energies(:)
+      logical, allocatable :: active(:)
+      allocate(retraint_energies(nmrnum))
+      allocate(active(nmrnum))
+      restraint_energies(:) restraint_data(2, :)
+      call select_active_restraints(nmrnum, restraint_energies, 0.6d0, active)
+      call update_active_restraints(nmrnum, active)
+      deallocate(restraint_energies, active)
     end if
   !####################################################################
   ! End the dump record:
