@@ -1,2 +1,0 @@
-# Replica REPNUM for pH,T-REMD
--O -i mdin.rep.REPNUM -p HAMILTONIAN -c min.x -o mdout.rep.REPNUM -r rst7.rep.REPNUM

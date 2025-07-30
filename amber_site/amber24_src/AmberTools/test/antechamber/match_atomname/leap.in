@@ -1,6 +1,0 @@
-source leaprc.gaff
-loadamberparams SAH.frcmod
-loadamberprep SAH_matched.prepi
-mol=loadpdb SAH_XRAY.pdb
-saveamberparm mol SAH.prmtop SAH.prmcrd
-quit

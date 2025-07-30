@@ -1,6 +1,0 @@
-source leaprc.ff99SB
-set default FlexibleWater on
-x = loadpdb equil.pdb
-set x box 62.23 
-saveamberparm x prmtop7 prmcrd7
-quit

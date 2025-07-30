@@ -1,6 +1,0 @@
-Reduce - tool for adding and correcting hydrogens in PDB files
-
-The files in this directory are from reduce.4.10 as downloaded from
-https://github.com/rlabduke/reduce.git.  The main author is J.
-Michael Word.  Please see the headers of the source files for copyright,
-license and attribution information.

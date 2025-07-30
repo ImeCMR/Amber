@@ -1,1 +1,0 @@
-/* Empty source file to tell CMake that it needs to link the C++ standard library to pbsa.cuda */
