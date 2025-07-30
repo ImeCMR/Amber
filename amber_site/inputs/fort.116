@@ -1,0 +1,7 @@
+
+  unknown flag: run01.in                                                                                                                                                                                                                                                        
+
+  usage: pmemd  [-O] -i mdin -o mdout -p prmtop -c inpcrd -r restrt
+              [-ref refc -x mdcrd -v mdvel -frc mdfrc -e mden -inf mdinfo -l logfile]
+              [-amd amdlog_name -gamd gamdlog_name -scaledMD scaledMDlog_name -suffix output_files_suffix]
+

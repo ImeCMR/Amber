@@ -1,0 +1,28 @@
+Equilibration with pressure and temperature control
+&cntrl
+    imin=0,
+    irest=0,
+    nstlim=2500,
+    dt=0.002,
+    ntx=1,
+    ntwr=100,
+    ntwx=100,
+    ntpr=50,
+    tempi=100.0,
+    temp0=300.0,
+    ntt=1,
+    tautp=2.0,
+    ntb=1,
+    ntp=0,
+    ntc=2,
+    ntf=2,
+    nmropt=1,
+    meld=1
+/
+&wt type='DUMPFREQ', istep1=25,
+/
+&wt type='END'
+/
+DISANG=nmr_res.rst
+DUMPAVE=nmr_out.dat
+/
